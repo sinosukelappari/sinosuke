@@ -1,0 +1,219 @@
+<textarea id="profileFlashMessagesJson" hidden><%= JSON.stringify({
+  success: safeSuccess,
+  error: safeError
+}) %></textarea>
+
+<section class="dashboard_grid profile_grid">
+
+            <section class="settings_section form_section">
+              <div class="section_header">
+                <div>
+                  <h2>
+                    <span class="material-symbols-rounded">manage_accounts</span>
+                    Informasi Akun
+                  </h2>
+
+                  <p>
+                    Data akun yang sedang aktif. Anda dapat memperbarui nama akun pada bagian ini.
+                  </p>
+                </div>
+              </div>
+
+              <div class="sinosuke_form">
+                <div class="form_grid single_column">
+
+                  <div class="input_group">
+                    <label class="group_label" for="namaReadonly">
+                      Nama
+                    </label>
+
+                    <input 
+                      type="text" 
+                      id="namaReadonly"
+                      class="styled_input" 
+                      value="<%= safeUserData.nama || '' %>"
+                      readonly
+                    >
+                  </div>
+
+                  <form 
+                    action="/profile/name" 
+                    method="POST" 
+                    class="input_group full_width profile_name_form"
+                    data-original-name="<%= safeUserData.nama || '' %>"
+                  >
+                    <label class="group_label" for="nama">
+                      Ubah Nama
+                    </label>
+
+                    <div class="input_with_button">
+                      <input 
+                        type="text" 
+                        name="nama" 
+                        id="nama"
+                        class="styled_input" 
+                        value="<%= safeUserData.nama || '' %>"
+                        required
+                      >
+
+                      <button type="submit" class="small_icon_btn" title="Simpan nama">
+                        <span class="material-symbols-rounded">save</span>
+                      </button>
+                    </div>
+
+                    <small class="helper_text">
+                      Nama ini akan digunakan sebagai identitas akun pada sistem.
+                    </small>
+                  </form>
+
+                  <div class="input_group">
+                    <label class="group_label" for="usernameReadonly">
+                      Username
+                    </label>
+
+                    <input 
+                      type="text" 
+                      id="usernameReadonly"
+                      class="styled_input" 
+                      value="<%= safeUserData.username || '' %>"
+                      readonly
+                    >
+                  </div>
+
+                  <div class="input_group">
+                    <label class="group_label" for="bagianReadonly">
+                      Bagian
+                    </label>
+
+                    <input 
+                      type="text" 
+                      id="bagianReadonly"
+                      class="styled_input" 
+                      value="<%= safeUserData.bagian || 'Belum diatur' %>"
+                      readonly
+                    >
+                  </div>
+
+                  <div class="input_group">
+                    <label class="group_label" for="roleReadonly">
+                      Role
+                    </label>
+
+                    <input 
+                      type="text" 
+                      id="roleReadonly"
+                      class="styled_input" 
+                      value="<%= safeUserData.role || '' %>"
+                      readonly
+                    >
+                  </div>
+
+                </div>
+              </div>
+            </section>
+
+            <aside class="info_panel">
+
+              <div class="info_card">
+                <span class="material-symbols-rounded">badge</span>
+
+                <h3>Ringkasan Akun</h3>
+
+                <p>
+                  Nama: <b><%= safeUserData.nama || '-' %></b><br>
+                  Username: <b><%= safeUserData.username || '-' %></b><br>
+                  Bagian: <b><%= safeUserData.bagian || 'Belum diatur' %></b><br>
+                  Role: <b><%= safeUserData.role || '-' %></b>
+                </p>
+              </div>
+
+              <div class="info_card">
+                <span class="material-symbols-rounded">info</span>
+
+                <h3>Catatan</h3>
+
+                <p>
+                  Bagian/Jabatan hanya dapat diubah oleh administrator. Jika bagian belum sesuai, hubungi admin sistem.
+                </p>
+              </div>
+
+            </aside>
+
+          </section>
+
+<section class="settings_section form_section" style="margin-top: 24px;">
+            <div class="section_header">
+              <div>
+                <h2>
+                  <span class="material-symbols-rounded">lock_reset</span>
+                  Ubah Password
+                </h2>
+
+                <p>
+                  Masukkan password lama sebelum membuat password baru.
+                </p>
+              </div>
+            </div>
+
+            <form action="/profile/password" method="POST" class="sinosuke_form profile_password_form">
+              <div class="form_grid">
+
+                <div class="input_group">
+                  <label class="group_label" for="passwordLama">
+                    Password Lama
+                  </label>
+
+                  <input 
+                    type="password" 
+                    name="passwordLama" 
+                    id="passwordLama"
+                    class="styled_input" 
+                    placeholder="Masukkan password lama"
+                    required
+                  >
+                </div>
+
+                <div class="input_group">
+                  <label class="group_label" for="passwordBaru">
+                    Password Baru
+                  </label>
+
+                  <input 
+                    type="password" 
+                    name="passwordBaru" 
+                    id="passwordBaru"
+                    class="styled_input" 
+                    placeholder="Masukkan password baru"
+                    required
+                  >
+                </div>
+
+                <div class="input_group full_width">
+                  <label class="group_label" for="konfirmasiPassword">
+                    Konfirmasi Password Baru
+                  </label>
+
+                  <input 
+                    type="password" 
+                    name="konfirmasiPassword" 
+                    id="konfirmasiPassword"
+                    class="styled_input" 
+                    placeholder="Ulangi password baru"
+                    required
+                  >
+
+                  <small class="helper_text">
+                    Pastikan password baru dan konfirmasi password sama.
+                  </small>
+                </div>
+
+              </div>
+
+              <div class="form_actions">
+                <button type="submit" class="primary_btn">
+                  <span class="material-symbols-rounded">save</span>
+                  Simpan Password Baru
+                </button>
+              </div>
+            </form>
+          </section>

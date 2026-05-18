@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+
+  <title>Login Aplikasi</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
+    rel="stylesheet"
+  >
+
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" 
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="/style.css">
+
+  <style>
+    :root {
+      --auth-bg-1: #0f172a;
+      --auth-bg-2: #1e293b;
+      --auth-card: rgba(255, 255, 255, 0.96);
+      --auth-text: #0f172a;
+      --auth-muted: #64748b;
+      --auth-primary: #2563eb;
+      --auth-primary-dark: #1d4ed8;
+      --auth-border: #e2e8f0;
+      --auth-danger-bg: #fef2f2;
+      --auth-danger-text: #b91c1c;
+      --auth-success-bg: #f0fdf4;
+      --auth-success-text: #15803d;
+    }
+
+    body.auth-body {
+      min-height: 100vh;
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.35), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.22), transparent 35%),
+        linear-gradient(135deg, var(--auth-bg-1), var(--auth-bg-2));
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--auth-text);
+    }
+
+    .auth-wrapper {
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 450px;
+      border-radius: 28px;
+      background: var(--auth-card);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .auth-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 7px;
+      background: linear-gradient(90deg, #2563eb, #38bdf8, #60a5fa);
+    }
+
+    .auth-logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #2563eb, #60a5fa);
+      color: #ffffff;
+      box-shadow: 0 16px 36px rgba(37, 99, 235, 0.28);
+      margin-bottom: 18px;
+    }
+
+    .auth-logo .material-symbols-rounded {
+      font-size: 34px;
+    }
+
+    .auth-title {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+
+    .auth-subtitle {
+      color: var(--auth-muted);
+      font-size: 15px;
+      line-height: 1.55;
+      margin-bottom: 0;
+    }
+
+    .auth-alert {
+      border: 0;
+      border-radius: 18px;
+      padding: 14px 16px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .auth-alert-danger {
+      background: var(--auth-danger-bg);
+      color: var(--auth-danger-text);
+    }
+
+    .auth-alert-success {
+      background: var(--auth-success-bg);
+      color: var(--auth-success-text);
+    }
+
+    .auth-label {
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 8px;
+    }
+
+    .auth-input-wrap {
+      position: relative;
+    }
+
+    .auth-input-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      font-size: 21px;
+      pointer-events: none;
+    }
+
+    .custom-input.auth-input {
+      height: 54px;
+      border-radius: 17px;
+      border: 1px solid var(--auth-border);
+      padding-left: 48px;
+      font-size: 15px;
+      box-shadow: none;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .custom-input.auth-input:focus {
+      border-color: #60a5fa;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    }
+
+    .btn-main.auth-submit {
+      height: 54px;
+      border-radius: 999px;
+      border: 0;
+      background: linear-gradient(135deg, var(--auth-primary), #60a5fa);
+      color: #ffffff;
+      font-weight: 800;
+      box-shadow: 0 16px 32px rgba(37, 99, 235, 0.24);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-main.auth-submit:hover {
+      background: linear-gradient(135deg, var(--auth-primary-dark), #3b82f6);
+      color: #ffffff;
+    }
+
+    .auth-link {
+      color: var(--auth-primary);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .auth-link:hover {
+      color: var(--auth-primary-dark);
+      text-decoration: underline;
+    }
+
+    .auth-note {
+      margin-top: 18px;
+      border-radius: 18px;
+      background: #eff6ff;
+      color: #1e40af;
+      padding: 13px 15px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .auth-note .material-symbols-rounded {
+      font-size: 20px;
+      flex: 0 0 auto;
+    }
+
+    @media (max-width: 576px) {
+      .auth-wrapper {
+        padding: 16px;
+      }
+
+      .auth-card {
+        border-radius: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body class="auth-body">
+
+  <%
+    const safeError = typeof error !== "undefined" && Array.isArray(error) ? error : [];
+    const safeSuccess = typeof success !== "undefined" && Array.isArray(success) ? success : [];
+  %>
+
+  <main class="auth-wrapper d-flex align-items-center justify-content-center">
+    <div class="auth-card card border-0 shadow-lg">
+      <div class="card-body p-4 p-sm-5">
+
+        <div class="text-center mb-4">
+          <div class="auth-logo mx-auto">
+            <span class="material-symbols-rounded">lock_open</span>
+          </div>
+
+          <h3 class="auth-title">
+            Selamat Datang
+          </h3>
+
+          <p class="auth-subtitle">
+            Silakan login untuk masuk ke SINOSUKE.
+          </p>
+        </div>
+
+        <% if (safeError.length > 0) { %>
+          <% safeError.forEach(function(message) { %>
+            <div class="alert auth-alert auth-alert-danger">
+              <%= message %>
+            </div>
+          <% }) %>
+        <% } %>
+
+        <% if (safeSuccess.length > 0) { %>
+          <% safeSuccess.forEach(function(message) { %>
+            <div class="alert auth-alert auth-alert-success">
+              <%= message %>
+            </div>
+          <% }) %>
+        <% } %>
+
+        <form action="/login" method="POST" autocomplete="on">
+
+          <div class="mb-3">
+            <label class="form-label auth-label" for="username">
+              Nomor Induk Pegawai (NIP)
+            </label>
+
+            <div class="auth-input-wrap">
+              <span class="material-symbols-rounded auth-input-icon">person</span>
+
+              <input 
+                type="text" 
+                name="username" 
+                id="username"
+                class="form-control form-control-lg custom-input auth-input" 
+                placeholder="Masukkan NIP"
+                autocomplete="username"
+                required
+              >
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label auth-label" for="password">
+              Kata Sandi
+            </label>
+
+            <div class="auth-input-wrap">
+              <span class="material-symbols-rounded auth-input-icon">lock</span>
+
+              <input 
+                type="password" 
+                name="password" 
+                id="password"
+                class="form-control form-control-lg custom-input auth-input" 
+                placeholder="Masukkan password"
+                autocomplete="current-password"
+                required
+              >
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-main auth-submit w-100">
+            <span class="material-symbols-rounded">login</span>
+            Login Sekarang
+          </button>
+        </form>
+
+        <!-- <div class="auth-note">
+          <span class="material-symbols-rounded">info</span>
+          <div>
+            Untuk membuat akun baru, NIP harus sudah masuk whitelist admin. Jika belum, hubungi administrator.
+          </div>
+        </div> -->
+
+        <div class="text-center mt-4">
+          <span class="text-secondary">Belum punya akun?</span>
+          <a href="/register" class="auth-link">Daftar</a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

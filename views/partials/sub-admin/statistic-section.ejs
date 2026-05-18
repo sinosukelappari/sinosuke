@@ -1,0 +1,25 @@
+<section class="subadmin_stat_grid">
+            <div class="info_card subadmin_stat_card">
+              <span class="material-symbols-rounded">description</span>
+              <h3>Surat Saya</h3>
+              <p><b><%= safeTotalSuratUser %></b></p>
+            </div>
+
+            <div class="info_card subadmin_stat_card">
+              <span class="material-symbols-rounded">group</span>
+              <h3>User Staf</h3>
+              <p><b><%= safeUsers.length %></b></p>
+            </div>
+
+            <div class="info_card subadmin_stat_card">
+              <span class="material-symbols-rounded">folder_shared</span>
+              <h3>Surat Staf</h3>
+              <p><b><%= safeTotalSuratBawahan %></b></p>
+            </div>
+
+            <div class="info_card subadmin_stat_card">
+              <span class="material-symbols-rounded">verified_user</span>
+              <h3>Whitelist</h3>
+              <p><b><%= safeWhitelistList.length %></b></p>
+            </div>
+          </section>

@@ -1,0 +1,58 @@
+<div 
+    class="modal fade admin_confirm_modal" 
+    id="adminConfirmModal" 
+    tabindex="-1" 
+    aria-labelledby="adminConfirmModalLabel" 
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content admin_confirm_content">
+        <div class="modal-header admin_confirm_header">
+          <div class="admin_confirm_icon" id="adminConfirmIcon">
+            <span class="material-symbols-rounded">help</span>
+          </div>
+
+          <div>
+            <h5 class="modal-title" id="adminConfirmModalLabel">
+              Konfirmasi
+            </h5>
+
+            <p class="admin_confirm_subtitle">
+              Pastikan tindakan yang dipilih sudah benar.
+            </p>
+          </div>
+
+          <button 
+            type="button" 
+            class="btn-close admin_confirm_close" 
+            data-bs-dismiss="modal" 
+            aria-label="Close"
+          ></button>
+        </div>
+
+        <div class="modal-body admin_confirm_body">
+          <p id="adminConfirmMessage">
+            Apakah Anda yakin ingin melanjutkan?
+          </p>
+        </div>
+
+        <div class="modal-footer admin_confirm_footer">
+          <button 
+            type="button" 
+            class="btn admin_modal_no_btn" 
+            data-bs-dismiss="modal"
+          >
+            Tidak
+          </button>
+
+          <button 
+            type="button" 
+            class="btn admin_modal_yes_btn" 
+            id="adminConfirmYesBtn"
+          >
+            Ya
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

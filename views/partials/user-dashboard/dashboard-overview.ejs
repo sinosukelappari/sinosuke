@@ -1,0 +1,47 @@
+<section class="hero_panel">
+            <div>
+              <span class="mini_badge">
+                <span class="material-symbols-rounded">verified</span>
+                <%= user.bagian || 'Belum ada Peran' %>
+              </span>
+
+              <h2>Halo, <%= user.nama %></h2>
+
+              <p>
+                Pilih kode klasifikasi utama terlebih dahulu. Kode tambahan akan muncul otomatis. 
+                No. Urut dan Nomor Surat akan diambil dari Database Sinosuke.
+              </p>
+            </div>
+
+            <div class="avatar_orb">
+              <%= (user.nama || '?').charAt(0).toUpperCase() %>
+            </div>
+          </section>
+
+<section class="dashboard_grid">
+  <aside class="info_panel">
+                        <div class="info_card" id="kodeTambahanInfoCard">
+              <span class="material-symbols-rounded">info</span>
+
+              <h3 id="kodeTambahanInfoTitle">
+                Informasi Kode Tambahan
+              </h3>
+
+              <p id="kodeTambahanInfoText">
+                Pilih kode tambahan terlebih dahulu untuk melihat keterangan klasifikasi surat.
+              </p>
+            </div>
+
+<div class="info_card">
+  <span class="material-symbols-rounded">manage_accounts</span>
+  <h3>Data Akun</h3>
+
+  <p>
+    Nama: <b><%= user.nama %></b><br>
+    Username: <b><%= user.username %></b><br>
+    Jabatan: <b><%= user.bagian || 'Belum diatur' %></b><br>
+    Total Surat Dibuat: <b><%= typeof totalSuratUser !== 'undefined' ? totalSuratUser : 0 %></b>
+  </p>
+</div>
+            </aside>
+</section>

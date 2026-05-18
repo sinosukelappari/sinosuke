@@ -1,0 +1,25 @@
+<aside class="info_panel">
+                        <div class="info_card" id="kodeTambahanInfoCard">
+              <span class="material-symbols-rounded">info</span>
+
+              <h3 id="kodeTambahanInfoTitle">
+                Informasi Kode Tambahan
+              </h3>
+
+              <p id="kodeTambahanInfoText">
+                Pilih kode tambahan terlebih dahulu untuk melihat keterangan klasifikasi surat.
+              </p>
+            </div>
+
+<div class="info_card">
+  <span class="material-symbols-rounded">manage_accounts</span>
+  <h3>Data Akun</h3>
+
+  <p>
+    Nama: <b><%= user.nama %></b><br>
+    Username: <b><%= user.username %></b><br>
+    Jabatan: <b><%= user.bagian || 'Belum diatur' %></b><br>
+    Total Surat Dibuat: <b><%= typeof totalSuratUser !== 'undefined' ? totalSuratUser : 0 %></b>
+  </p>
+</div>
+            </aside>

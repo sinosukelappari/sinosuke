@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Administrator</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0"
+    rel="stylesheet"
+  >
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    .sheet_row_link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      text-decoration: none;
+      background: rgba(59, 130, 246, 0.14);
+      border: 1px solid rgba(96, 165, 250, 0.28);
+      color: #bfdbfe;
+      padding: 8px 11px;
+      border-radius: 999px;
+      font-weight: 850;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .sheet_row_link:hover {
+      background: rgba(37, 99, 235, 0.22);
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .sheet_row_link .material-symbols-rounded {
+      font-size: 17px;
+    }
+
+    .sheet_row_empty {
+      color: #94a3b8;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .sinosuke-body.theme-light .sheet_row_link {
+      background: #dbeafe;
+      border-color: #bfdbfe;
+      color: #1d4ed8;
+    }
+
+    .sinosuke-body.theme-light .sheet_row_link:hover {
+      background: #bfdbfe;
+      color: #1e3a8a;
+    }
+
+    .sinosuke-body.theme-light .sheet_row_empty {
+      color: #64748b;
+    }
+  </style>
+    <script src="/secure-js/dashboard/theme.js"></script>
+</head>
+
+<body class="sinosuke-body">
+
+  <%
+    const safeAdmin = typeof user !== "undefined" && user ? user : {};
+    const safeUsers = typeof users !== "undefined" && Array.isArray(users) ? users : [];
+    const safeSubAdminList = typeof subAdminList !== "undefined" && Array.isArray(subAdminList) ? subAdminList : [];
+    const safeBagianList = typeof bagianList !== "undefined" && Array.isArray(bagianList) ? bagianList : [];
+    const safeBagianUsageMap = typeof bagianUsageMap !== "undefined" && bagianUsageMap ? bagianUsageMap : {};
+    const safeSuratList = typeof suratList !== "undefined" && Array.isArray(suratList) ? suratList : [];
+    const safeWhitelistList = typeof whitelistList !== "undefined" && Array.isArray(whitelistList) ? whitelistList : [];
+    const safeAppConfig = typeof appConfig !== "undefined" && appConfig ? appConfig : {};
+    const safeTotalSurat = typeof totalSurat !== "undefined" ? totalSurat : safeSuratList.length;
+    const safeSuccess = typeof success !== "undefined" && Array.isArray(success) ? success : [];
+    const safeError = typeof error !== "undefined" && Array.isArray(error) ? error : [];
+    const safeSpreadsheetUrl = safeAppConfig.spreadsheetUrl || "";
+
+    function getBagianOptionData(bagian) {
+      const usedCount = safeBagianUsageMap[bagian.nama] || 0;
+      const isUnlimited = bagian.limitUser === null || typeof bagian.limitUser === "undefined";
+
+      return {
+        nama: bagian.nama,
+        usedCount: usedCount,
+        limitUser: isUnlimited ? null : Number(bagian.limitUser),
+        isUnlimited: isUnlimited
+      };
+    }
+
+    function getSubAdminBagianOptionData(bagian) {
+      return {
+        nama: bagian.nama,
+        ignoreSlot: true,
+        supervisorOnly: true,
+        label: "Dibawahi",
+        description: "Bagian ini dibawahi sub admin dan tidak mengurangi slot user."
+      };
+    }
+
+    function buildSheetRowUrl(surat) {
+      if (!surat) {
+        return "";
+      }
+
+      if (surat.sheetRowUrl) {
+        return surat.sheetRowUrl;
+      }
+
+      const spreadsheetUrlValue = surat.spreadsheetUrl || safeSpreadsheetUrl || "";
+      const sheetGid = surat.sheetGid || "";
+      const sheetRow = surat.sheetRow || "";
+
+      if (!spreadsheetUrlValue || !sheetGid || !sheetRow) {
+        return "";
+      }
+
+      const cleanUrl = String(spreadsheetUrlValue).split("#")[0];
+
+      return cleanUrl + "#gid=" + sheetGid + "&range=A" + sheetRow;
+    }
+  %>
+
+  <div id="toast_container" class="toast_container"></div>
+
+  <textarea id="adminFlashMessagesJson" hidden><%= JSON.stringify({
+    success: safeSuccess,
+    error: safeError
+  }) %></textarea>
+
+  <textarea id="adminBagianOptionsJson" hidden><%= JSON.stringify(
+    safeBagianList.map(getBagianOptionData)
+  ) %></textarea>
+
+  <textarea id="adminSubAdminBagianOptionsJson" hidden><%= JSON.stringify(
+    safeBagianList.map(getSubAdminBagianOptionData)
+  ) %></textarea>
+
+  <textarea id="adminUserOptionsJson" hidden><%= JSON.stringify(
+    safeUsers
+      .filter(function(item) {
+        return item.role !== "admin";
+      })
+      .map(function(item) {
+        return {
+          id: String(item._id),
+          nama: item.nama || "",
+          username: item.username || "",
+          role: item.role || "user",
+          bagian: item.bagian || "",
+          subAdminGroup: item.subAdminGroup || ""
+        };
+      })
+  ) %></textarea>
+
+  <div class="app_window">
+
+    <aside class="sidebar">
+      <div class="branding">
+        <span class="material-symbols-rounded logo_icon">admin_panel_settings</span>
+        <h1>SINOSUKE</h1>
+
+        <div class="app_slogan">
+          Panel Administrator Sistem Nomor Surat Keluar.
+        </div>
+      </div>
+
+      <div class="sidebar_divider"></div>
+
+      <nav class="nav_items">
+        <a href="/admin/dashboard" class="nav_item active">
+          <span class="material-symbols-rounded">dashboard</span>
+          <span class="project_label">Dashboard</span>
+        </a>
+
+        <a href="#bagianSection" class="nav_item">
+          <span class="material-symbols-rounded">category</span>
+          <span class="project_label">Bagian</span>
+        </a>
+
+        <a href="#subAdminSection" class="nav_item">
+          <span class="material-symbols-rounded">shield_person</span>
+          <span class="project_label">Sub Admin</span>
+        </a>
+
+        <a href="#akunSection" class="nav_item">
+          <span class="material-symbols-rounded">group</span>
+          <span class="project_label">Akun</span>
+        </a>
+
+        <a href="#whitelistSection" class="nav_item">
+          <span class="material-symbols-rounded">verified_user</span>
+          <span class="project_label">Whitelist</span>
+        </a>
+
+        <a href="#suratSection" class="nav_item">
+          <span class="material-symbols-rounded">folder_open</span>
+          <span class="project_label">Surat</span>
+        </a>
+
+        <a href="#configSection" class="nav_item">
+          <span class="material-symbols-rounded">settings</span>
+          <span class="project_label">Konfigurasi</span>
+        </a>
+      </nav>
+
+      <div class="sidebar_bottom">
+        <button type="button" id="themeToggleBtn" class="nav_item nav_button">
+          <span class="material-symbols-rounded" id="themeIcon">dark_mode</span>
+          <span class="project_label">Tema</span>
+        </button>
+
+        <a href="/logout" class="nav_item danger_nav">
+          <span class="material-symbols-rounded">logout</span>
+          <span class="project_label">Logout</span>
+        </a>
+      </div>
+    </aside>
+
+    <main class="main_content">
+
+      <header class="top_header">
+        <div class="header_center">
+          <div class="project_rename_wrapper">
+            <input
+              type="text"
+              id="header_project_name"
+              class="project_name_input"
+              value="Dashboard Administrator"
+              readonly
+            >
+          </div>
+        </div>
+      </header>
+
+      <section class="view_container">
+        <div class="dashboard_scroll">
+
+          <section class="settings_section admin_intro_section">
+            <div class="section_header">
+              <div>
+                <h2>
+                  <span class="material-symbols-rounded">admin_panel_settings</span>
+                  Dashboard Administrator
+                </h2>
+
+                <p>
+                  Kelola akun pengguna, data bagian, sub admin, whitelist username, konfigurasi aplikasi, dan seluruh data surat yang dibuat user.
+                </p>
+              </div>
+            </div>
+
+            <div class="admin_stat_grid">
+              <div class="info_card admin_stat_card">
+                <span class="material-symbols-rounded">group</span>
+                <h3>Total Akun</h3>
+                <p><b><%= safeUsers.length %></b></p>
+              </div>
+
+              <div class="info_card admin_stat_card">
+                <span class="material-symbols-rounded">shield_person</span>
+                <h3>Total Sub Admin</h3>
+                <p><b><%= safeSubAdminList.length %></b></p>
+              </div>
+
+              <div class="info_card admin_stat_card">
+                <span class="material-symbols-rounded">description</span>
+                <h3>Total Surat</h3>
+                <p><b><%= safeTotalSurat %></b></p>
+              </div>
+
+              <div class="info_card admin_stat_card">
+                <span class="material-symbols-rounded">category</span>
+                <h3>Total Bagian</h3>
+                <p><b><%= safeBagianList.length %></b></p>
+              </div>
+
+              <div class="info_card admin_stat_card">
+                <span class="material-symbols-rounded">verified_user</span>
+                <h3>Total Whitelist</h3>
+                <p><b><%= safeWhitelistList.length %></b></p>
+              </div>
+            </div>
+          </section>
+
+          <section class="settings_section" id="bagianSection">
+            <div class="section_header">
+              <div>
+                <h2>
+                  <span class="material-symbols-rounded">category</span>
+                  Kelola Data Bagian
+                </h2>
+
+                <p>
+                  Tambahkan, hapus, dan atur batas maksimal user yang dapat memakai sebuah bagian.
+                </p>
+              </div>
+            </div>
+
+            <form action="/admin/bagian" method="POST" class="sinosuke_form" style="margin-bottom: 24px;">
+              <div class="form_grid">
+                <div class="input_group">
+                  <label class="group_label" for="namaBagian">
+                    Nama Bagian
+                  </label>
+
+                  <input
+                    type="text"
+                    name="nama"
+                    id="namaBagian"
+                    class="styled_input"
+                    placeholder="Contoh: KEUANGAN"
+                    required
+                  >
+
+                  <small class="helper_text">
+                    Nama bagian akan disimpan dalam huruf kapital.
+                  </small>
+                </div>
+
+                <div class="input_group">
+                  <label class="group_label" for="limitUser">
+                    Limit User
+                  </label>
+
+                  <input
+                    type="number"
+                    name="limitUser"
+                    id="limitUser"
+                    class="styled_input"
+                    min="1"
+                    placeholder="Kosongkan untuk unlimited"
+                  >
+
+                  <small class="helper_text">
+                    Isi 1 jika bagian hanya boleh dipakai 1 user. Kosongkan jika tidak terbatas.
+                  </small>
+                </div>
+              </div>
+
+              <div class="form_actions">
+                <button type="submit" class="primary_btn">
+                  <span class="material-symbols-rounded">add</span>
+                  Tambah Bagian
+                </button>
+              </div>
+            </form>
+
+            <div class="admin_table_wrapper">
+              <table class="surat_table admin_clean_table">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama Bagian</th>
+                    <th>Limit User</th>
+                    <th>Terpakai</th>
+                    <th>Ubah Limit</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% if (safeBagianList.length > 0) { %>
+                    <% safeBagianList.forEach((bagian, index) => { %>
+                      <%
+                        const usedCount = safeBagianUsageMap[bagian.nama] || 0;
+                        const isUnlimited = bagian.limitUser === null || typeof bagian.limitUser === "undefined";
+                      %>
+
+                      <tr>
+                        <td class="number_cell"><%= index + 1 %></td>
+
+                        <td>
+                          <div class="bagian_identity">
+                            <div class="bagian_icon">
+                              <span class="material-symbols-rounded">domain</span>
+                            </div>
+
+                            <div class="bagian_text">
+                              <strong><%= bagian.nama %></strong>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td>
+                          <% if (isUnlimited) { %>
+                            <span class="limit_pill limit_unlimited">
+                              <span class="material-symbols-rounded">all_inclusive</span>
+                              Unlimited
+                            </span>
+                          <% } else { %>
+                            <span class="limit_pill">
+                              <span class="material-symbols-rounded">person</span>
+                              <%= bagian.limitUser %> user
+                            </span>
+                          <% } %>
+                        </td>
+
+                        <td>
+                          <span class="used_pill">
+                            <span class="material-symbols-rounded">group</span>
+                            <%= usedCount %> terpakai
+                          </span>
+                        </td>
+
+                        <td>
+                          <form
+                            action="/admin/bagian/<%= bagian._id %>/limit"
+                            method="POST"
+                            class="admin_inline_form"
+                          >
+                            <input
+                              type="number"
+                              name="limitUser"
+                              class="styled_input admin_limit_input"
+                              min="1"
+                              value="<%= isUnlimited ? '' : bagian.limitUser %>"
+                              data-original-value="<%= isUnlimited ? '' : bagian.limitUser %>"
+                              placeholder="∞"
+                            >
+
+                            <button type="submit" class="small_save_btn">
+                              <span class="material-symbols-rounded">save</span>
+                              Simpan
+                            </button>
+                          </form>
+
+                          <small class="helper_text">
+                            Kosongkan lalu simpan untuk unlimited.
+                          </small>
+                        </td>
+
+                        <td>
+                          <form
+                            action="/admin/bagian/<%= bagian._id %>/delete"
+                            method="POST"
+                            class="confirm_form"
+                            data-confirm-title="Hapus Bagian"
+                            data-confirm-message="Yakin ingin menghapus bagian <%= bagian.nama %>?"
+                            data-confirm-yes="Ya, Hapus"
+                            data-confirm-type="danger"
+                          >
+                            <button type="submit" class="danger_inline_btn">
+                              <span class="material-symbols-rounded">delete</span>
+                              Hapus
+                            </button>
+                          </form>
+                        </td>
+                      </tr>
+                    <% }) %>
+                  <% } else { %>
+                    <tr>
+                      <td colspan="6" class="empty_cell">
+                        Belum ada data bagian.
+                      </td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="settings_section" id="subAdminSection">
+            <div class="section_header">
+              <div>
+                <h2>
+                  <span class="material-symbols-rounded">shield_person</span>
+                  Kelola Sub Admin
+                </h2>
+
+                <p>
+                  Pilih user dari database, tentukan nama sub admin, lalu pilih bagian.
+                </p>
+              </div>
+            </div>
+
+            <form action="/admin/sub-admin" method="POST" class="sinosuke_form subadmin_create_form" style="margin-bottom: 24px;">
+              <div class="form_grid">
+
+                <div class="input_group">
+                  <label class="group_label" for="subAdminUserSearch">
+                    Pilih User
+                  </label>
+
+                  <input
+                    type="hidden"
+                    name="userId"
+                    id="subAdminUserId"
+                    class="subadmin_user_hidden"
+                    required
+                  >
+
+                  <div class="admin_user_select">
+                    <span class="material-symbols-rounded admin_bagian_icon">
+                      person
+                    </span>
+
+                    <input
+                      type="text"
+                      id="subAdminUserSearch"
+                      class="styled_input admin_bagian_search_input subadmin_user_search_input"
+                      placeholder="Cari atau pilih user"
+                      autocomplete="off"
+                      required
+                    >
+
+                    <button
+                      type="button"
+                      class="admin_bagian_clear_btn subadmin_user_clear_btn"
+                      title="Hapus pilihan"
+                    >
+                      <span class="material-symbols-rounded">close</span>
+                    </button>
+
+                    <div class="admin_bagian_dropdown subadmin_user_dropdown hidden"></div>
+                  </div>
+
+                  <small class="helper_text">
+                    User yang dipilih akan diberi role sub_admin.
+                  </small>
+                </div>
+
+                <div class="input_group">
+                  <label class="group_label" for="subAdminGroup">
+                    Nama/Jabatan Sub Admin
+                  </label>
+
+                  <input
+                    type="text"
+                    name="subAdminGroup"
+                    id="subAdminGroup"
+                    class="styled_input"
+                    placeholder="Contoh: KASUBBAG TU"
+                    required
+                  >
+
+                  <small class="helper_text">
+                    Contoh: KALAPAS, KASUBBAG TU, KASIMINKAMTIB, KASI BINAPIGIATJA.
+                  </small>
+                </div>
+
+                <div class="input_group full_width">
+                  <label class="group_label" for="subAdminBagianSearch">
+                    Bagian yang Dibawahi
+                  </label>
+
+                  <div class="admin_multi_bagian_select">
+                    <div class="admin_multi_selected_tags" id="subAdminBagianTags"></div>
+
+                    <div class="admin_multi_search_row">
+                      <span class="material-symbols-rounded admin_bagian_icon">
+                        business_center
+                      </span>
+
+                      <input
+                        type="text"
+                        id="subAdminBagianSearch"
+                        class="styled_input admin_bagian_search_input subadmin_bagian_search_input"
+                        placeholder="Cari dan pilih bagian"
+                        autocomplete="off"
+                      >
+
+                      <button
+                        type="button"
+                        class="admin_bagian_clear_btn subadmin_bagian_clear_btn"
+                        title="Hapus pencarian"
+                      >
+                        <span class="material-symbols-rounded">close</span>
+                      </button>
+
+                      <div class="admin_bagian_dropdown subadmin_bagian_dropdown hidden"></div>
+                    </div>
+                  </div>
+
+                  <div id="subAdminBagianHiddenContainer"></div>
+
+                  <small class="helper_text">
+                    Pilih satu atau lebih bagian yang berada di bawah kewenangan sub admin. Pilihan ini tidak mengurangi slot user pada bagian tersebut.
+                  </small>
+                </div>
+
+              </div>
+
+              <div class="form_actions">
+                <button type="submit" class="primary_btn">
+                  <span class="material-symbols-rounded">add_moderator</span>
+                  Simpan Sub Admin
+                </button>
+              </div>
+            </form>
+
+            <div class="admin_table_wrapper">
+              <table class="surat_table admin_clean_table">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Sub Admin</th>
+                    <th>Nama/Jabatan Sub Admin</th>
+                    <th>Bagian Dibawahi</th>
+                    <th>Tambah Bagian</th>
+                    <th>Tanggal Ditunjuk</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% if (safeSubAdminList.length > 0) { %>
+                    <% safeSubAdminList.forEach(function(item, index) { %>
+                      <%
+                        const bagianDibawahiAktif = Array.isArray(item.bagianDibawahi)
+                          ? item.bagianDibawahi
+                          : [];
+
+                        const bagianBelumDibawahi = safeBagianList.filter(function(bagian) {
+                          return !bagianDibawahiAktif.includes(bagian.nama);
+                        });
+                      %>
+
+                      <tr>
+                        <td class="number_cell"><%= index + 1 %></td>
+
+                        <td>
+                          <div class="user_identity">
+                            <span class="material-symbols-rounded">shield_person</span>
+                            <div>
+                              <strong><%= item.nama || "-" %></strong>
+                              <small><%= item.username || "-" %></small>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td>
+                          <span class="role_badge role_sub_admin">
+                            <span class="material-symbols-rounded">admin_panel_settings</span>
+                            <%= item.subAdminGroup || "SUB ADMIN" %>
+                          </span>
+                        </td>
+
+                        <td>
+                          <div class="subadmin_bagian_list">
+                            <% if (bagianDibawahiAktif.length > 0) { %>
+                              <% bagianDibawahiAktif.forEach(function(bagianNama) { %>
+                                <div class="subadmin_bagian_item">
+                                  <span class="bagian_pill">
+                                    <span class="material-symbols-rounded">business_center</span>
+                                    <%= bagianNama %>
+                                  </span>
+
+                                  <form
+                                    action="/admin/sub-admin/<%= item._id %>/bagian/hapus"
+                                    method="POST"
+                                    class="confirm_form"
+                                    data-confirm-title="Hapus Bagian Sub Admin"
+                                    data-confirm-message="Hapus bagian <%= bagianNama %> dari sub admin <%= item.nama %>?"
+                                    data-confirm-yes="Ya, Hapus"
+                                    data-confirm-type="danger"
+                                  >
+                                    <input type="hidden" name="bagian" value="<%= bagianNama %>">
+
+                                    <button type="submit" class="mini_icon_danger_btn" title="Hapus bagian">
+                                      <span class="material-symbols-rounded">close</span>
+                                    </button>
+                                  </form>
+                                </div>
+                              <% }) %>
+                            <% } else { %>
+                              <span class="bagian_pill bagian_empty">
+                                <span class="material-symbols-rounded">warning</span>
+                                Belum ada bagian
+                              </span>
+                            <% } %>
+                          </div>
+                        </td>
+
+                        <td>
+                          <% if (bagianBelumDibawahi.length > 0) { %>
+                            <form
+                              action="/admin/sub-admin/<%= item._id %>/bagian/tambah"
+                              method="POST"
+                              class="admin_inline_form subadmin_add_bagian_form"
+                            >
+                              <input
+                                type="hidden"
+                                name="bagianTambahan"
+                                class="subadmin_add_bagian_hidden"
+                                required
+                              >
+
+                              <div
+                                class="admin_bagian_select subadmin_add_bagian_select"
+                                data-options='<%- JSON.stringify(bagianBelumDibawahi.map(getSubAdminBagianOptionData)) %>'
+                              >
+                                <span class="material-symbols-rounded admin_bagian_icon">
+                                  business_center
+                                </span>
+
+                                <input
+                                  type="text"
+                                  class="styled_input admin_bagian_search_input subadmin_add_bagian_search_input"
+                                  placeholder="Cari atau pilih bagian"
+                                  autocomplete="off"
+                                  required
+                                >
+
+                                <button
+                                  type="button"
+                                  class="admin_bagian_clear_btn subadmin_add_bagian_clear_btn"
+                                  title="Hapus pilihan"
+                                >
+                                  <span class="material-symbols-rounded">close</span>
+                                </button>
+
+                                <div class="admin_bagian_dropdown subadmin_add_bagian_dropdown hidden"></div>
+                              </div>
+
+                              <button type="submit" class="small_save_btn">
+                                <span class="material-symbols-rounded">add</span>
+                                Tambah
+                              </button>
+                            </form>
+                          <% } else { %>
+                            <span class="helper_text">
+                              Semua bagian sudah masuk.
+                            </span>
+                          <% } %>
+                        </td>
+
+                        <td>
+                          <span class="date_text">
+                            <% if (item.tanggalDitunjuk) { %>
+                              <%= item.tanggalDitunjuk.toLocaleDateString("id-ID") %>
+                              <br>
+                              <small>
+                                <%= item.tanggalDitunjuk.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }) %>
+                              </small>
+                            <% } else { %>
+                              -
+                            <% } %>
+                          </span>
+                        </td>
+
+                        <td>
+                          <form
+                            action="/admin/sub-admin/<%= item._id %>/cabut"
+                            method="POST"
+                            class="confirm_form"
+                            data-confirm-title="Cabut Sub Admin"
+                            data-confirm-message="Cabut hak sub admin dari <%= item.nama %>? Akun tidak dihapus, hanya kembali menjadi user biasa."
+                            data-confirm-yes="Ya, Cabut"
+                            data-confirm-type="danger"
+                          >
+                            <button type="submit" class="danger_inline_btn">
+                              <span class="material-symbols-rounded">remove_moderator</span>
+                              Cabut
+                            </button>
+                          </form>
+                        </td>
+                      </tr>
+                    <% }) %>
+                  <% } else { %>
+                    <tr>
+                      <td colspan="7" class="empty_cell">
+                        Belum ada sub admin aktif.
+                      </td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="settings_section" id="akunSection">
+            <div class="section_header">
+              <div>
+                <h2>
+                  <span class="material-symbols-rounded">group</span>
+                  Data Semua Akun
+                </h2>
+
+                <p>
+                  Atur bagian, reset password, atau hapus akun user biasa dari sistem.
+                </p>
+              </div>
+            </div>
+
+            <div class="admin_search_wrapper">
+              <div class="admin_search_box">
+                <span class="material-symbols-rounded">search</span>
+
+                <input
+                  type="text"
+                  id="searchAkunInput"
+                  class="admin_search_input"
+                  placeholder="Cari berdasarkan nama atau username..."
+                  autocomplete="off"
+                >
+              </div>
+
+              <button type="button" id="clearSearchAkunBtn" class="admin_search_clear">
+                <span class="material-symbols-rounded">close</span>
+                Bersihkan
+              </button>
+            </div>
+
+            <div class="admin_table_wrapper">
+              <table class="surat_table admin_clean_table" id="akunTable">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Role</th>
+                    <th>Bagian Saat Ini</th>
+                    <th>Ubah Bagian</th>
+                    <th>Tanggal Dibuat</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% if (safeUsers.length > 0) { %>
+                    <% safeUsers.forEach((item, index) => { %>
+                      <tr
+                        class="akun_row"
+                        data-nama="<%= String(item.nama || '').toLowerCase() %>"
+                        data-username="<%= String(item.username || '').toLowerCase() %>"
+                      >
+                        <td class="akun_nomor number_cell"><%= index + 1 %></td>
+
+                        <td>
+                          <div class="user_identity">
+                            <span class="material-symbols-rounded">account_circle</span>
+                            <div>
+                              <strong><%= item.nama %></strong>
+                              <small><%= item.username %></small>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td>
+                          <% if (item.role === "admin") { %>
+                            <span class="role_badge role_admin">
+                              <span class="material-symbols-rounded">admin_panel_settings</span>
+                              Administrator
+                            </span>
+                          <% } else if (item.role === "sub_admin") { %>
+                            <span class="role_badge role_sub_admin">
+                              <span class="material-symbols-rounded">shield_person</span>
+                              Sub Admin
+                            </span>
+                          <% } else { %>
+                            <span class="role_badge role_user">
+                              <span class="material-symbols-rounded">person</span>
+                              User
+                            </span>
+                          <% } %>
+                        </td>
+
+                        <td>
+                          <% if (item.bagian) { %>
+                            <span class="bagian_pill">
+                              <span class="material-symbols-rounded">business_center</span>
+                              <%= item.bagian %>
+                            </span>
+                          <% } else { %>
+                            <span class="bagian_pill bagian_empty">
+                              <span class="material-symbols-rounded">warning</span>
+                              Belum diatur
+                            </span>
+                          <% } %>
+                        </td>
+
+                        <td>
+                          <% if (item.role !== "admin") { %>
+                            <form
+                              action="/admin/user/<%= item._id %>/bagian"
+                              method="POST"
+                              class="admin_inline_form admin_bagian_form"
+                            >
+                              <input
+                                type="hidden"
+                                name="bagian"
+                                class="admin_bagian_hidden"
+                                value="<%= item.bagian || '' %>"
+                                data-original-value="<%= item.bagian || '' %>"
+                              >
+
+                              <div
+                                class="admin_bagian_select"
+                                data-current="<%= item.bagian || '' %>"
+                              >
+                                <span class="material-symbols-rounded admin_bagian_icon">
+                                  business_center
+                                </span>
+
+                                <input
+                                  type="text"
+                                  class="styled_input admin_bagian_search_input"
+                                  value="<%= item.bagian || '' %>"
+                                  placeholder="Cari atau pilih bagian"
+                                  autocomplete="off"
+                                >
+
+                                <button
+                                  type="button"
+                                  class="admin_bagian_clear_btn"
+                                  title="Hapus pilihan"
+                                >
+                                  <span class="material-symbols-rounded">close</span>
+                                </button>
+
+                                <div class="admin_bagian_dropdown hidden"></div>
+                              </div>
+
+                              <button type="submit" class="small_save_btn">
+                                <span class="material-symbols-rounded">save</span>
+                                Simpan
+                              </button>
+                            </form>
+                          <% } else { %>
+                            <span class="helper_text">
+                              Tidak dapat diubah
+                            </span>
+                          <% } %>
+                        </td>
+
+                        <td>
+                          <span class="date_text">
+                            <%= item.createdAt ? item.createdAt.toLocaleDateString("id-ID") : "-" %>
+                          </span>
+                        </td>
+
+                        <td>
+                          <% if (item.role !== "admin") { %>
+                            <div class="admin_action_group">
+                              <form
+                                action="/admin/user/<%= item._id %>/reset-password"
+                                method="POST"
+                                class="confirm_form"
+                                data-confirm-title="Reset Password"
+                                data-confirm-message="Reset password user <%= item.nama %> menjadi 12345678?"
+                                data-confirm-yes="Ya, Reset"
+                                data-confirm-type="warning"
+                              >
+                                <button type="submit" class="warning_inline_btn">
+                                  <span class="material-symbols-rounded">lock_reset</span>
+                                  Reset
+                                </button>
+                              </form>
+
+                              <form
+                                action="/admin/user/<%= item._id %>/delete"
+                                method="POST"
+                                class="confirm_form"
+                                data-confirm-title="Hapus User"
+                                data-confirm-message="Yakin ingin menghapus user <%= item.nama %>? Data surat user tetap disimpan sebagai arsip."
+                                data-confirm-yes="Ya, Hapus"
+                                data-confirm-type="danger"
+                              >
+                                <button type="submit" class="danger_inline_btn">
+                                  <span class="material-symbols-rounded">delete</span>
+                                  Hapus
+                                </button>
+                              </form>
+                            </div>
+                          <% } else { %>
+                            <span class="helper_text">
+                              Tidak dapat diubah
+                            </span>
+                          <% } %>
+                        </td>
+                      </tr>
+                    <% }) %>
+
+                    <tr id="akunNoResultRow" class="hidden">
+                      <td colspan="7" class="empty_cell">
+                        Tidak ada akun yang sesuai dengan pencarian.
+                      </td>
+                    </tr>
+                  <% } else { %>
+                    <tr>
+                      <td colspan="7" class="empty_cell">
+                        Belum ada data akun.
+                      </td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="settings_section" id="whitelistSection">
+            <div class="section_header">
+              <div>
+                <h2>
+                  <span class="material-symbols-rounded">verified_user</span>
+                  Username Whitelist
+                </h2>
+
+                <p>
+                  Hanya username yang terdaftar di whitelist ini yang dapat membuat akun. Username wajib berupa 18 digit angka.
+                </p>
+              </div>
+            </div>
+
+            <form action="/admin/whitelist" method="POST" class="sinosuke_form" style="margin-bottom: 24px;">
+              <div class="form_grid">
+                <div class="input_group full_width">
+                  <label class="group_label" for="usernames">
+                    Tambah Username/NIP Whitelist
+                  </label>
+
+                  <textarea
+                    name="usernames"
+                    id="usernames"
+                    class="styled_input admin_textarea"
+                    placeholder="Contoh: 198708202018092002, 198812102016071005"
+                    required
+                  ></textarea>
+
+                  <small class="helper_text">
+                    Bisa menambahkan banyak username sekaligus dengan pemisah koma. Setiap username harus 18 digit angka.
+                  </small>
+                </div>
+              </div>
+
+              <div class="form_actions">
+                <button type="submit" class="primary_btn">
+                  <span class="material-symbols-rounded">add</span>
+                  Tambah Whitelist
+                </button>
+              </div>
+            </form>
+
+            <div class="admin_table_wrapper">
+              <table class="surat_table admin_clean_table">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Username</th>
+                    <th>Status</th>
+                    <th>Tanggal Ditambahkan</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% if (safeWhitelistList.length > 0) { %>
+                    <% safeWhitelistList.forEach((item, index) => { %>
+                      <tr>
+                        <td class="number_cell"><%= index + 1 %></td>
+
+                        <td>
+                          <div class="whitelist_identity">
+                            <div class="whitelist_icon">
+                              <span class="material-symbols-rounded">verified_user</span>
+                            </div>
+
+                            <div class="whitelist_text">
+                              <strong><%= item.username %></strong>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td>
+                          <span class="active_status_pill">
+                            <span class="material-symbols-rounded">check_circle</span>
+                            Aktif
+                          </span>
+                        </td>
+
+                        <td>
+                          <span class="date_text">
+                            <% if (item.createdAt) { %>
+                              <%= item.createdAt.toLocaleDateString("id-ID") %>
+                              <br>
+                              <small>
+                                <%= item.createdAt.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }) %>
+                              </small>
+                            <% } else { %>
+                              -
+                            <% } %>
+                          </span>
+                        </td>
+
+                        <td>
+                          <form
+                            action="/admin/whitelist/<%= item._id %>/delete"
+                            method="POST"
+                            class="confirm_form"
+                            data-confirm-title="Hapus Whitelist"
+                            data-confirm-message="Yakin ingin menghapus username whitelist <%= item.username %>?"
+                            data-confirm-yes="Ya, Hapus"
+                            data-confirm-type="danger"
+                          >
+                            <button type="submit" class="danger_inline_btn">
+                              <span class="material-symbols-rounded">delete</span>
+                              Hapus
+                            </button>
+                          </form>
+                        </td>
+                      </tr>
+                    <% }) %>
+                  <% } else { %>
+                    <tr>
+                      <td colspan="5" class="empty_cell">
+                        Belum ada username whitelist.
+                      </td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="settings_section" id="suratSection">
+            <div class="section_header">
+              <div>
+                <h2>
+                  <span class="material-symbols-rounded">folder_open</span>
+                  Data Semua Surat
+                </h2>
+
+                <p>
+                  Seluruh data surat yang dibuat oleh semua pegawai.
+                </p>
+              </div>
+            </div>
+
+            <div class="admin_table_wrapper">
+              <table class="surat_table admin_clean_table surat_admin_table">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Nomor Surat Lengkap</th>
+                    <th>Nama User</th>
+                    <th>Username</th>
+                    <th>Bagian</th>
+                    <th>Klasifikasi</th>
+                    <th>Kode Tambahan</th>
+                    <th>Tujuan Surat</th>
+                    <th>Hal Surat</th>
+                    <th>Sheet</th>
+                    <th>Baris / Link</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% if (safeSuratList.length > 0) { %>
+                    <% safeSuratList.forEach((surat, index) => { %>
+                      <%
+                        const sheetRowUrl = buildSheetRowUrl(surat);
+                      %>
+
+                      <tr>
+                        <td class="number_cell"><%= index + 1 %></td>
+
+                        <td>
+                          <span class="date_text">
+                            <% if (surat.createdAt) { %>
+                              <%= surat.createdAt.toLocaleDateString("id-ID") %>
+                              <br>
+                              <small>
+                                <%= surat.createdAt.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }) %>
+                              </small>
+                            <% } else { %>
+                              -
+                            <% } %>
+                          </span>
+                        </td>
+
+                        <td>
+                          <button
+                            type="button"
+                            class="copy_nomor_btn"
+                            data-nomor="<%= surat.nomorSuratLengkap || '' %>"
+                            title="Klik untuk salin nomor surat"
+                          >
+                            <span class="material-symbols-rounded">content_copy</span>
+                            <%= surat.nomorSuratLengkap || '-' %>
+                          </button>
+                        </td>
+
+                        <td>
+                          <%= surat.namaUser || (surat.userId && surat.userId.nama ? surat.userId.nama : '-') %>
+                        </td>
+
+                        <td>
+                          <span class="username_text">
+                            <%= surat.username || (surat.userId && surat.userId.username ? surat.userId.username : '-') %>
+                          </span>
+                        </td>
+
+                        <td>
+                          <% if (surat.dariBagian) { %>
+                            <span class="bagian_pill">
+                              <span class="material-symbols-rounded">business_center</span>
+                              <%= surat.dariBagian %>
+                            </span>
+                          <% } else if (surat.userId && surat.userId.bagian) { %>
+                            <span class="bagian_pill">
+                              <span class="material-symbols-rounded">business_center</span>
+                              <%= surat.userId.bagian %>
+                            </span>
+                          <% } else { %>
+                            -
+                          <% } %>
+                        </td>
+
+                        <td>
+                          <span class="klasifikasi_pill">
+                            <%= surat.kodeKlasifikasi || '-' %>
+                          </span>
+                        </td>
+
+                        <td><%= surat.kodeTambahan || '-' %></td>
+                        <td><%= surat.tujuanSurat || '-' %></td>
+                        <td><%= surat.halSurat || '-' %></td>
+                        <td><%= surat.sheetName || '-' %></td>
+
+                        <td>
+                          <% if (sheetRowUrl) { %>
+                            <a
+                              href="<%= sheetRowUrl %>"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="sheet_row_link"
+                              title="Buka baris surat di Google Sheet"
+                            >
+                              <span class="material-symbols-rounded">open_in_new</span>
+                              Row <%= surat.sheetRow || '-' %>
+                            </a>
+                          <% } else if (surat.sheetRow) { %>
+                            <span class="mini_badge">
+                              Row <%= surat.sheetRow %>
+                            </span>
+                          <% } else { %>
+                            <span class="sheet_row_empty">-</span>
+                          <% } %>
+                        </td>
+                      </tr>
+                    <% }) %>
+                  <% } else { %>
+                    <tr>
+                      <td colspan="12" class="empty_cell">
+                        Belum ada data surat.
+                      </td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="settings_section" id="configSection">
+            <div class="section_header">
+              <div>
+                <h2>
+                  <span class="material-symbols-rounded">settings</span>
+                  Konfigurasi Aplikasi
+                </h2>
+
+                <p>
+                  Atur mode bagian, URL Spreadsheet, dan URL Google Apps Script.
+                </p>
+              </div>
+            </div>
+
+            <form action="/admin/settings" method="POST" class="sinosuke_form">
+              <div class="form_grid">
+
+                <div class="input_group">
+                  <label class="group_label" for="dariBagianMode">
+                    Dari Bagian Mode
+                  </label>
+
+                  <select name="dariBagianMode" id="dariBagianMode" class="styled_input" data-original-value="<%= safeAppConfig.dariBagianMode || 'manual' %>" required>
+                    <option
+                      value="auto"
+                      <%= safeAppConfig.dariBagianMode === "auto" ? "selected" : "" %>
+                    >
+                      Auto - dari bagian akun user
+                    </option>
+
+                    <option
+                      value="manual"
+                      <%= !safeAppConfig.dariBagianMode || safeAppConfig.dariBagianMode === "manual" ? "selected" : "" %>
+                    >
+                      Manual - dipilih dari dropdown
+                    </option>
+                  </select>
+                </div>
+
+                <div class="input_group">
+                  <label class="group_label" for="spreadsheetUrl">
+                    Spreadsheet URL
+                  </label>
+
+                  <input
+                    type="url"
+                    name="spreadsheetUrl"
+                    id="spreadsheetUrl"
+                    class="styled_input"
+                    value="<%= safeAppConfig.spreadsheetUrl || '' %>"
+                    placeholder="https://docs.google.com/spreadsheets/d/..."
+                    data-original-value="<%= safeAppConfig.spreadsheetUrl || '' %>"
+                  >
+                </div>
+
+                <div class="input_group full_width">
+                  <label class="group_label" for="googleScriptUrl">
+                    Google Script URL
+                  </label>
+
+                  <input
+                    type="url"
+                    name="googleScriptUrl"
+                    id="googleScriptUrl"
+                    class="styled_input"
+                    value="<%= safeAppConfig.googleScriptUrl || '' %>"
+                    placeholder="https://script.google.com/macros/s/xxxxx/exec"
+                    data-original-value="<%= safeAppConfig.googleScriptUrl || '' %>"
+                  >
+                </div>
+
+              </div>
+
+              <div class="form_actions">
+                <button type="submit" class="primary_btn">
+                  <span class="material-symbols-rounded">save</span>
+                  Simpan Konfigurasi
+                </button>
+              </div>
+            </form>
+          </section>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div
+    class="modal fade admin_confirm_modal"
+    id="adminConfirmModal"
+    tabindex="-1"
+    aria-labelledby="adminConfirmModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content admin_confirm_content">
+        <div class="modal-header admin_confirm_header">
+          <div class="admin_confirm_icon" id="adminConfirmIcon">
+            <span class="material-symbols-rounded">help</span>
+          </div>
+
+          <div>
+            <h5 class="modal-title" id="adminConfirmModalLabel">
+              Konfirmasi
+            </h5>
+
+            <p class="admin_confirm_subtitle">
+              Pastikan tindakan yang dipilih sudah benar.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            class="btn-close admin_confirm_close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+
+        <div class="modal-body admin_confirm_body">
+          <p id="adminConfirmMessage">
+            Apakah Anda yakin ingin melanjutkan?
+          </p>
+        </div>
+
+        <div class="modal-footer admin_confirm_footer">
+          <button
+            type="button"
+            class="btn admin_modal_no_btn"
+            data-bs-dismiss="modal"
+          >
+            Tidak
+          </button>
+
+          <button
+            type="button"
+            class="btn admin_modal_yes_btn"
+            id="adminConfirmYesBtn"
+          >
+            Ya
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/secure-js/dashboard/ui-utils.js"></script>
+  <!-- <script src="/secure-js/dashboard/theme.js"></script> -->
+  <script src="/secure-js/dashboard/admin.js"></script>
+</body>
+</html>

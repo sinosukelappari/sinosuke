@@ -1,0 +1,254 @@
+<%
+  function normalizeJenisSurat(value) {
+    const jenisSurat = String(value || "")
+      .trim()
+      .toUpperCase()
+      .replace(/\s+/g, "_");
+
+    if (jenisSurat === "SURAT_BIASA") {
+      return "SURAT_BIASA";
+    }
+
+    if (jenisSurat === "SURAT_KEPUTUSAN") {
+      return "SURAT_KEPUTUSAN";
+    }
+
+    return "SURAT_KEPUTUSAN";
+  }
+
+  function getJenisSuratLabel(value) {
+    const jenisSurat = normalizeJenisSurat(value);
+
+    if (jenisSurat === "SURAT_BIASA") {
+      return "Biasa";
+    }
+
+    return "Keputusan";
+  }
+
+  function getJenisSuratIcon(value) {
+    const jenisSurat = normalizeJenisSurat(value);
+
+    if (jenisSurat === "SURAT_BIASA") {
+      return "mail";
+    }
+
+    return "gavel";
+  }
+
+  function getJenisSuratClass(value) {
+    const jenisSurat = normalizeJenisSurat(value);
+
+    if (jenisSurat === "SURAT_BIASA") {
+      return "jenis_surat_biasa";
+    }
+
+    return "jenis_surat_keputusan";
+  }
+
+  function getFormatNomorSurat(value) {
+    const jenisSurat = normalizeJenisSurat(value);
+
+   
+  }
+%>
+
+<style>
+  /* .jenis_surat_badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 900;
+    white-space: nowrap;
+  }
+
+  .jenis_surat_badge .material-symbols-rounded {
+    font-size: 17px;
+  }
+
+  .jenis_surat_biasa {
+    background: rgba(34, 197, 94, 0.14);
+    border: 1px solid rgba(74, 222, 128, 0.28);
+    color: #bbf7d0;
+  }
+
+  .jenis_surat_keputusan {
+    background: rgba(168, 85, 247, 0.14);
+    border: 1px solid rgba(192, 132, 252, 0.28);
+    color: #e9d5ff;
+  } */
+
+  .format_nomor_text {
+    display: block;
+    margin-top: 7px;
+    color: var(--text-muted, #94a3b8);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+</style>
+
+<section class="settings_section subadmin_panel_section" id="suratBawahanSection">
+  <div class="section_header">
+    <div>
+      <h2>
+        <span class="material-symbols-rounded">folder_shared</span>
+        Data Surat Staf
+      </h2>
+
+      <p>
+        Data surat yang tampil hanya surat dari bagian yang berada di bawah kewenangan sub admin.
+      </p>
+    </div>
+  </div>
+
+  <div class="subadmin_table_wrapper">
+    <table class="subadmin_table surat_bawahan_table">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nomor Surat Lengkap</th>
+          <th>Jenis Surat</th>
+          <th>Nama User</th>
+          <th>Username</th>
+          <th>Bagian</th>
+          <th>Klasifikasi</th>
+          <th>Kode Tambahan</th>
+          <th>Tujuan Surat</th>
+          <th>Hal Surat</th>
+          <th>Sheet</th>
+          <th>Baris / Link</th>
+          <th>Tanggal Input</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% if (safeSuratList.length > 0) { %>
+          <% safeSuratList.forEach(function(surat, index) { %>
+            <%
+              const sheetRowUrl = buildSheetRowUrl(surat);
+
+              const jenisSurat = normalizeJenisSurat(surat.jenisSurat);
+              const jenisSuratLabel = getJenisSuratLabel(jenisSurat);
+              const jenisSuratIcon = getJenisSuratIcon(jenisSurat);
+              const jenisSuratClass = getJenisSuratClass(jenisSurat);
+              const formatNomorSurat = getFormatNomorSurat(jenisSurat);
+            %>
+
+            <tr>
+              <td class="number_cell"><%= index + 1 %></td>
+
+              <td>
+                <button
+                  type="button"
+                  class="copy_nomor_btn"
+                  data-nomor="<%= surat.nomorSuratLengkap || '' %>"
+                  title="Klik untuk salin nomor surat"
+                >
+                  <span class="material-symbols-rounded">content_copy</span>
+                  <%= surat.nomorSuratLengkap || '-' %>
+                </button>
+              </td>
+
+              <td>
+                <span class="jenis_surat_badge <%= jenisSuratClass %>">
+                  <span class="material-symbols-rounded"><%= jenisSuratIcon %></span>
+                  <%= jenisSuratLabel %>
+                </span>
+
+                <span class="format_nomor_text">
+                  <%= formatNomorSurat %>
+                </span>
+              </td>
+
+              <td>
+                <%= surat.namaUser || (surat.userId && surat.userId.nama ? surat.userId.nama : '-') %>
+              </td>
+
+              <td>
+                <span class="username_text">
+                  <%= surat.username || (surat.userId && surat.userId.username ? surat.userId.username : '-') %>
+                </span>
+              </td>
+
+              <td>
+                <% if (surat.dariBagian) { %>
+                  <span class="bagian_pill">
+                    <span class="material-symbols-rounded">business_center</span>
+                    <%= surat.dariBagian %>
+                  </span>
+                <% } else if (surat.userId && surat.userId.bagian) { %>
+                  <span class="bagian_pill">
+                    <span class="material-symbols-rounded">business_center</span>
+                    <%= surat.userId.bagian %>
+                  </span>
+                <% } else { %>
+                  -
+                <% } %>
+              </td>
+
+              <td>
+                <span class="klasifikasi_pill">
+                  <%= surat.kodeKlasifikasi || '-' %>
+                </span>
+              </td>
+
+              <td><%= surat.kodeTambahan || '-' %></td>
+
+              <td><%= surat.tujuanSurat || '-' %></td>
+
+              <td><%= surat.halSurat || '-' %></td>
+
+              <td><%= surat.sheetName || '-' %></td>
+
+              <td>
+                <% if (sheetRowUrl) { %>
+                  <a
+                    href="<%= sheetRowUrl %>"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="sheet_row_link"
+                    title="Buka baris surat di Google Sheet"
+                  >
+                    <span class="material-symbols-rounded">open_in_new</span>
+                    Row <%= surat.sheetRow || '-' %>
+                  </a>
+                <% } else if (surat.sheetRow) { %>
+                  <span class="mini_badge">
+                    Row <%= surat.sheetRow %>
+                  </span>
+                <% } else { %>
+                  <span class="sheet_row_empty">-</span>
+                <% } %>
+              </td>
+
+              <td>
+                <span class="date_text">
+                  <% if (surat.createdAt) { %>
+                    <%= surat.createdAt.toLocaleDateString("id-ID") %>
+                    <br>
+                    <small>
+                      <%= surat.createdAt.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }) %>
+                    </small>
+                  <% } else { %>
+                    -
+                  <% } %>
+                </span>
+              </td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="13" class="empty_cell">
+              Belum ada data surat Staf.
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</section>

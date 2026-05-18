@@ -1,0 +1,31 @@
+<%
+  const safeHeaderTitle = typeof headerTitle !== "undefined" && headerTitle
+    ? headerTitle
+    : "Dashboard";
+
+  const safeHeaderSubtitle = typeof headerSubtitle !== "undefined" && headerSubtitle
+    ? headerSubtitle
+    : process.env.HEADER_SUBTITLE || "Sistem Penomoran Surat Keluar Lapas Pariaman";
+%>
+
+<header class="top_header">
+  <div class="header_left"></div>
+
+  <div class="header_center">
+    <div class="project_rename_wrapper">
+      <input 
+        type="text" 
+        id="header_project_name" 
+        class="project_name_input" 
+        value="<%= safeHeaderTitle %>"
+        readonly
+      >
+    </div>
+
+    <span id="header_subtitle">
+      <%= safeHeaderSubtitle %>
+    </span>
+  </div>
+
+  <div class="header_right"></div>
+</header>

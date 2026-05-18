@@ -1,0 +1,126 @@
+<section class="settings_section subadmin_panel_section" id="whitelistSection">
+  <div class="section_header">
+    <div>
+      <h2>
+        <span class="material-symbols-rounded">verified_user</span>
+        Username/NIP Whitelist
+      </h2>
+    </div>
+  </div>
+
+  <form
+    action="/sub-admin/whitelist"
+    method="POST"
+    class="sinosuke_form whitelist_form confirm_form"
+    style="margin-bottom: 24px;"
+    data-confirm-title="Tambah Whitelist"
+    data-confirm-message="Yakin ingin menambahkan NIP ke whitelist?"
+    data-confirm-yes="Ya, Tambahkan"
+    data-confirm-type="warning"
+  >
+    <div class="form_grid">
+      <div class="input_group full_width">
+        <label class="group_label" for="usernames">
+          Tambah Username/NIP Whitelist
+        </label>
+
+        <textarea
+          name="usernames"
+          id="usernames"
+          class="styled_input subadmin_textarea"
+          placeholder="Contoh: 198708202018092002, 198812102016071005"
+          required
+        ></textarea>
+
+        <small class="helper_text">
+          Bisa menambahkan banyak username sekaligus dengan pemisah koma. Setiap username harus 18 digit angka.
+        </small>
+      </div>
+    </div>
+
+    <div class="form_actions">
+      <button type="submit" class="primary_btn">
+        <span class="material-symbols-rounded">add</span>
+        Tambah Whitelist
+      </button>
+    </div>
+  </form>
+
+  <div class="subadmin_table_wrapper">
+    <table class="subadmin_table whitelist_table">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Username/NIP</th>
+          <th>Status</th>
+          <th>Tanggal Ditambahkan</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% if (safeWhitelistList.length > 0) { %>
+          <% safeWhitelistList.forEach(function(item, index) { %>
+            <tr>
+              <td class="number_cell"><%= index + 1 %></td>
+
+              <td>
+                <div class="whitelist_identity">
+                  <span class="material-symbols-rounded">verified_user</span>
+                  <div>
+                    <strong><%= item.username || '-' %></strong>
+                    <small>18 digit angka</small>
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <span class="active_status_pill">
+                  <span class="material-symbols-rounded">check_circle</span>
+                  Aktif
+                </span>
+              </td>
+
+              <td>
+                <span class="date_text">
+                  <% if (item.createdAt) { %>
+                    <%= item.createdAt.toLocaleDateString("id-ID") %>
+                    <br>
+                    <small>
+                      <%= item.createdAt.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }) %>
+                    </small>
+                  <% } else { %>
+                    -
+                  <% } %>
+                </span>
+              </td>
+
+              <td>
+                <form
+                  action="/sub-admin/whitelist/<%= item._id %>/delete"
+                  method="POST"
+                  class="confirm_form"
+                  data-confirm-title="Hapus Whitelist"
+                  data-confirm-message="Yakin ingin menghapus whitelist <%= item.username %>?"
+                  data-confirm-yes="Ya, Hapus"
+                  data-confirm-type="danger"
+                >
+                  <button type="submit" class="danger_inline_btn">
+                    <span class="material-symbols-rounded">delete</span>
+                    Hapus
+                  </button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="5" class="empty_cell">
+              Belum ada username whitelist.
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</section>

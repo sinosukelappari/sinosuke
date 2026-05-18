@@ -1,0 +1,136 @@
+<section class="settings_section subadmin_panel_section" id="akunBawahanSection">
+            <div class="section_header">
+              <div>
+                <h2>
+                  <span class="material-symbols-rounded">group</span>
+                  Data Akun Staf
+                </h2>
+
+                <p>
+                  Akun yang tampil hanya user biasa yang berada pada bagian yang dibawahi oleh sub admin.
+                </p>
+              </div>
+            </div>
+
+            <div class="subadmin_search_wrapper">
+              <div class="subadmin_search_box">
+                <span class="material-symbols-rounded">search</span>
+
+                <input
+                  type="text"
+                  id="searchAkunInput"
+                  class="subadmin_search_input"
+                  placeholder="Cari berdasarkan nama, username, atau bagian..."
+                  autocomplete="off"
+                >
+              </div>
+
+              <button type="button" id="clearSearchAkunBtn" class="subadmin_search_clear">
+                <span class="material-symbols-rounded">close</span>
+                Bersihkan
+              </button>
+            </div>
+
+            <div class="subadmin_table_wrapper">
+              <table class="subadmin_table" id="akunTable">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Username</th>
+                    <th>Tanggal Dibuat</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% if (safeUsers.length > 0) { %>
+                    <% safeUsers.forEach(function(item, index) { %>
+                      <tr
+                        class="akun_row"
+                        data-nama="<%= String(item.nama || '').toLowerCase() %>"
+                        data-username="<%= String(item.username || '').toLowerCase() %>"
+                        data-bagian="<%= String(item.bagian || '').toLowerCase() %>"
+                      >
+                        <td class="akun_nomor number_cell"><%= index + 1 %></td>
+
+                        <td>
+                          <div class="subadmin_user_identity">
+                            <span class="material-symbols-rounded">account_circle</span>
+                            <div>
+                              <strong><%= item.nama || '-' %></strong>
+                              <small>
+                                <% if (item.bagian) { %>
+                                  <%= item.bagian %>
+                                <% } else { %>
+                                  Belum diatur
+                                <% } %>
+                              </small>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td>
+                          <span class="username_text">
+                            <%= item.username || '-' %>
+                          </span>
+                        </td>
+
+                        <td>
+                          <span class="date_text">
+                            <%= item.createdAt ? item.createdAt.toLocaleDateString("id-ID") : "-" %>
+                          </span>
+                        </td>
+
+                        <td>
+                          <div class="subadmin_action_group">
+                            <form
+                              action="/sub-admin/user/<%= item._id %>/reset-password"
+                              method="POST"
+                              class="confirm_form"
+                              data-confirm-title="Reset Password"
+                              data-confirm-message="Reset password user <%= item.nama %> menjadi 12345678?"
+                              data-confirm-yes="Ya, Reset"
+                              data-confirm-type="warning"
+                            >
+                              <button type="submit" class="warning_inline_btn">
+                                <span class="material-symbols-rounded">lock_reset</span>
+                                Reset
+                              </button>
+                            </form>
+
+                            <form
+                              action="/sub-admin/user/<%= item._id %>/delete"
+                              method="POST"
+                              class="confirm_form"
+                              data-confirm-title="Hapus User"
+                              data-confirm-message="Yakin ingin menghapus user <%= item.nama %>? Data surat user tetap disimpan sebagai arsip."
+                              data-confirm-yes="Ya, Hapus"
+                              data-confirm-type="danger"
+                            >
+                              <button type="submit" class="danger_inline_btn">
+                                <span class="material-symbols-rounded">delete</span>
+                                Hapus
+                              </button>
+                            </form>
+                          </div>
+                        </td>
+                      </tr>
+                    <% }) %>
+
+                    <tr id="akunNoResultRow" class="hidden">
+                      <td colspan="5" class="empty_cell">
+                        Tidak ada akun yang sesuai dengan pencarian.
+                      </td>
+                    </tr>
+                  <% } else { %>
+                    <tr>
+                      <td colspan="5" class="empty_cell">
+                        Belum ada akun Staf.
+                      </td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </section>

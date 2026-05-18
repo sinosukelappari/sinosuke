@@ -1,0 +1,19 @@
+<section class="hero_panel">
+            <div>
+              <span class="mini_badge">
+                <span class="material-symbols-rounded">verified</span>
+                <%= user.bagian || 'Belum ada Peran' %>
+              </span>
+
+              <h2>Halo, <%= user.nama %></h2>
+
+              <p>
+                Pilih kode klasifikasi utama terlebih dahulu. Kode tambahan akan muncul otomatis. 
+                No. Urut dan Nomor Surat akan diambil dari Database Sinosuke.
+              </p>
+            </div>
+
+            <div class="avatar_orb">
+              <%= (user.nama || '?').charAt(0).toUpperCase() %>
+            </div>
+          </section>

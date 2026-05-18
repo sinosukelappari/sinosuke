@@ -1,0 +1,272 @@
+<section class="dashboard_grid">
+  <section class="settings_section form_section">
+              <div class="section_header">
+                <div>
+                  <h2>
+                    <span class="material-symbols-rounded">edit_document</span>
+                    Form Input Data Surat
+                  </h2>
+
+                  <p>
+                    Isi data surat dengan lengkap agar nomor surat dapat dibuat otomatis.
+                  </p>
+                </div>
+              </div>
+
+              <form id="suratForm" class="sinosuke_form">
+
+                <div class="form_grid">
+
+                  <div class="input_group">
+                    <label class="group_label" for="kodeKlasifikasiSearch">
+                      Kode Klasifikasi
+                    </label>
+
+                    <input type="hidden" name="kodeKlasifikasi" id="kodeKlasifikasi">
+
+                    <div class="search_select">
+                      <input 
+                        type="text"
+                        id="kodeKlasifikasiSearch"
+                        class="styled_input search_select_input"
+                        placeholder="Cari atau pilih kode utama"
+                        autocomplete="off"
+                      >
+
+<button 
+  type="button"
+  id="kodeKlasifikasiToggle"
+  class="search_select_toggle search_clear_btn"
+  title="Hapus pilihan"
+>
+  <span class="material-symbols-rounded">close</span>
+</button>
+
+                      <div 
+                        id="kodeKlasifikasiDropdown"
+                        class="search_dropdown hidden"
+                      ></div>
+                    </div>
+
+                    <small class="helper_text">
+                      Cari berdasarkan kode atau nama klasifikasi.
+                    </small>
+                  </div>
+
+                  <div class="input_group">
+                    <label class="group_label" for="kodeTambahanSearch">
+                      Kode Tambahan
+                    </label>
+
+                    <input type="hidden" name="kodeTambahan" id="kodeTambahan">
+
+                    <div class="search_select">
+                      <input 
+                        type="text"
+                        id="kodeTambahanSearch"
+                        class="styled_input search_select_input"
+                        placeholder="Pilih kode klasifikasi dulu"
+                        autocomplete="off"
+                        disabled
+                      >
+
+<button 
+  type="button"
+  id="kodeTambahanToggle"
+  class="search_select_toggle search_clear_btn"
+  title="Hapus pilihan"
+  disabled
+>
+  <span class="material-symbols-rounded">close</span>
+</button>
+
+                      <div 
+                        id="kodeTambahanDropdown"
+                        class="search_dropdown hidden"
+                      ></div>
+                    </div>
+
+                    <small class="helper_text">
+                      Cari berdasarkan kode atau nama kode tambahan.
+                    </small>
+                  </div>
+
+                  <input type="hidden" name="noUrut" id="noUrut">
+
+                  <div class="input_group">
+                    <label class="group_label" for="hariTanggal">
+                      Hari/Tanggal
+                    </label>
+
+                    <input 
+                      type="text" 
+                      name="hariTanggal" 
+                      id="hariTanggal"
+                      class="styled_input" 
+                      readonly
+                    >
+                  </div>
+
+                  <input 
+                    type="hidden" 
+                    name="kodeSatker" 
+                    id="kodeSatker" 
+                    value="<%= process.env.KODE_SATKER || '' %>"
+                  >
+
+                  <div class="input_group">
+                    <!-- <label class="group_label" for="nomorSurat">
+                      Nomor Surat
+                    </label> -->
+
+                  <input 
+                    type="hidden" 
+                    name="nomorSurat" 
+                    id="nomorSurat"
+                    class="styled_input" 
+                    placeholder="Nomor akan dibuat saat submit"
+                    readonly
+                  >
+                  </div>
+
+                  <div class="input_group">
+                    <label class="group_label" for="dariBagianSearch">
+                      Dari Bagian
+                    </label>
+
+                    <% if (dariBagianMode === 'auto') { %>
+                      <input 
+                        type="hidden" 
+                        name="dariBagian" 
+                        id="dariBagian"
+                        value="<%= user.bagian || '' %>"
+                      >
+
+                      <input 
+                        type="text" 
+                        id="dariBagianSearch"
+                        class="styled_input" 
+                        value="<%= user.bagian || '' %>"
+                        readonly
+                        required
+                      >
+
+                      <small class="helper_text">
+                        Otomatis dari bagian akun user.
+                      </small>
+                    <% } else { %>
+                      <input type="hidden" name="dariBagian" id="dariBagian">
+
+                      <div class="input_with_button">
+                        <div class="search_select">
+                          <input 
+                            type="text"
+                            id="dariBagianSearch"
+                            class="styled_input search_select_input"
+                            placeholder="Cari atau pilih bagian"
+                            autocomplete="off"
+                            required
+                          >
+
+                          <button 
+                            type="button"
+                            id="dariBagianToggle"
+                            class="search_select_toggle search_clear_btn"
+                            title="Hapus pilihan"
+                          >
+                            <span class="material-symbols-rounded">close</span>
+                          </button>
+
+                          <div 
+                            id="dariBagianDropdown"
+                            class="search_dropdown hidden"
+                          ></div>
+                        </div>
+
+                        <button 
+                          type="button" 
+                          id="autoBagianBtn" 
+                          class="small_icon_btn"
+                          title="Gunakan bagian dari akun ini"
+                        >
+                          <span class="material-symbols-rounded">check</span>
+                        </button>
+                      </div>
+
+                      <small class="helper_text">
+                        Cari bagian secara manual atau klik tanda centang untuk memakai bagian akun.
+                      </small>
+                    <% } %>
+                  </div>
+
+                  <div class="input_group">
+                    <label class="group_label" for="tujuanSurat">
+                      Tujuan Surat
+                    </label>
+
+                    <input 
+                      type="text" 
+                      name="tujuanSurat" 
+                      id="tujuanSurat"
+                      class="styled_input" 
+                      placeholder="Masukkan tujuan surat"
+                      required
+                    >
+                  </div>
+
+                  <div class="input_group full_width">
+                    <label class="group_label" for="halSurat">
+                      Hal Surat
+                    </label>
+
+                    <input 
+                      type="text" 
+                      name="halSurat" 
+                      id="halSurat"
+                      class="styled_input" 
+                      placeholder="Masukkan hal surat"
+                      required
+                    >
+                  </div>
+
+                </div>
+
+                <div class="form_actions">
+                  <button type="submit" class="primary_btn" id="submitBtn">
+                    <span class="material-symbols-rounded">send</span>
+                    Buat Sinosuke
+                    <span id="submitSpinner" class="mini_spinner hidden"></span>
+                  </button>
+                </div>
+
+              </form>
+
+              <div id="formMessage" class="result_message"></div>
+            </section>
+
+  <aside class="info_panel">
+                        <div class="info_card" id="kodeTambahanInfoCard">
+              <span class="material-symbols-rounded">info</span>
+
+              <h3 id="kodeTambahanInfoTitle">
+                Informasi Kode Tambahan
+              </h3>
+
+              <p id="kodeTambahanInfoText">
+                Pilih kode tambahan terlebih dahulu untuk melihat keterangan klasifikasi surat.
+              </p>
+            </div>
+
+<div class="info_card">
+  <span class="material-symbols-rounded">manage_accounts</span>
+  <h3>Data Akun</h3>
+
+  <p>
+    Nama: <b><%= user.nama %></b><br>
+    Username: <b><%= user.username %></b><br>
+    Jabatan: <b><%= user.bagian || 'Belum diatur' %></b><br>
+    Total Surat Dibuat: <b><%= typeof totalSuratUser !== 'undefined' ? totalSuratUser : 0 %></b>
+  </p>
+</div>
+            </aside>
+</section>

@@ -1,0 +1,57 @@
+<%
+  const safeActiveMenu = typeof activeMenu !== "undefined" && activeMenu
+    ? activeMenu
+    : "dashboard";
+%>
+
+<aside class="sidebar">
+  <div class="branding">
+    <span class="material-symbols-rounded logo_icon">description</span>
+    <h1>SINOSUKE</h1>
+
+    <div class="app_slogan">
+      <%= process.env.APP_SLOGAN || 'Sistem Nomor Surat Keluar Lapas Pariaman.' %>
+    </div>
+  </div>
+
+  <div class="sidebar_divider"></div>
+
+  <nav class="nav_items">
+    <a href="/dashboard?section=dashboard" class="nav_item <%= safeActiveMenu === 'dashboard' ? 'active' : '' %>">
+      <span class="material-symbols-rounded">dashboard</span>
+      <span class="project_label">Dashboard</span>
+    </a>
+
+    <a href="/dashboard?section=buat-surat" class="nav_item <%= safeActiveMenu === 'buat-surat' ? 'active' : '' %>">
+      <span class="material-symbols-rounded">edit_document</span>
+      <span class="project_label">Buat Surat</span>
+    </a>
+
+    <a href="/profile" class="nav_item">
+      <span class="material-symbols-rounded">account_circle</span>
+      <span class="project_label">Profil</span>
+    </a>
+
+    <a href="/surat-saya" class="nav_item">
+      <span class="material-symbols-rounded">folder_open</span>
+      <span class="project_label">Surat Saya</span>
+    </a>
+
+    <a href="/dashboard?section=sheet" class="nav_item <%= safeActiveMenu === 'sheet' ? 'active' : '' %>">
+      <span class="material-symbols-rounded">table_view</span>
+      <span class="project_label">Sheet</span>
+    </a>
+  </nav>
+
+  <div class="sidebar_bottom">
+    <button type="button" id="themeToggleBtn" class="nav_item nav_button">
+      <span class="material-symbols-rounded" id="themeIcon">dark_mode</span>
+      <span class="project_label">Tema</span>
+    </button>
+
+    <a href="/logout" class="nav_item danger_nav">
+      <span class="material-symbols-rounded">logout</span>
+      <span class="project_label">Logout</span>
+    </a>
+  </div>
+</aside>

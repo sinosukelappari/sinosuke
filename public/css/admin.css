@@ -1,0 +1,3556 @@
+.dashboard_scroll {
+  width: 100% !important;
+  max-width: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 24px;
+  box-sizing: border-box !important;
+}
+
+.dashboard_scroll > section {
+  width: 100% !important;
+  max-width: 100% !important;
+  align-self: stretch !important;
+  box-sizing: border-box !important;
+}
+
+.dashboard_content,
+.dashboard_container,
+.admin_dashboard,
+.main_content,
+.content_area,
+.page_content,
+.sinosuke_main,
+.sinosuke-content {
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+}
+
+.settings_section {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  align-self: stretch !important;
+  box-sizing: border-box !important;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.18);
+  backdrop-filter: blur(18px);
+}
+
+.settings_section.admin_intro_section {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  inline-size: 100% !important;
+  max-inline-size: none !important;
+  align-self: stretch !important;
+  display: block !important;
+  box-sizing: border-box !important;
+}
+
+.admin_intro_section {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  align-self: stretch !important;
+}
+
+.section_header {
+  width: 100%;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.section_header h2 {
+  letter-spacing: -0.02em;
+}
+
+.section_header p {
+  max-width: 760px;
+  line-height: 1.6;
+}
+
+.admin_stat_grid {
+  width: 100% !important;
+  max-width: none !important;
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+
+.admin_intro_section .admin_stat_grid {
+  width: 100% !important;
+  max-width: none !important;
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+
+.admin_stat_card {
+  position: relative;
+  overflow: hidden;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 150px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-sizing: border-box !important;
+}
+
+.admin_intro_section .admin_stat_card {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.admin_stat_card::after {
+  content: "";
+  position: absolute;
+  right: -40px;
+  bottom: -40px;
+  width: 130px;
+  height: 130px;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.12);
+}
+
+.admin_stat_card > span.material-symbols-rounded {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: rgba(37, 99, 235, 0.12);
+  color: #60a5fa;
+  margin-bottom: 12px;
+}
+
+.admin_stat_card h3 {
+  margin-bottom: 8px;
+}
+
+.admin_stat_card p b {
+  font-size: 34px;
+  line-height: 1;
+}
+
+.admin_table_wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-radius: 22px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(15, 23, 42, 0.14);
+}
+
+.admin_clean_table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  min-width: 980px;
+  overflow: hidden;
+}
+
+.admin_clean_table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding: 15px 18px;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+  color: #dbeafe;
+  background: #111827;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  white-space: nowrap;
+}
+
+.admin_clean_table tbody td {
+  padding: 15px 18px;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  color: #e5e7eb;
+  background: rgba(15, 23, 42, 0.30);
+}
+
+.admin_clean_table tbody tr:nth-child(even) td {
+  background: rgba(30, 41, 59, 0.34);
+}
+
+.admin_clean_table tbody tr:hover td {
+  background: rgba(37, 99, 235, 0.16);
+}
+
+.number_cell {
+  font-weight: 800;
+  color: #93c5fd !important;
+}
+
+.empty_cell {
+  text-align: center;
+  padding: 28px 18px !important;
+  color: #94a3b8 !important;
+  font-weight: 700;
+}
+
+.user_identity {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 210px;
+}
+
+.user_identity > span {
+  width: 38px;
+  height: 38px;
+  border-radius: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(59, 130, 246, 0.14);
+  color: #60a5fa;
+}
+
+.user_identity div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.user_identity strong {
+  font-size: 14px;
+  font-weight: 850;
+  color: #f8fafc;
+}
+
+.user_identity small {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.username_text,
+.date_text {
+  color: #cbd5e1;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.date_text small {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.bagian_identity,
+.whitelist_identity {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 230px;
+  padding: 10px 12px;
+  border-radius: 18px;
+  background: rgba(59, 130, 246, 0.13);
+  border: 1px solid rgba(96, 165, 250, 0.22);
+}
+
+.whitelist_identity {
+  min-width: 260px;
+}
+
+.bagian_icon,
+.whitelist_icon {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  color: #ffffff;
+  flex: 0 0 auto;
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.24);
+}
+
+.bagian_text,
+.whitelist_text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bagian_text strong,
+.whitelist_text strong {
+  font-size: 14px;
+  font-weight: 850;
+  letter-spacing: 0.01em;
+  color: #f8fafc;
+}
+
+.bagian_text small,
+.whitelist_text small {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.bagian_pill,
+.limit_pill,
+.used_pill,
+.active_status_pill,
+.role_badge,
+.klasifikasi_pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.bagian_pill {
+  background: rgba(34, 197, 94, 0.14);
+  border: 1px solid rgba(34, 197, 94, 0.28);
+  color: #86efac;
+}
+
+.bagian_empty {
+  background: rgba(148, 163, 184, 0.12);
+  border-color: rgba(148, 163, 184, 0.24);
+  color: #cbd5e1;
+}
+
+.limit_pill {
+  background: rgba(59, 130, 246, 0.14);
+  border: 1px solid rgba(59, 130, 246, 0.28);
+  color: #93c5fd;
+}
+
+.limit_unlimited {
+  background: rgba(168, 85, 247, 0.14);
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  color: #d8b4fe;
+}
+
+.used_pill,
+.active_status_pill {
+  background: rgba(34, 197, 94, 0.14);
+  border: 1px solid rgba(34, 197, 94, 0.28);
+  color: #86efac;
+}
+
+.role_admin {
+  background: rgba(239, 68, 68, 0.14);
+  border: 1px solid rgba(239, 68, 68, 0.28);
+  color: #fca5a5;
+}
+
+.role_user {
+  background: rgba(59, 130, 246, 0.14);
+  border: 1px solid rgba(59, 130, 246, 0.28);
+  color: #93c5fd;
+}
+
+.role_sub_admin {
+  background: rgba(168, 85, 247, 0.14);
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  color: #d8b4fe;
+}
+
+.klasifikasi_pill {
+  background: rgba(14, 165, 233, 0.14);
+  border: 1px solid rgba(14, 165, 233, 0.26);
+  color: #7dd3fc;
+}
+
+.bagian_pill .material-symbols-rounded,
+.limit_pill .material-symbols-rounded,
+.used_pill .material-symbols-rounded,
+.active_status_pill .material-symbols-rounded,
+.role_badge .material-symbols-rounded {
+  font-size: 17px;
+}
+
+.admin_textarea {
+  min-height: 120px;
+  padding-top: 14px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.admin_inline_form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 330px;
+}
+
+.admin_limit_input {
+  width: 110px;
+  min-width: 110px;
+  height: 42px;
+  padding: 0 12px;
+}
+
+.admin_action_group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.small_save_btn,
+.danger_inline_btn,
+.warning_inline_btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 850;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+
+.small_save_btn:hover,
+.danger_inline_btn:hover,
+.warning_inline_btn:hover {
+  transform: translateY(-1px);
+}
+
+.small_save_btn {
+  border: 0;
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  color: #ffffff;
+  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22);
+}
+
+.danger_inline_btn {
+  background: rgba(239, 68, 68, 0.12);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.danger_inline_btn:hover {
+  background: rgba(239, 68, 68, 0.18);
+}
+
+.warning_inline_btn {
+  background: rgba(245, 158, 11, 0.12);
+  color: #fcd34d;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.warning_inline_btn:hover {
+  background: rgba(245, 158, 11, 0.18);
+}
+
+.copy_nomor_btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: rgba(59, 130, 246, 0.14);
+  color: #bfdbfe;
+  font: inherit;
+  cursor: pointer;
+  font-weight: 850;
+  padding: 9px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  border: 1px solid rgba(96, 165, 250, 0.22);
+}
+
+.copy_nomor_btn:hover {
+  background: rgba(37, 99, 235, 0.22);
+}
+
+.copy_nomor_btn .material-symbols-rounded {
+  font-size: 18px;
+}
+
+.admin_search_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.admin_search_box {
+  flex: 1;
+  min-width: 260px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: rgba(15, 23, 42, 0.18);
+}
+
+.admin_search_box:focus-within {
+  border-color: rgba(96, 165, 250, 0.7);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.admin_search_box .material-symbols-rounded {
+  font-size: 21px;
+  color: #94a3b8;
+}
+
+.admin_search_input {
+  width: 100%;
+  height: 50px;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+
+.admin_search_clear {
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 0 16px;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: rgba(148, 163, 184, 0.1);
+  color: inherit;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.admin_bagian_form {
+  align-items: flex-start;
+}
+
+.admin_bagian_select,
+.admin_user_select,
+.admin_multi_search_row {
+  position: relative;
+  min-width: 270px;
+  flex: 1;
+}
+
+.admin_bagian_icon {
+  position: absolute;
+  left: 14px;
+  top: 21px;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 20px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.admin_bagian_search_input {
+  width: 100%;
+  height: 42px;
+  padding-left: 42px !important;
+  padding-right: 44px !important;
+  border-radius: 999px;
+}
+
+.admin_bagian_clear_btn {
+  position: absolute;
+  right: 6px;
+  top: 21px;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.14);
+  color: #94a3b8;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 4;
+}
+
+.admin_bagian_clear_btn:hover {
+  background: rgba(148, 163, 184, 0.22);
+  color: #ffffff;
+}
+
+.admin_bagian_clear_btn .material-symbols-rounded {
+  font-size: 19px;
+}
+
+.admin_bagian_dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 80;
+  max-height: 260px;
+  overflow-y: auto;
+  padding: 8px;
+  border-radius: 18px;
+  background: #0f172a;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.38);
+}
+
+.admin_dropdown_option {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  border-radius: 14px;
+  padding: 10px 11px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #e5e7eb;
+  cursor: pointer;
+  text-align: left;
+}
+
+.admin_dropdown_option:hover {
+  background: rgba(37, 99, 235, 0.16);
+}
+
+.admin_dropdown_option.disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.admin_dropdown_option.disabled:hover {
+  background: transparent;
+}
+
+.admin_dropdown_icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.admin_dropdown_icon.full {
+  background: linear-gradient(135deg, #ef4444, #f97316);
+}
+
+.admin_dropdown_text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.admin_dropdown_text strong {
+  font-size: 13px;
+  font-weight: 850;
+  color: #f8fafc;
+}
+
+.admin_dropdown_text small {
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.35;
+}
+
+.admin_dropdown_status {
+  margin-left: auto;
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 5px 8px;
+  font-size: 11px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.admin_dropdown_status.available {
+  background: rgba(34, 197, 94, 0.14);
+  color: #86efac;
+}
+
+.admin_dropdown_status.full {
+  background: rgba(239, 68, 68, 0.14);
+  color: #fca5a5;
+}
+
+.admin_dropdown_empty {
+  padding: 14px;
+  color: #94a3b8;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.admin_multi_bagian_select {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin_multi_selected_tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 0;
+}
+
+.admin_multi_tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 10px 8px 12px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.14);
+  border: 1px solid rgba(34, 197, 94, 0.28);
+  color: #86efac;
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.admin_multi_tag button {
+  width: 22px;
+  height: 22px;
+  border: 0;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.22);
+  color: inherit;
+  cursor: pointer;
+}
+
+.admin_multi_tag button:hover {
+  background: rgba(239, 68, 68, 0.22);
+  color: #fca5a5;
+}
+
+.admin_multi_tag .material-symbols-rounded {
+  font-size: 16px;
+}
+
+.subadmin_bagian_list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 250px;
+}
+
+.subadmin_bagian_item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.subadmin_add_bagian_form {
+  min-width: 420px;
+}
+
+.subadmin_add_bagian_select {
+  min-width: 250px;
+}
+
+.mini_icon_danger_btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.12);
+  color: #fca5a5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.mini_icon_danger_btn:hover {
+  background: rgba(239, 68, 68, 0.22);
+}
+
+.mini_icon_danger_btn .material-symbols-rounded {
+  font-size: 18px;
+}
+
+.toast_container {
+  position: fixed;
+  top: 22px;
+  right: 22px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.admin_toast {
+  width: min(390px, calc(100vw - 32px));
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 15px;
+  border-radius: 18px;
+  background: #0f172a;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.38);
+  color: #e5e7eb;
+  opacity: 0;
+  transform: translateX(18px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: auto;
+}
+
+.admin_toast.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.admin_toast_icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.admin_toast.success .admin_toast_icon {
+  background: rgba(34, 197, 94, 0.16);
+  color: #86efac;
+}
+
+.admin_toast.error .admin_toast_icon {
+  background: rgba(239, 68, 68, 0.16);
+  color: #fca5a5;
+}
+
+.admin_toast.warning .admin_toast_icon {
+  background: rgba(245, 158, 11, 0.16);
+  color: #fcd34d;
+}
+
+.admin_toast_content {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin_toast_content strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 850;
+  margin-bottom: 2px;
+  color: #f8fafc;
+}
+
+.admin_toast_content p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #cbd5e1;
+}
+
+.admin_toast_close {
+  border: 0;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin_confirm_content {
+  border: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #0f172a;
+  color: #e5e7eb;
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.38);
+}
+
+.admin_confirm_header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  padding: 20px 22px;
+}
+
+.admin_confirm_header .modal-title {
+  font-weight: 850;
+  color: #f8fafc;
+  margin-bottom: 3px;
+}
+
+.admin_confirm_subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.admin_confirm_icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(59, 130, 246, 0.16);
+  color: #93c5fd;
+  flex: 0 0 auto;
+}
+
+.admin_confirm_icon.danger {
+  background: rgba(239, 68, 68, 0.16);
+  color: #fca5a5;
+}
+
+.admin_confirm_icon.warning {
+  background: rgba(245, 158, 11, 0.16);
+  color: #fcd34d;
+}
+
+.admin_confirm_body {
+  padding: 22px;
+}
+
+.admin_confirm_body p {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+.admin_confirm_footer {
+  border-top: 1px solid rgba(148, 163, 184, 0.18);
+  padding: 16px 22px 20px;
+}
+
+.admin_modal_no_btn,
+.admin_modal_yes_btn {
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-weight: 800;
+  border: 0;
+}
+
+.admin_modal_no_btn {
+  background: rgba(148, 163, 184, 0.14);
+  color: #e5e7eb;
+}
+
+.admin_modal_yes_btn {
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  color: #ffffff;
+}
+
+.admin_modal_yes_btn.danger {
+  background: linear-gradient(135deg, #dc2626, #f97316);
+}
+
+.admin_modal_yes_btn.warning {
+  background: linear-gradient(135deg, #d97706, #f59e0b);
+}
+
+.admin_confirm_close {
+  filter: invert(1);
+  opacity: 0.75;
+  margin-left: auto;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.sinosuke-body.theme-light {
+  color: #0f172a;
+}
+
+.sinosuke-body.theme-light .settings_section,
+.sinosuke-body.theme-light .info_card,
+.sinosuke-body.theme-light .top_header,
+.sinosuke-body.theme-light .admin_table_wrapper {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: #dbe3ef;
+  color: #0f172a;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+}
+
+.sinosuke-body.theme-light .section_header h2,
+.sinosuke-body.theme-light .info_card h3,
+.sinosuke-body.theme-light .project_name_input,
+.sinosuke-body.theme-light .bagian_text strong,
+.sinosuke-body.theme-light .whitelist_text strong,
+.sinosuke-body.theme-light .user_identity strong {
+  color: #0f172a;
+}
+
+.sinosuke-body.theme-light .section_header p,
+.sinosuke-body.theme-light .helper_text,
+.sinosuke-body.theme-light .info_card p,
+.sinosuke-body.theme-light .bagian_text small,
+.sinosuke-body.theme-light .whitelist_text small,
+.sinosuke-body.theme-light .user_identity small {
+  color: #64748b;
+}
+
+.sinosuke-body.theme-light .admin_clean_table thead th {
+  color: #ffffff;
+  background: #1d4ed8;
+  border-color: #1e40af;
+}
+
+.sinosuke-body.theme-light .admin_clean_table tbody td {
+  color: #0f172a;
+  background: #ffffff;
+  border-bottom-color: #e2e8f0;
+}
+
+.sinosuke-body.theme-light .admin_clean_table tbody tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.sinosuke-body.theme-light .admin_clean_table tbody tr:hover td {
+  background: #eff6ff;
+}
+
+.sinosuke-body.theme-light .admin_bagian_dropdown {
+  background: #ffffff;
+  border-color: #dbe3ef;
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.18);
+}
+
+.sinosuke-body.theme-light .admin_dropdown_option {
+  color: #0f172a;
+}
+
+.sinosuke-body.theme-light .admin_dropdown_option:hover {
+  background: #eff6ff;
+}
+
+.sinosuke-body.theme-light .admin_dropdown_text strong {
+  color: #0f172a;
+}
+
+.sinosuke-body.theme-light .admin_dropdown_text small {
+  color: #64748b;
+}
+
+.sinosuke-body.theme-light .admin_multi_tag {
+  background: #dcfce7;
+  border-color: #bbf7d0;
+  color: #166534;
+}
+
+.sinosuke-body.theme-light .admin_multi_tag button {
+  background: rgba(22, 101, 52, 0.10);
+}
+
+.sinosuke-body.theme-light .role_sub_admin {
+  background: #f3e8ff;
+  border-color: #e9d5ff;
+  color: #7e22ce;
+}
+
+
+/* =========================================================
+   CLEAN RESPONSIVE + TABLE STABILITY PATCH
+   Replace all old mobile/dropdown fix blocks with this patch.
+   ========================================================= */
+
+.toast_container .toast {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.dashboard_scroll {
+  width: 100% !important;
+  max-width: 100% !important;
+  gap: clamp(16px, 2vw, 24px) !important;
+}
+
+.dashboard_scroll > .settings_section,
+.dashboard_scroll > section {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+.admin_intro_section {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.admin_stat_grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+}
+
+.admin_table_wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  border-radius: 18px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.admin_clean_table {
+  width: 100% !important;
+  min-width: 980px !important;
+  table-layout: auto !important;
+  overflow: visible !important;
+}
+
+.admin_clean_table th,
+.admin_clean_table td {
+  white-space: nowrap;
+}
+
+.admin_clean_table td .helper_text {
+  display: block;
+  max-width: 220px;
+  white-space: normal;
+  line-height: 1.35;
+}
+
+.bagian_identity,
+.whitelist_identity,
+.user_identity,
+.subadmin_bagian_list,
+.subadmin_add_bagian_form,
+.admin_inline_form {
+  min-width: 0 !important;
+}
+
+.bagian_identity {
+  min-width: 190px !important;
+}
+
+.whitelist_identity {
+  min-width: 230px !important;
+}
+
+.user_identity {
+  min-width: 190px !important;
+}
+
+.admin_inline_form {
+  width: max-content;
+  max-width: none;
+}
+
+.admin_bagian_select,
+.admin_user_select,
+.admin_multi_search_row {
+  min-width: 240px !important;
+  position: relative;
+}
+
+.subadmin_add_bagian_form {
+  width: max-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.subadmin_add_bagian_select {
+  min-width: 230px !important;
+}
+
+#subAdminSection .form_grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+#subAdminSection .input_group.full_width {
+  grid-column: 1 / -1;
+}
+
+#subAdminSection .admin_multi_search_row,
+#subAdminSection .admin_user_select {
+  width: 100%;
+  min-width: 0 !important;
+}
+
+#subAdminSection .admin_multi_bagian_select {
+  width: 100%;
+}
+
+.admin_bagian_dropdown,
+.subadmin_bagian_dropdown,
+.subadmin_user_dropdown {
+  position: absolute !important;
+  top: calc(100% + 8px) !important;
+  left: 0 !important;
+  right: auto !important;
+  width: 100% !important;
+  min-width: 240px !important;
+  max-height: 260px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  z-index: 9999 !important;
+}
+
+.admin_bagian_select:focus-within,
+.admin_user_select:focus-within,
+.admin_multi_search_row:focus-within {
+  z-index: 10000 !important;
+}
+
+/* Open dropdown upward for last rows inside tables. Keeps horizontal scroll stable. */
+.admin_clean_table tbody tr:nth-last-child(-n + 3) .admin_bagian_dropdown,
+.admin_clean_table tbody tr:nth-last-child(-n + 3) .subadmin_bagian_dropdown,
+.admin_clean_table tbody tr:nth-last-child(-n + 3) .subadmin_user_dropdown {
+  top: auto !important;
+  bottom: calc(100% + 8px) !important;
+}
+
+.sinosuke-body.theme-light .admin_bagian_dropdown,
+.sinosuke-body.theme-light .subadmin_bagian_dropdown,
+.sinosuke-body.theme-light .subadmin_user_dropdown {
+  background: #ffffff !important;
+  border-color: #dbe3ef !important;
+  color: #0f172a !important;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.20) !important;
+}
+
+.sinosuke-body.theme-light select.styled_input option {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+select.styled_input option {
+  background: #111827;
+  color: #f8fafc;
+}
+
+@media (max-width: 1400px) {
+  .admin_stat_grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  .admin_stat_grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .admin_clean_table {
+    min-width: 900px !important;
+  }
+
+  #bagianSection .admin_clean_table {
+    min-width: 780px !important;
+  }
+
+  #subAdminSection .admin_clean_table,
+  #akunSection .admin_clean_table {
+    min-width: 860px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard_scroll {
+    gap: 16px !important;
+  }
+
+  .settings_section {
+    padding: 18px !important;
+    border-radius: 20px !important;
+  }
+
+  .section_header {
+    gap: 10px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .section_header h2 {
+    font-size: 18px !important;
+    line-height: 1.3 !important;
+  }
+
+  .section_header h2 .material-symbols-rounded {
+    font-size: 21px !important;
+  }
+
+  .section_header p,
+  .helper_text {
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+  }
+
+  .admin_stat_grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .admin_stat_card {
+    min-height: 118px !important;
+    padding: 18px !important;
+  }
+
+  .admin_stat_card > span.material-symbols-rounded {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 14px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .admin_stat_card h3 {
+    font-size: 14px !important;
+  }
+
+  .admin_stat_card p b {
+    font-size: 28px !important;
+  }
+
+  .admin_search_wrapper {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .admin_search_box,
+  .admin_search_clear {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  #subAdminSection .form_grid,
+  .form_grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  #subAdminSection .input_group.full_width {
+    grid-column: auto !important;
+  }
+
+  .admin_bagian_select,
+  .admin_user_select,
+  .admin_multi_search_row {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .admin_bagian_search_input {
+    height: 42px !important;
+    font-size: 12px !important;
+  }
+
+  .admin_table_wrapper {
+    border-radius: 14px !important;
+  }
+
+  .admin_clean_table {
+    min-width: 820px !important;
+  }
+
+  #bagianSection .admin_clean_table {
+    min-width: 760px !important;
+  }
+
+  #subAdminSection .admin_clean_table,
+  #akunSection .admin_clean_table {
+    min-width: 840px !important;
+  }
+
+  .admin_clean_table thead th {
+    padding: 10px 9px !important;
+    font-size: 10px !important;
+  }
+
+  .admin_clean_table tbody td {
+    padding: 10px 9px !important;
+    font-size: 11px !important;
+  }
+
+  .bagian_identity {
+    min-width: 150px !important;
+    padding: 8px 9px !important;
+  }
+
+  .bagian_icon,
+  .whitelist_icon {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 12px !important;
+  }
+
+  .bagian_text strong,
+  .whitelist_text strong,
+  .user_identity strong {
+    font-size: 11.5px !important;
+  }
+
+  .user_identity small {
+    font-size: 10px !important;
+  }
+
+  .bagian_pill,
+  .limit_pill,
+  .used_pill,
+  .active_status_pill,
+  .role_badge,
+  .klasifikasi_pill {
+    padding: 6px 8px !important;
+    font-size: 10.5px !important;
+    gap: 5px !important;
+  }
+
+  .admin_limit_input {
+    width: 82px !important;
+    min-width: 82px !important;
+    height: 38px !important;
+  }
+
+  .small_save_btn,
+  .danger_inline_btn,
+  .warning_inline_btn {
+    padding: 8px 10px !important;
+    font-size: 11px !important;
+  }
+
+  .admin_action_group {
+    gap: 6px !important;
+  }
+
+  #akunSection .warning_inline_btn,
+  #akunSection .danger_inline_btn,
+  #akunSection .small_save_btn,
+  #subAdminSection .subadmin_add_bagian_form .small_save_btn {
+    width: 34px !important;
+    height: 34px !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+    border-radius: 999px !important;
+  }
+
+  #akunSection .warning_inline_btn .material-symbols-rounded,
+  #akunSection .danger_inline_btn .material-symbols-rounded,
+  #akunSection .small_save_btn .material-symbols-rounded,
+  #subAdminSection .subadmin_add_bagian_form .small_save_btn .material-symbols-rounded {
+    font-size: 17px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .settings_section {
+    padding: 14px !important;
+    border-radius: 18px !important;
+  }
+
+  .top_header {
+    margin-bottom: 12px !important;
+  }
+
+  .project_name_input {
+    font-size: 15px !important;
+  }
+
+  .admin_clean_table {
+    min-width: 760px !important;
+  }
+
+  #bagianSection .admin_clean_table {
+    min-width: 720px !important;
+  }
+
+  #subAdminSection .admin_clean_table,
+  #akunSection .admin_clean_table {
+    min-width: 800px !important;
+  }
+
+  .toast_container {
+    top: 14px !important;
+    right: 12px !important;
+    left: 12px !important;
+  }
+
+  .toast_container .toast {
+    width: 100% !important;
+  }
+}
+/* =========================================================
+   FINAL RESPONSIVE ADMIN DASHBOARD
+   Fokus: HP, Samsung A51, tablet, laptop, desktop
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.sinosuke-body {
+  min-width: 0;
+}
+
+/* ---------- BASE LAYOUT ---------- */
+
+.app_window {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.main_content,
+.view_container,
+.dashboard_scroll {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.dashboard_scroll {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2vw, 24px);
+}
+
+.settings_section {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: visible;
+}
+
+.section_header {
+  gap: 12px;
+}
+
+.section_header h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: clamp(17px, 1.5vw, 22px);
+  line-height: 1.3;
+}
+
+.section_header p {
+  max-width: 780px;
+  font-size: clamp(12px, 1.1vw, 14px);
+  line-height: 1.55;
+}
+
+/* ---------- BUTTONS: NORMAL SIZE ---------- */
+
+.primary_btn,
+.small_save_btn,
+.danger_inline_btn,
+.warning_inline_btn,
+.admin_search_clear,
+.copy_nomor_btn,
+.mini_icon_danger_btn {
+  min-height: 0;
+  line-height: 1;
+}
+
+.primary_btn {
+  height: 46px;
+  padding: 0 18px;
+  font-size: 13px;
+}
+
+.small_save_btn,
+.danger_inline_btn,
+.warning_inline_btn {
+  min-height: 38px;
+  padding: 0 13px;
+  font-size: 12px;
+}
+
+.mini_icon_danger_btn {
+  width: 30px;
+  height: 30px;
+}
+
+/* ---------- FORMS ---------- */
+
+.styled_input,
+.admin_search_input,
+.admin_bagian_search_input {
+  min-width: 0;
+}
+
+.admin_inline_form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  width: max-content;
+}
+
+.admin_limit_input {
+  width: 86px;
+  min-width: 86px;
+  height: 38px;
+  padding: 0 10px;
+}
+
+.admin_bagian_select,
+.admin_user_select,
+.admin_multi_search_row {
+  min-width: 0;
+  width: 100%;
+}
+
+.admin_bagian_search_input {
+  height: 38px;
+  font-size: 12px;
+  padding-left: 38px !important;
+  padding-right: 38px !important;
+}
+
+.admin_bagian_icon {
+  top: 19px;
+  left: 12px;
+  font-size: 18px;
+}
+
+.admin_bagian_clear_btn {
+  top: 19px;
+  right: 5px;
+  width: 28px;
+  height: 28px;
+}
+
+/* ---------- TABLE BASE ---------- */
+
+.admin_table_wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 18px;
+}
+
+.admin_clean_table {
+  width: 100%;
+  min-width: 820px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.admin_clean_table thead th {
+  padding: 12px 12px;
+  font-size: 10.5px;
+  white-space: nowrap;
+}
+
+.admin_clean_table tbody td {
+  padding: 12px 12px;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+/* ---------- TABLE CONTENT COMPACT ---------- */
+
+.user_identity {
+  min-width: 0;
+  gap: 8px;
+}
+
+.user_identity > span {
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  font-size: 19px;
+  flex: 0 0 auto;
+}
+
+.user_identity strong {
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.user_identity small {
+  font-size: 10.5px;
+  line-height: 1.25;
+}
+
+.bagian_identity,
+.whitelist_identity {
+  min-width: 0;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 14px;
+}
+
+.bagian_icon,
+.whitelist_icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+}
+
+.bagian_text strong,
+.whitelist_text strong {
+  font-size: 12px;
+}
+
+.bagian_pill,
+.limit_pill,
+.used_pill,
+.active_status_pill,
+.role_badge,
+.klasifikasi_pill {
+  padding: 6px 9px;
+  gap: 5px;
+  font-size: 11px;
+}
+
+.bagian_pill .material-symbols-rounded,
+.limit_pill .material-symbols-rounded,
+.used_pill .material-symbols-rounded,
+.active_status_pill .material-symbols-rounded,
+.role_badge .material-symbols-rounded {
+  font-size: 15px;
+}
+
+/* ---------- SECTION TABLE WIDTHS ---------- */
+
+#bagianSection .admin_clean_table {
+  min-width: 720px;
+}
+
+#akunSection .admin_clean_table {
+  min-width: 820px;
+}
+
+#subAdminSection .admin_clean_table {
+  min-width: 900px;
+}
+
+#whitelistSection .admin_clean_table {
+  min-width: 650px;
+}
+
+#suratSection .admin_clean_table {
+  min-width: 1180px;
+}
+
+/* ---------- DROPDOWN ---------- */
+
+.admin_bagian_dropdown,
+.subadmin_bagian_dropdown,
+.subadmin_user_dropdown,
+.subadmin_add_bagian_dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: auto;
+  width: 100%;
+  min-width: 240px;
+  max-height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 9999;
+  padding: 8px;
+  border-radius: 16px;
+  background: #0f172a;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+}
+
+.admin_bagian_select:focus-within,
+.admin_user_select:focus-within,
+.admin_multi_search_row:focus-within {
+  z-index: 9999;
+}
+
+.admin_dropdown_option {
+  padding: 9px 10px;
+  gap: 9px;
+}
+
+.admin_dropdown_icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 11px;
+}
+
+.admin_dropdown_text strong {
+  font-size: 12px;
+}
+
+.admin_dropdown_text small {
+  font-size: 10.5px;
+}
+
+.admin_dropdown_status {
+  font-size: 10px;
+  padding: 4px 7px;
+}
+
+/* ---------- DESKTOP ---------- */
+
+@media (min-width: 1201px) {
+  .admin_stat_grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .settings_section {
+    padding: 24px;
+  }
+}
+
+/* ---------- LAPTOP / TABLET LANDSCAPE ---------- */
+
+@media (max-width: 1200px) {
+  .admin_stat_grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .settings_section {
+    padding: 22px;
+  }
+}
+
+/* ---------- TABLET ---------- */
+
+@media (max-width: 992px) {
+  .admin_stat_grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #subAdminSection .form_grid,
+  #bagianSection .form_grid,
+  #configSection .form_grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin_inline_form {
+    width: auto;
+    max-width: 100%;
+  }
+}
+
+/* ---------- MOBILE NAVBAR FIX ---------- */
+
+@media (max-width: 768px) {
+  body.sinosuke-body {
+    overflow-x: hidden;
+  }
+
+  .app_window {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .sidebar {
+    position: sticky !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    z-index: 1000 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    padding: 10px 12px !important;
+    overflow: visible !important;
+    border-radius: 0 0 18px 18px !important;
+  }
+
+  .branding {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+  }
+
+  .branding .logo_icon {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 20px !important;
+    flex: 0 0 auto !important;
+  }
+
+  .branding h1 {
+    font-size: 14px !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  .app_slogan {
+    display: none !important;
+  }
+
+  .sidebar_divider {
+    display: none !important;
+  }
+
+  .nav_items {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 2px 0 4px !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav_items::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .nav_items::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.65);
+    border-radius: 999px;
+  }
+
+  .sidebar_bottom {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 8px !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    padding-top: 0 !important;
+  }
+
+  .nav_item,
+  .nav_button {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: max-content !important;
+    height: 36px !important;
+    padding: 0 10px !important;
+    border-radius: 999px !important;
+    gap: 6px !important;
+    font-size: 11px !important;
+    line-height: 1 !important;
+  }
+
+  .nav_item .material-symbols-rounded,
+  .nav_button .material-symbols-rounded {
+    font-size: 17px !important;
+  }
+
+  .project_label {
+    font-size: 11px !important;
+    white-space: nowrap !important;
+  }
+
+  .main_content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    padding: 10px !important;
+  }
+
+  .top_header {
+    display: none !important;
+  }
+
+  .view_container {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .dashboard_scroll {
+    gap: 14px !important;
+  }
+}
+
+/* ---------- MOBILE CONTENT FIX ---------- */
+
+@media (max-width: 768px) {
+  .settings_section {
+    padding: 14px !important;
+    border-radius: 18px !important;
+  }
+
+  .section_header {
+    margin-bottom: 14px !important;
+  }
+
+  .section_header h2 {
+    font-size: 16px !important;
+    gap: 7px !important;
+  }
+
+  .section_header h2 .material-symbols-rounded {
+    font-size: 19px !important;
+  }
+
+  .section_header p {
+    font-size: 11.5px !important;
+    line-height: 1.45 !important;
+  }
+
+  .admin_stat_grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .admin_stat_card {
+    min-height: 104px !important;
+    padding: 14px !important;
+    border-radius: 16px !important;
+  }
+
+  .admin_stat_card > span.material-symbols-rounded {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 12px !important;
+    margin-bottom: 8px !important;
+    font-size: 19px !important;
+  }
+
+  .admin_stat_card h3 {
+    font-size: 12px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .admin_stat_card p b {
+    font-size: 24px !important;
+  }
+
+  .form_grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .group_label {
+    font-size: 10.5px !important;
+    letter-spacing: 0.08em !important;
+    margin-bottom: 7px !important;
+  }
+
+  .helper_text {
+    font-size: 10.5px !important;
+    line-height: 1.4 !important;
+  }
+
+  .styled_input,
+  .admin_search_input,
+  .admin_bagian_search_input {
+    height: 38px !important;
+    font-size: 12px !important;
+  }
+
+  .admin_textarea {
+    min-height: 92px !important;
+    font-size: 12px !important;
+    border-radius: 12px !important;
+  }
+
+  .primary_btn {
+    width: 100% !important;
+    height: 40px !important;
+    padding: 0 12px !important;
+    font-size: 12px !important;
+    justify-content: center !important;
+  }
+
+  .small_save_btn,
+  .warning_inline_btn,
+  .danger_inline_btn {
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 0 10px !important;
+    font-size: 10.5px !important;
+    gap: 4px !important;
+  }
+
+  .small_save_btn .material-symbols-rounded,
+  .warning_inline_btn .material-symbols-rounded,
+  .danger_inline_btn .material-symbols-rounded {
+    font-size: 16px !important;
+  }
+
+  .admin_search_wrapper {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .admin_search_box {
+    min-width: 0 !important;
+    width: 100% !important;
+    height: 40px !important;
+    border-radius: 13px !important;
+  }
+
+  .admin_search_clear {
+    width: 100% !important;
+    height: 38px !important;
+    border-radius: 13px !important;
+    font-size: 11px !important;
+  }
+
+  .admin_table_wrapper {
+    border-radius: 14px !important;
+  }
+
+  .admin_clean_table thead th {
+    padding: 9px 8px !important;
+    font-size: 8.5px !important;
+  }
+
+  .admin_clean_table tbody td {
+    padding: 9px 8px !important;
+    font-size: 10.5px !important;
+  }
+
+  #bagianSection .admin_clean_table {
+    min-width: 610px !important;
+  }
+
+  #akunSection .admin_clean_table {
+    min-width: 720px !important;
+  }
+
+  #subAdminSection .admin_clean_table {
+    min-width: 760px !important;
+  }
+
+  #whitelistSection .admin_clean_table {
+    min-width: 560px !important;
+  }
+
+  #suratSection .admin_clean_table {
+    min-width: 980px !important;
+  }
+
+  .user_identity > span {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 16px !important;
+  }
+
+  .user_identity strong {
+    font-size: 10.5px !important;
+    max-width: 100px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .user_identity small {
+    font-size: 9.5px !important;
+    max-width: 100px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .bagian_identity,
+  .whitelist_identity {
+    padding: 6px 8px !important;
+    border-radius: 12px !important;
+  }
+
+  .bagian_icon,
+  .whitelist_icon {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 10px !important;
+  }
+
+  .bagian_pill,
+  .limit_pill,
+  .used_pill,
+  .active_status_pill,
+  .role_badge,
+  .klasifikasi_pill {
+    padding: 5px 7px !important;
+    font-size: 9.5px !important;
+    gap: 4px !important;
+  }
+
+  .admin_inline_form {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    gap: 6px !important;
+  }
+
+  .admin_limit_input {
+    width: 64px !important;
+    min-width: 64px !important;
+    height: 34px !important;
+  }
+
+  #bagianSection .admin_inline_form {
+    display: grid !important;
+    grid-template-columns: 64px 32px !important;
+    gap: 6px !important;
+    align-items: center !important;
+  }
+
+  #bagianSection .small_save_btn {
+    width: 32px !important;
+    min-width: 32px !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+    border-radius: 999px !important;
+  }
+
+  #bagianSection .small_save_btn .material-symbols-rounded {
+    font-size: 16px !important;
+  }
+
+  #bagianSection .danger_inline_btn,
+  #akunSection .warning_inline_btn,
+  #akunSection .danger_inline_btn {
+    width: 32px !important;
+    min-width: 32px !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+    border-radius: 999px !important;
+  }
+
+  #bagianSection .danger_inline_btn .material-symbols-rounded,
+  #akunSection .warning_inline_btn .material-symbols-rounded,
+  #akunSection .danger_inline_btn .material-symbols-rounded {
+    font-size: 16px !important;
+  }
+
+  #akunSection .admin_action_group {
+    gap: 5px !important;
+  }
+
+  #akunSection .admin_inline_form {
+    display: grid !important;
+    grid-template-columns: 128px 32px !important;
+    gap: 6px !important;
+  }
+
+  #akunSection .admin_bagian_select {
+    width: 128px !important;
+    min-width: 128px !important;
+  }
+
+  #akunSection .small_save_btn {
+    width: 32px !important;
+    min-width: 32px !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+    border-radius: 999px !important;
+  }
+
+  #akunSection .small_save_btn .material-symbols-rounded {
+    font-size: 16px !important;
+  }
+
+  #subAdminSection .subadmin_add_bagian_form {
+    display: grid !important;
+    grid-template-columns: 132px 32px !important;
+    gap: 6px !important;
+  }
+
+  #subAdminSection .subadmin_add_bagian_select {
+    width: 132px !important;
+    min-width: 132px !important;
+  }
+
+  #subAdminSection .subadmin_add_bagian_form .small_save_btn {
+    width: 32px !important;
+    min-width: 32px !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+    border-radius: 999px !important;
+  }
+}
+
+/* ---------- SMALL MOBILE, SAMSUNG A51 WIDTH AREA ---------- */
+
+@media (max-width: 430px) {
+  .main_content {
+    padding: 8px !important;
+  }
+
+  .settings_section {
+    padding: 12px !important;
+    border-radius: 16px !important;
+  }
+
+  .nav_item,
+  .nav_button {
+    height: 34px !important;
+    padding: 0 9px !important;
+    font-size: 10.5px !important;
+  }
+
+  .project_label {
+    font-size: 10.5px !important;
+  }
+
+  .primary_btn {
+    height: 38px !important;
+    font-size: 11px !important;
+  }
+
+  .admin_clean_table thead th {
+    padding: 8px 7px !important;
+    font-size: 8px !important;
+  }
+
+  .admin_clean_table tbody td {
+    padding: 8px 7px !important;
+    font-size: 10px !important;
+  }
+
+  #bagianSection .admin_clean_table {
+    min-width: 560px !important;
+  }
+
+  #akunSection .admin_clean_table {
+    min-width: 670px !important;
+  }
+
+  #subAdminSection .admin_clean_table {
+    min-width: 700px !important;
+  }
+
+  #whitelistSection .admin_clean_table {
+    min-width: 520px !important;
+  }
+
+  #suratSection .admin_clean_table {
+    min-width: 900px !important;
+  }
+
+  .admin_bagian_dropdown,
+  .subadmin_bagian_dropdown,
+  .subadmin_user_dropdown,
+  .subadmin_add_bagian_dropdown {
+    min-width: 220px !important;
+    max-height: 230px !important;
+  }
+}
+.toast_container .toast {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+/* =========================================================
+   FINAL OVERRIDE - COMPACT BUTTONS ON MOBILE
+   Letakkan PALING BAWAH admin.css
+   ========================================================= */
+
+@media (max-width: 768px) {
+  /* Tombol utama form: Tambah Bagian, Simpan Sub Admin, Tambah Whitelist, Simpan Konfigurasi */
+  .form_actions {
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+  }
+
+  .form_actions .primary_btn {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: max-content !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    padding: 0 12px !important;
+    border-radius: 999px !important;
+    font-size: 11px !important;
+    line-height: 1 !important;
+    gap: 6px !important;
+  }
+
+  .form_actions .primary_btn .material-symbols-rounded {
+    font-size: 16px !important;
+  }
+
+  /* Tombol dalam tabel jadi icon-only */
+  .admin_clean_table .small_save_btn,
+  .admin_clean_table .danger_inline_btn,
+  .admin_clean_table .warning_inline_btn,
+  .admin_clean_table .mini_icon_danger_btn {
+    width: 28px !important;
+    min-width: 28px !important;
+    max-width: 28px !important;
+    height: 28px !important;
+    min-height: 28px !important;
+    max-height: 28px !important;
+    padding: 0 !important;
+    border-radius: 999px !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    gap: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .admin_clean_table .small_save_btn .material-symbols-rounded,
+  .admin_clean_table .danger_inline_btn .material-symbols-rounded,
+  .admin_clean_table .warning_inline_btn .material-symbols-rounded,
+  .admin_clean_table .mini_icon_danger_btn .material-symbols-rounded {
+    font-size: 15px !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+  }
+
+  /* Grup tombol aksi di tabel */
+  .admin_clean_table .admin_action_group {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 5px !important;
+    flex-wrap: nowrap !important;
+  }
+
+  /* Form ubah limit di tabel bagian */
+  #bagianSection .admin_clean_table .admin_inline_form {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    display: inline-grid !important;
+    grid-template-columns: 58px 28px !important;
+    gap: 5px !important;
+    align-items: center !important;
+  }
+
+  #bagianSection .admin_clean_table .admin_limit_input {
+    width: 58px !important;
+    min-width: 58px !important;
+    max-width: 58px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    padding: 0 8px !important;
+    font-size: 11px !important;
+    border-radius: 12px !important;
+  }
+
+  /* Form ubah bagian di tabel akun */
+  #akunSection .admin_clean_table .admin_inline_form {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    display: inline-grid !important;
+    grid-template-columns: 118px 28px !important;
+    gap: 5px !important;
+    align-items: center !important;
+  }
+
+  #akunSection .admin_clean_table .admin_bagian_select {
+    width: 118px !important;
+    min-width: 118px !important;
+    max-width: 118px !important;
+  }
+
+  #akunSection .admin_clean_table .admin_bagian_search_input {
+    width: 118px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    padding-left: 28px !important;
+    padding-right: 25px !important;
+    font-size: 10px !important;
+    border-radius: 999px !important;
+  }
+
+  #akunSection .admin_clean_table .admin_bagian_icon {
+    left: 9px !important;
+    top: 15px !important;
+    font-size: 14px !important;
+  }
+
+  #akunSection .admin_clean_table .admin_bagian_clear_btn {
+    right: 3px !important;
+    top: 15px !important;
+    width: 23px !important;
+    height: 23px !important;
+  }
+
+  #akunSection .admin_clean_table .admin_bagian_clear_btn .material-symbols-rounded {
+    font-size: 14px !important;
+  }
+
+  /* Form tambah bagian di tabel sub admin */
+  #subAdminSection .admin_clean_table .subadmin_add_bagian_form {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    display: inline-grid !important;
+    grid-template-columns: 120px 28px !important;
+    gap: 5px !important;
+    align-items: center !important;
+  }
+
+  #subAdminSection .admin_clean_table .subadmin_add_bagian_select {
+    width: 120px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
+  }
+
+  #subAdminSection .admin_clean_table .subadmin_add_bagian_search_input {
+    width: 120px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    padding-left: 28px !important;
+    padding-right: 25px !important;
+    font-size: 10px !important;
+  }
+
+  #subAdminSection .admin_clean_table .admin_bagian_icon {
+    left: 9px !important;
+    top: 15px !important;
+    font-size: 14px !important;
+  }
+
+  #subAdminSection .admin_clean_table .admin_bagian_clear_btn {
+    right: 3px !important;
+    top: 15px !important;
+    width: 23px !important;
+    height: 23px !important;
+  }
+
+  /* Tombol Cabut di tabel sub admin */
+  #subAdminSection .admin_clean_table .danger_inline_btn {
+    width: 30px !important;
+    min-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+  }
+
+  /* Tombol Hapus whitelist */
+  #whitelistSection .admin_clean_table .danger_inline_btn {
+    width: 30px !important;
+    min-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+  }
+
+  /* Tombol Bersihkan pencarian jangan full besar */
+  .admin_search_clear {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: max-content !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 11px !important;
+    border-radius: 999px !important;
+    font-size: 10.5px !important;
+    gap: 5px !important;
+  }
+
+  .admin_search_clear .material-symbols-rounded {
+    font-size: 15px !important;
+  }
+
+  /* Tombol salin nomor surat */
+  .copy_nomor_btn {
+    min-height: 30px !important;
+    padding: 0 9px !important;
+    font-size: 10px !important;
+    gap: 5px !important;
+    border-radius: 999px !important;
+  }
+
+  .copy_nomor_btn .material-symbols-rounded {
+    font-size: 14px !important;
+  }
+
+  /* Tombol modal konfirmasi */
+  .admin_modal_no_btn,
+  .admin_modal_yes_btn {
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 13px !important;
+    font-size: 11px !important;
+    border-radius: 999px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  /* Di layar kecil, tombol utama dibuat lebih pendek */
+  .form_actions .primary_btn {
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 10px !important;
+    font-size: 10.5px !important;
+  }
+
+  .form_actions .primary_btn .material-symbols-rounded {
+    font-size: 15px !important;
+  }
+
+  /* Tombol tabel lebih kecil lagi */
+  .admin_clean_table .small_save_btn,
+  .admin_clean_table .danger_inline_btn,
+  .admin_clean_table .warning_inline_btn,
+  .admin_clean_table .mini_icon_danger_btn {
+    width: 26px !important;
+    min-width: 26px !important;
+    max-width: 26px !important;
+    height: 26px !important;
+    min-height: 26px !important;
+    max-height: 26px !important;
+  }
+
+  .admin_clean_table .small_save_btn .material-symbols-rounded,
+  .admin_clean_table .danger_inline_btn .material-symbols-rounded,
+  .admin_clean_table .warning_inline_btn .material-symbols-rounded,
+  .admin_clean_table .mini_icon_danger_btn .material-symbols-rounded {
+    font-size: 14px !important;
+  }
+
+  #bagianSection .admin_clean_table .admin_inline_form {
+    grid-template-columns: 52px 26px !important;
+  }
+
+  #bagianSection .admin_clean_table .admin_limit_input {
+    width: 52px !important;
+    min-width: 52px !important;
+    max-width: 52px !important;
+    height: 28px !important;
+  }
+
+  #akunSection .admin_clean_table .admin_inline_form {
+    grid-template-columns: 106px 26px !important;
+  }
+
+  #akunSection .admin_clean_table .admin_bagian_select,
+  #akunSection .admin_clean_table .admin_bagian_search_input {
+    width: 106px !important;
+    min-width: 106px !important;
+    max-width: 106px !important;
+  }
+
+  #subAdminSection .admin_clean_table .subadmin_add_bagian_form {
+    grid-template-columns: 108px 26px !important;
+  }
+
+  #subAdminSection .admin_clean_table .subadmin_add_bagian_select,
+  #subAdminSection .admin_clean_table .subadmin_add_bagian_search_input {
+    width: 108px !important;
+    min-width: 108px !important;
+    max-width: 108px !important;
+  }
+
+  .admin_search_clear {
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 0 10px !important;
+    font-size: 10px !important;
+  }
+}
+
+
+
+
+
+
+html.theme-light,
+html[data-theme="light"],
+body.theme-light,
+body[data-theme="light"] {
+  --app-bg: #f8fafc;
+  --sidebar-bg: #ffffff;
+  --card-bg: #ffffff;
+  --card-hover: #f1f5f9;
+  --input-bg: #f8fafc;
+
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-soft: #334155;
+
+  --accent: #7c3aed;
+  --accent-rgb: 124, 58, 237;
+
+  --success: #059669;
+  --danger: #dc2626;
+  --warning: #d97706;
+  --info: #0284c7;
+
+  --border-soft: rgba(15, 23, 42, 0.09);
+  --border-strong: rgba(15, 23, 42, 0.16);
+
+  --shadow-card: 0 18px 45px rgba(15, 23, 42, 0.08);
+
+  color-scheme: light;
+}
+
+html.theme-dark,
+html[data-theme="dark"],
+body.theme-dark,
+body[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+html.theme-light body,
+html[data-theme="light"] body,
+body.theme-light {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+html.theme-light .sinosuke-body,
+html[data-theme="light"] .sinosuke-body,
+html.theme-light .app_window,
+html[data-theme="light"] .app_window,
+html.theme-light .main_content,
+html[data-theme="light"] .main_content,
+html.theme-light .top_header,
+html[data-theme="light"] .top_header {
+  background: var(--app-bg) !important;
+  color: var(--text-main) !important;
+}
+
+html.theme-light .sidebar,
+html[data-theme="light"] .sidebar {
+  background: var(--sidebar-bg) !important;
+  border-color: var(--border-soft) !important;
+}
+
+html.theme-light .hero_panel,
+html[data-theme="light"] .hero_panel {
+  background:
+    radial-gradient(circle at top right, rgba(var(--accent-rgb), 0.18), transparent 35%),
+    rgba(255, 255, 255, 0.68) !important;
+}
+
+html.theme-light .settings_section,
+html[data-theme="light"] .settings_section,
+html.theme-light .info_card,
+html[data-theme="light"] .info_card {
+  background: rgba(255, 255, 255, 0.80) !important;
+  border-color: var(--border-soft) !important;
+  color: var(--text-main) !important;
+}
+
+html.theme-light .sheet_wrapper,
+html[data-theme="light"] .sheet_wrapper,
+html.theme-light .search_dropdown,
+html[data-theme="light"] .search_dropdown,
+html.theme-light .toast,
+html[data-theme="light"] .toast {
+  background: var(--card-bg) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-soft) !important;
+}
+
+html.theme-light .styled_select,
+html[data-theme="light"] .styled_select,
+html.theme-light .styled_input,
+html[data-theme="light"] .styled_input,
+html.theme-light .styled_input2,
+html[data-theme="light"] .styled_input2,
+html.theme-light textarea,
+html[data-theme="light"] textarea,
+html.theme-light input,
+html[data-theme="light"] input,
+html.theme-light select,
+html[data-theme="light"] select {
+  background: var(--input-bg) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-soft) !important;
+}
+
+html.theme-light .styled_select option,
+html[data-theme="light"] .styled_select option,
+html.theme-light select option,
+html[data-theme="light"] select option {
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+html.theme-light .search_select_input::placeholder,
+html[data-theme="light"] .search_select_input::placeholder,
+html.theme-light input::placeholder,
+html[data-theme="light"] input::placeholder,
+html.theme-light textarea::placeholder,
+html[data-theme="light"] textarea::placeholder {
+  color: #64748b !important;
+}
+
+html.theme-light .project_name_input,
+html[data-theme="light"] .project_name_input {
+  color: var(--text-main) !important;
+}
+
+html.theme-light #header_subtitle,
+html[data-theme="light"] #header_subtitle,
+html.theme-light .group_label,
+html[data-theme="light"] .group_label,
+html.theme-light .helper_text,
+html[data-theme="light"] .helper_text,
+html.theme-light .info_card p,
+html[data-theme="light"] .info_card p,
+html.theme-light .hero_panel p,
+html[data-theme="light"] .hero_panel p,
+html.theme-light .section_header p,
+html[data-theme="light"] .section_header p,
+html.theme-light .toast_message,
+html[data-theme="light"] .toast_message {
+  color: var(--text-muted) !important;
+}
+
+html.theme-light .search_option,
+html[data-theme="light"] .search_option {
+  color: var(--text-main) !important;
+}
+
+html.theme-light .search_option_label,
+html[data-theme="light"] .search_option_label {
+  color: var(--text-soft) !important;
+}
+
+html.theme-light .surat_table:not(.admin_clean_table),
+html[data-theme="light"] .surat_table:not(.admin_clean_table) {
+  background: #ffffff !important;
+}
+
+html.theme-light .surat_table:not(.admin_clean_table) th,
+html[data-theme="light"] .surat_table:not(.admin_clean_table) th {
+  color: #ffffff !important;
+  background: #1e3a8a !important;
+}
+
+html.theme-light .surat_table:not(.admin_clean_table) td,
+html[data-theme="light"] .surat_table:not(.admin_clean_table) td {
+  color: #0f172a !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+html.theme-light .surat_table:not(.admin_clean_table) tbody tr:hover,
+html[data-theme="light"] .surat_table:not(.admin_clean_table) tbody tr:hover {
+  background: #f1f5f9 !important;
+}
+
+html.theme-light .surat_table:not(.admin_clean_table) .copy_nomor_btn,
+html[data-theme="light"] .surat_table:not(.admin_clean_table) .copy_nomor_btn {
+  color: #1d4ed8 !important;
+}
+
+html.theme-light .icon_btn,
+html[data-theme="light"] .icon_btn {
+  background: transparent !important;
+  color: var(--text-muted) !important;
+  border-color: var(--border-soft) !important;
+}
+
+html.theme-light .icon_btn:hover,
+html[data-theme="light"] .icon_btn:hover {
+  color: var(--text-main) !important;
+  background: rgba(var(--accent-rgb), 0.10) !important;
+  border-color: rgba(var(--accent-rgb), 0.4) !important;
+}
+
+html.theme-light .small_icon_btn,
+html[data-theme="light"] .small_icon_btn {
+  background: rgba(var(--accent-rgb), 0.14) !important;
+  color: var(--accent) !important;
+  border-color: rgba(var(--accent-rgb), 0.3) !important;
+}
+
+html.theme-light .small_icon_btn:hover,
+html[data-theme="light"] .small_icon_btn:hover {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+@media (max-width: 900px) {
+  html.theme-light .sidebar,
+  html[data-theme="light"] .sidebar {
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08) !important;
+  }
+}
+/* =========================================================
+   ADMIN THEME FINAL FIX
+   Tempel bagian ini di PALING BAWAH admin.css.
+   Fungsi: warna tabel, nomor, isi, input, dropdown, modal, toast.
+   Struktur lama tetap dipakai.
+   ========================================================= */
+
+:root,
+html[data-theme="dark"],
+html.theme-dark,
+body[data-theme="dark"],
+body.theme-dark {
+  --admin-bg: #111827;
+  --admin-bg-soft: #0f172a;
+  --admin-surface: rgba(17, 24, 39, 0.92);
+  --admin-surface-solid: #111827;
+  --admin-surface-soft: #1f2937;
+  --admin-surface-muted: #172033;
+  --admin-surface-hover: rgba(37, 99, 235, 0.22);
+
+  --admin-text: #f8fafc;
+  --admin-text-soft: #e5e7eb;
+  --admin-text-muted: #cbd5e1;
+  --admin-text-subtle: #94a3b8;
+
+  --admin-border: rgba(148, 163, 184, 0.22);
+  --admin-border-strong: rgba(148, 163, 184, 0.34);
+
+  --admin-table-head-bg: #111827;
+  --admin-table-head-text: #dbeafe;
+  --admin-table-row-bg: rgba(15, 23, 42, 0.52);
+  --admin-table-row-alt-bg: rgba(30, 41, 59, 0.58);
+  --admin-table-row-hover-bg: rgba(37, 99, 235, 0.20);
+
+  --admin-input-bg: #0f172a;
+  --admin-input-text: #f8fafc;
+  --admin-input-placeholder: #94a3b8;
+
+  --admin-primary: #60a5fa;
+  --admin-primary-strong: #2563eb;
+  --admin-primary-soft: rgba(59, 130, 246, 0.16);
+  --admin-primary-border: rgba(96, 165, 250, 0.32);
+  --admin-number: #93c5fd;
+
+  --admin-success: #86efac;
+  --admin-success-strong: #22c55e;
+  --admin-success-soft: rgba(34, 197, 94, 0.16);
+  --admin-success-border: rgba(34, 197, 94, 0.34);
+
+  --admin-danger: #fca5a5;
+  --admin-danger-strong: #ef4444;
+  --admin-danger-soft: rgba(239, 68, 68, 0.16);
+  --admin-danger-border: rgba(239, 68, 68, 0.36);
+
+  --admin-warning: #fcd34d;
+  --admin-warning-strong: #f59e0b;
+  --admin-warning-soft: rgba(245, 158, 11, 0.16);
+  --admin-warning-border: rgba(245, 158, 11, 0.36);
+
+  --admin-purple: #d8b4fe;
+  --admin-purple-soft: rgba(168, 85, 247, 0.16);
+  --admin-purple-border: rgba(168, 85, 247, 0.34);
+
+  --admin-info: #7dd3fc;
+  --admin-info-soft: rgba(14, 165, 233, 0.16);
+  --admin-info-border: rgba(14, 165, 233, 0.34);
+
+  --admin-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+  --admin-shadow-soft: 0 14px 34px rgba(0, 0, 0, 0.22);
+
+  color-scheme: dark;
+}
+
+html.theme-light,
+html[data-theme="light"],
+body.theme-light,
+body[data-theme="light"] {
+  --admin-bg: #f8fafc;
+  --admin-bg-soft: #eef2f7;
+  --admin-surface: rgba(255, 255, 255, 0.96);
+  --admin-surface-solid: #ffffff;
+  --admin-surface-soft: #f8fafc;
+  --admin-surface-muted: #f1f5f9;
+  --admin-surface-hover: #eff6ff;
+
+  --admin-text: #0f172a;
+  --admin-text-soft: #1e293b;
+  --admin-text-muted: #475569;
+  --admin-text-subtle: #64748b;
+
+  --admin-border: #dbe3ef;
+  --admin-border-strong: #cbd5e1;
+
+  --admin-table-head-bg: #1d4ed8;
+  --admin-table-head-text: #ffffff;
+  --admin-table-row-bg: #ffffff;
+  --admin-table-row-alt-bg: #f8fafc;
+  --admin-table-row-hover-bg: #eff6ff;
+
+  --admin-input-bg: #ffffff;
+  --admin-input-text: #0f172a;
+  --admin-input-placeholder: #64748b;
+
+  --admin-primary: #1d4ed8;
+  --admin-primary-strong: #2563eb;
+  --admin-primary-soft: #dbeafe;
+  --admin-primary-border: #bfdbfe;
+  --admin-number: #1d4ed8;
+
+  --admin-success: #166534;
+  --admin-success-strong: #16a34a;
+  --admin-success-soft: #dcfce7;
+  --admin-success-border: #bbf7d0;
+
+  --admin-danger: #b91c1c;
+  --admin-danger-strong: #dc2626;
+  --admin-danger-soft: #fee2e2;
+  --admin-danger-border: #fecaca;
+
+  --admin-warning: #92400e;
+  --admin-warning-strong: #d97706;
+  --admin-warning-soft: #fef3c7;
+  --admin-warning-border: #fde68a;
+
+  --admin-purple: #7e22ce;
+  --admin-purple-soft: #f3e8ff;
+  --admin-purple-border: #e9d5ff;
+
+  --admin-info: #0369a1;
+  --admin-info-soft: #e0f2fe;
+  --admin-info-border: #bae6fd;
+
+  --admin-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+  --admin-shadow-soft: 0 12px 28px rgba(15, 23, 42, 0.08);
+
+  color-scheme: light;
+}
+
+html.theme-light body,
+html[data-theme="light"] body,
+body.theme-light,
+body[data-theme="light"] {
+  background: var(--admin-bg) !important;
+  color: var(--admin-text) !important;
+}
+
+html.theme-light .sinosuke-body,
+html[data-theme="light"] .sinosuke-body,
+html.theme-light .app_window,
+html[data-theme="light"] .app_window,
+html.theme-light .main_content,
+html[data-theme="light"] .main_content,
+html.theme-light .view_container,
+html[data-theme="light"] .view_container,
+body.theme-light .sinosuke-body,
+body[data-theme="light"] .sinosuke-body {
+  background: var(--admin-bg) !important;
+  color: var(--admin-text) !important;
+}
+
+.admin_dashboard,
+.dashboard_content,
+.dashboard_container,
+.content_area,
+.page_content,
+.sinosuke_main,
+.sinosuke-content {
+  background: transparent !important;
+  color: var(--admin-text) !important;
+}
+
+.settings_section,
+.settings_section.admin_intro_section,
+.admin_intro_section,
+.info_card {
+  background: var(--admin-surface) !important;
+  border-color: var(--admin-border) !important;
+  color: var(--admin-text) !important;
+  box-shadow: var(--admin-shadow) !important;
+}
+
+.section_header h2,
+.info_card h3,
+.admin_stat_card h3,
+.project_name_input {
+  color: var(--admin-text) !important;
+}
+
+.section_header p,
+.info_card p,
+.helper_text,
+.group_label,
+.admin_stat_card p,
+.admin_stat_card small {
+  color: var(--admin-text-muted) !important;
+}
+
+.admin_stat_card {
+  background: var(--admin-surface-solid) !important;
+  border-color: var(--admin-border) !important;
+  color: var(--admin-text) !important;
+  box-shadow: var(--admin-shadow-soft) !important;
+}
+
+.admin_stat_card::after {
+  background: var(--admin-primary-soft) !important;
+}
+
+.admin_stat_card > span.material-symbols-rounded {
+  background: var(--admin-primary-soft) !important;
+  color: var(--admin-primary) !important;
+}
+
+.admin_stat_card p b {
+  color: var(--admin-text) !important;
+}
+
+.admin_table_wrapper {
+  background: var(--admin-surface-solid) !important;
+  border-color: var(--admin-border) !important;
+  box-shadow: var(--admin-shadow-soft) !important;
+}
+
+.admin_clean_table {
+  background: var(--admin-surface-solid) !important;
+  color: var(--admin-text) !important;
+}
+
+.admin_clean_table thead th {
+  color: var(--admin-table-head-text) !important;
+  background: var(--admin-table-head-bg) !important;
+  border-bottom-color: var(--admin-border-strong) !important;
+}
+
+.admin_clean_table tbody td {
+  color: var(--admin-text-soft) !important;
+  background: var(--admin-table-row-bg) !important;
+  border-bottom-color: var(--admin-border) !important;
+}
+
+.admin_clean_table tbody tr:nth-child(even) td {
+  background: var(--admin-table-row-alt-bg) !important;
+}
+
+.admin_clean_table tbody tr:hover td {
+  background: var(--admin-table-row-hover-bg) !important;
+}
+
+.admin_clean_table tbody td:first-child,
+.number_cell {
+  color: var(--admin-number) !important;
+  font-weight: 850 !important;
+}
+
+.empty_cell {
+  color: var(--admin-text-subtle) !important;
+  background: var(--admin-table-row-bg) !important;
+}
+
+.username_text,
+.date_text,
+.admin_clean_table td,
+.admin_clean_table td span,
+.admin_clean_table td div,
+.admin_clean_table td p {
+  color: var(--admin-text-soft);
+}
+
+.date_text small,
+.user_identity small,
+.bagian_text small,
+.whitelist_text small,
+.admin_clean_table td small {
+  color: var(--admin-text-subtle) !important;
+}
+
+.user_identity > span,
+.bagian_identity,
+.whitelist_identity {
+  background: var(--admin-primary-soft) !important;
+  border-color: var(--admin-primary-border) !important;
+  color: var(--admin-text) !important;
+}
+
+.user_identity > span {
+  color: var(--admin-primary) !important;
+}
+
+.user_identity strong,
+.bagian_text strong,
+.whitelist_text strong,
+.admin_dropdown_text strong,
+.admin_clean_table td strong {
+  color: var(--admin-text) !important;
+}
+
+.bagian_icon,
+.whitelist_icon,
+.admin_dropdown_icon {
+  background: linear-gradient(135deg, var(--admin-primary-strong), var(--admin-primary)) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.22) !important;
+}
+
+.bagian_pill,
+.used_pill,
+.active_status_pill,
+.admin_multi_tag,
+.admin_dropdown_status.available {
+  background: var(--admin-success-soft) !important;
+  border-color: var(--admin-success-border) !important;
+  color: var(--admin-success) !important;
+}
+
+.bagian_empty,
+.empty_status_pill {
+  background: var(--admin-surface-muted) !important;
+  border-color: var(--admin-border) !important;
+  color: var(--admin-text-muted) !important;
+}
+
+.limit_pill,
+.role_user {
+  background: var(--admin-primary-soft) !important;
+  border-color: var(--admin-primary-border) !important;
+  color: var(--admin-primary) !important;
+}
+
+.limit_unlimited,
+.role_sub_admin {
+  background: var(--admin-purple-soft) !important;
+  border-color: var(--admin-purple-border) !important;
+  color: var(--admin-purple) !important;
+}
+
+.role_admin,
+.admin_dropdown_status.full {
+  background: var(--admin-danger-soft) !important;
+  border-color: var(--admin-danger-border) !important;
+  color: var(--admin-danger) !important;
+}
+
+.klasifikasi_pill {
+  background: var(--admin-info-soft) !important;
+  border-color: var(--admin-info-border) !important;
+  color: var(--admin-info) !important;
+}
+
+.styled_input,
+.styled_input2,
+.styled_select,
+.admin_search_input,
+.admin_bagian_search_input,
+.admin_limit_input,
+.admin_textarea,
+textarea.admin_textarea,
+.admin_clean_table input,
+.admin_clean_table select,
+.admin_clean_table textarea {
+  background: var(--admin-input-bg) !important;
+  color: var(--admin-input-text) !important;
+  border-color: var(--admin-border) !important;
+  caret-color: var(--admin-primary) !important;
+}
+
+.styled_input:focus,
+.styled_input2:focus,
+.styled_select:focus,
+.admin_search_input:focus,
+.admin_bagian_search_input:focus,
+.admin_limit_input:focus,
+.admin_textarea:focus,
+.admin_clean_table input:focus,
+.admin_clean_table select:focus,
+.admin_clean_table textarea:focus {
+  border-color: var(--admin-primary) !important;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.16) !important;
+  outline: none !important;
+}
+
+.styled_input::placeholder,
+.styled_input2::placeholder,
+.admin_search_input::placeholder,
+.admin_bagian_search_input::placeholder,
+.admin_textarea::placeholder,
+.admin_clean_table input::placeholder,
+.admin_clean_table textarea::placeholder {
+  color: var(--admin-input-placeholder) !important;
+}
+
+.styled_select option,
+select.styled_input option,
+.admin_clean_table select option {
+  background: var(--admin-surface-solid) !important;
+  color: var(--admin-text) !important;
+}
+
+.admin_search_box {
+  background: var(--admin-input-bg) !important;
+  border-color: var(--admin-border) !important;
+  color: var(--admin-text) !important;
+}
+
+.admin_search_box:focus-within {
+  border-color: var(--admin-primary) !important;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.16) !important;
+}
+
+.admin_search_box .material-symbols-rounded,
+.admin_bagian_icon {
+  color: var(--admin-text-subtle) !important;
+}
+
+.admin_search_clear {
+  background: var(--admin-surface-muted) !important;
+  border-color: var(--admin-border) !important;
+  color: var(--admin-text-soft) !important;
+}
+
+.admin_search_clear:hover {
+  background: var(--admin-surface-hover) !important;
+  color: var(--admin-primary) !important;
+}
+
+.admin_bagian_dropdown,
+.subadmin_bagian_dropdown,
+.subadmin_user_dropdown,
+.subadmin_add_bagian_dropdown {
+  background: var(--admin-surface-solid) !important;
+  border-color: var(--admin-border) !important;
+  color: var(--admin-text) !important;
+  box-shadow: var(--admin-shadow) !important;
+}
+
+.admin_dropdown_option {
+  background: transparent !important;
+  color: var(--admin-text) !important;
+}
+
+.admin_dropdown_option:hover,
+.admin_dropdown_option.active {
+  background: var(--admin-surface-hover) !important;
+}
+
+.admin_dropdown_option.disabled,
+.admin_dropdown_option:disabled {
+  color: var(--admin-text-subtle) !important;
+  opacity: 0.62 !important;
+}
+
+.admin_dropdown_text small,
+.admin_dropdown_empty {
+  color: var(--admin-text-subtle) !important;
+}
+
+.admin_bagian_clear_btn {
+  background: var(--admin-surface-muted) !important;
+  color: var(--admin-text-subtle) !important;
+}
+
+.admin_bagian_clear_btn:hover {
+  background: var(--admin-danger-soft) !important;
+  color: var(--admin-danger) !important;
+}
+
+.admin_multi_tag button {
+  background: rgba(15, 23, 42, 0.14) !important;
+  color: inherit !important;
+}
+
+html.theme-light .admin_multi_tag button,
+html[data-theme="light"] .admin_multi_tag button,
+body.theme-light .admin_multi_tag button,
+body[data-theme="light"] .admin_multi_tag button {
+  background: rgba(22, 101, 52, 0.10) !important;
+}
+
+.admin_multi_tag button:hover {
+  background: var(--admin-danger-soft) !important;
+  color: var(--admin-danger) !important;
+}
+
+.small_save_btn,
+.admin_modal_yes_btn {
+  background: linear-gradient(135deg, var(--admin-primary-strong), var(--admin-primary)) !important;
+  color: #ffffff !important;
+  border: 0 !important;
+  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22) !important;
+}
+
+.danger_inline_btn,
+.mini_icon_danger_btn,
+.admin_modal_yes_btn.danger {
+  background: var(--admin-danger-soft) !important;
+  border-color: var(--admin-danger-border) !important;
+  color: var(--admin-danger) !important;
+}
+
+.danger_inline_btn:hover,
+.mini_icon_danger_btn:hover {
+  background: rgba(239, 68, 68, 0.22) !important;
+}
+
+.warning_inline_btn,
+.admin_modal_yes_btn.warning {
+  background: var(--admin-warning-soft) !important;
+  border-color: var(--admin-warning-border) !important;
+  color: var(--admin-warning) !important;
+}
+
+.warning_inline_btn:hover {
+  background: rgba(245, 158, 11, 0.22) !important;
+}
+
+.copy_nomor_btn {
+  background: var(--admin-primary-soft) !important;
+  border-color: var(--admin-primary-border) !important;
+  color: var(--admin-primary) !important;
+}
+
+.copy_nomor_btn:hover {
+  background: var(--admin-surface-hover) !important;
+  color: var(--admin-primary-strong) !important;
+}
+
+.surat_table:not(.admin_clean_table) {
+  background: var(--admin-surface-solid) !important;
+  color: var(--admin-text) !important;
+}
+
+.surat_table:not(.admin_clean_table) th {
+  background: var(--admin-table-head-bg) !important;
+  color: var(--admin-table-head-text) !important;
+  border-bottom-color: var(--admin-border-strong) !important;
+}
+
+.surat_table:not(.admin_clean_table) td {
+  background: var(--admin-table-row-bg) !important;
+  color: var(--admin-text-soft) !important;
+  border-bottom-color: var(--admin-border) !important;
+}
+
+.surat_table:not(.admin_clean_table) tbody tr:nth-child(even) td {
+  background: var(--admin-table-row-alt-bg) !important;
+}
+
+.surat_table:not(.admin_clean_table) tbody tr:hover td,
+.surat_table:not(.admin_clean_table) tbody tr:hover {
+  background: var(--admin-table-row-hover-bg) !important;
+}
+
+.nomor_cell,
+.nomor_surat_cell,
+.isi_cell,
+.admin_isi_cell,
+.content_cell,
+.surat_content,
+.perihal_cell,
+.judul_cell {
+  color: var(--admin-text-soft) !important;
+}
+
+.nomor_cell,
+.nomor_surat_cell {
+  color: var(--admin-number) !important;
+  font-weight: 850 !important;
+}
+
+.admin_toast,
+.toast,
+.admin_confirm_content {
+  background: var(--admin-surface-solid) !important;
+  border-color: var(--admin-border) !important;
+  color: var(--admin-text) !important;
+  box-shadow: var(--admin-shadow) !important;
+}
+
+.admin_toast_content strong,
+.admin_confirm_header .modal-title {
+  color: var(--admin-text) !important;
+}
+
+.admin_toast_content p,
+.admin_confirm_body p,
+.admin_confirm_subtitle {
+  color: var(--admin-text-muted) !important;
+}
+
+.admin_toast_close,
+.admin_confirm_close {
+  color: var(--admin-text-subtle) !important;
+  filter: none !important;
+}
+
+.admin_confirm_header,
+.admin_confirm_footer {
+  border-color: var(--admin-border) !important;
+}
+
+.admin_confirm_icon {
+  background: var(--admin-primary-soft) !important;
+  color: var(--admin-primary) !important;
+}
+
+.admin_confirm_icon.danger {
+  background: var(--admin-danger-soft) !important;
+  color: var(--admin-danger) !important;
+}
+
+.admin_confirm_icon.warning {
+  background: var(--admin-warning-soft) !important;
+  color: var(--admin-warning) !important;
+}
+
+.admin_modal_no_btn {
+  background: var(--admin-surface-muted) !important;
+  color: var(--admin-text-soft) !important;
+  border: 1px solid var(--admin-border) !important;
+}
+
+.admin_toast.success .admin_toast_icon {
+  background: var(--admin-success-soft) !important;
+  color: var(--admin-success) !important;
+}
+
+.admin_toast.error .admin_toast_icon {
+  background: var(--admin-danger-soft) !important;
+  color: var(--admin-danger) !important;
+}
+
+.admin_toast.warning .admin_toast_icon {
+  background: var(--admin-warning-soft) !important;
+  color: var(--admin-warning) !important;
+}
+
+/* Admin table readability on small screens */
+@media (max-width: 768px) {
+  .admin_table_wrapper {
+    background: var(--admin-surface-solid) !important;
+    border-color: var(--admin-border) !important;
+  }
+
+  .admin_clean_table thead th {
+    color: var(--admin-table-head-text) !important;
+    background: var(--admin-table-head-bg) !important;
+  }
+
+  .admin_clean_table tbody td {
+    color: var(--admin-text-soft) !important;
+  }
+
+  .admin_clean_table tbody td:first-child,
+  .number_cell {
+    color: var(--admin-number) !important;
+  }
+
+  .admin_clean_table input,
+  .admin_clean_table select,
+  .admin_clean_table textarea,
+  .admin_bagian_search_input,
+  .admin_limit_input {
+    background: var(--admin-input-bg) !important;
+    color: var(--admin-input-text) !important;
+    border-color: var(--admin-border) !important;
+  }
+}

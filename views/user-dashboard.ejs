@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title><%= process.env.APP_TITLE || 'Dashboard Sinosuke Lappari' %></title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" 
+    rel="stylesheet"
+  >
+
+  <script src="/secure-js/dashboard/theme.js"></script>
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="sinosuke-body">
+
+  <div id="toast_container" class="toast_container"></div>
+
+  <div class="app_window">
+
+    <aside class="sidebar">
+      <div class="branding">
+        <span class="material-symbols-rounded logo_icon">description</span>
+        <h1>SINOSUKE</h1>
+        <div class="app_slogan">
+          <%= process.env.APP_SLOGAN || 'Sistem Nomor Surat Keluar Lapas Pariaman.' %>
+        </div>
+      </div>
+
+      <div class="sidebar_divider"></div>
+
+      <nav class="nav_items">
+        <a href="/dashboard" class="nav_item active">
+          <span class="material-symbols-rounded">dashboard</span>
+          <span class="project_label">Dashboard</span>
+        </a>
+
+        <a href="/profile" class="nav_item">
+          <span class="material-symbols-rounded">account_circle</span>
+          <span class="project_label">Profil</span>
+        </a>
+
+        <a href="/surat-saya" class="nav_item">
+          <span class="material-symbols-rounded">folder_open</span>
+          <span class="project_label">Surat Saya</span>
+        </a>
+
+        <!-- <a href="#spreadsheetSection" class="nav_item">
+          <span class="material-symbols-rounded">table_view</span>
+          <span class="project_label">Sheet</span>
+        </a> -->
+      </nav>
+
+      <div class="sidebar_bottom">
+        <button type="button" id="themeToggleBtn" class="nav_item nav_button">
+          <span class="material-symbols-rounded" id="themeIcon">dark_mode</span>
+          <span class="project_label">Tema</span>
+        </button>
+
+        <a href="/logout" class="nav_item danger_nav">
+          <span class="material-symbols-rounded">logout</span>
+          <span class="project_label">Logout</span>
+        </a>
+      </div>
+    </aside>
+
+    <main class="main_content">
+
+      <header class="top_header">
+        <div class="header_center">
+          <div class="project_rename_wrapper">
+            <input 
+              type="text" 
+              id="header_project_name" 
+              class="project_name_input" 
+              value="Dashboard Sinosuke Lappari"
+              readonly
+            >
+          </div>
+
+          <span id="header_subtitle">
+            <%= process.env.HEADER_SUBTITLE || 'Sistem Penomoran Surat Keluar Lapas Pariaman' %>
+          </span>
+        </div>
+      </header>
+
+      <section class="view_container">
+
+        <div class="dashboard_scroll">
+
+          <section class="hero_panel">
+            <div>
+              <span class="mini_badge">
+                <span class="material-symbols-rounded">verified</span>
+                <%= user.bagian || 'Belum ada Peran' %>
+              </span>
+
+              <h2>Halo, <%= user.nama %></h2>
+
+              <p>
+                Pilih jenis surat, kode klasifikasi utama, dan kode tambahan. 
+                No. Urut dan Nomor Surat akan diambil dari Database Sinosuke.
+              </p>
+            </div>
+
+            <div class="avatar_orb">
+              <%= (user.nama || '?').charAt(0).toUpperCase() %>
+            </div>
+          </section>
+
+          <section class="dashboard_grid">
+
+            <section class="settings_section form_section">
+              <div class="section_header">
+                <div>
+                  <h2>
+                    <span class="material-symbols-rounded">edit_document</span>
+                    Form Input Data Surat
+                  </h2>
+
+                  <p>
+                    Isi data surat dengan lengkap agar nomor surat dapat dibuat otomatis.
+                  </p>
+                </div>
+              </div>
+
+              <form id="suratForm" class="sinosuke_form">
+
+                <div class="form_grid">
+
+                  <div class="input_group">
+                    <label class="group_label" for="jenisSurat">
+                      Jenis Surat
+                    </label>
+
+                    <select 
+                      name="jenisSurat" 
+                      id="jenisSurat" 
+                      class="styled_input" 
+                      required
+                    >
+                      <option value="SURAT_BIASA" selected>Surat Biasa</option>
+                      <option value="SURAT_KEPUTUSAN">Surat Keputusan</option>
+                    </select>
+
+                    <!-- <small class="helper_text">
+                      Default Surat Biasa. Format: WP.3.PAS.4-KU.04.03-78.
+                    </small> -->
+                  </div>
+
+                  <div class="input_group">
+                    <label class="group_label" for="kodeKlasifikasiSearch">
+                      Kode Klasifikasi
+                    </label>
+
+                    <input type="hidden" name="kodeKlasifikasi" id="kodeKlasifikasi">
+
+                    <div class="search_select">
+                      <input 
+                        type="text"
+                        id="kodeKlasifikasiSearch"
+                        class="styled_input search_select_input"
+                        placeholder="Cari atau pilih kode utama"
+                        autocomplete="off"
+                      >
+
+                      <button 
+                        type="button"
+                        id="kodeKlasifikasiToggle"
+                        class="search_select_toggle search_clear_btn"
+                        title="Hapus pilihan"
+                      >
+                        <span class="material-symbols-rounded">close</span>
+                      </button>
+
+                      <div 
+                        id="kodeKlasifikasiDropdown"
+                        class="search_dropdown hidden"
+                      ></div>
+                    </div>
+
+                    <small class="helper_text">
+                      Cari berdasarkan kode atau nama klasifikasi.
+                    </small>
+                  </div>
+
+                  <div class="input_group">
+                    <label class="group_label" for="kodeTambahanSearch">
+                      Kode Tambahan
+                    </label>
+
+                    <input type="hidden" name="kodeTambahan" id="kodeTambahan">
+
+                    <div class="search_select">
+                      <input 
+                        type="text"
+                        id="kodeTambahanSearch"
+                        class="styled_input search_select_input"
+                        placeholder="Pilih kode klasifikasi dulu"
+                        autocomplete="off"
+                        disabled
+                      >
+
+                      <button 
+                        type="button"
+                        id="kodeTambahanToggle"
+                        class="search_select_toggle search_clear_btn"
+                        title="Hapus pilihan"
+                        disabled
+                      >
+                        <span class="material-symbols-rounded">close</span>
+                      </button>
+
+                      <div 
+                        id="kodeTambahanDropdown"
+                        class="search_dropdown hidden"
+                      ></div>
+                    </div>
+
+                    <small class="helper_text">
+                      Cari berdasarkan kode atau nama kode tambahan.
+                    </small>
+                  </div>
+
+                  <input type="hidden" name="noUrut" id="noUrut">
+
+                  <div class="input_group">
+                    <label class="group_label" for="hariTanggal">
+                      Hari/Tanggal
+                    </label>
+
+                    <input 
+                      type="text" 
+                      name="hariTanggal" 
+                      id="hariTanggal"
+                      class="styled_input" 
+                      readonly
+                    >
+                  </div>
+
+                  <input 
+                    type="hidden" 
+                    name="kodeSatker" 
+                    id="kodeSatker" 
+                    value="<%= process.env.KODE_SATKER || 'WP.3.PAS.4-' %>"
+                  >
+
+                  <input 
+                    type="hidden" 
+                    name="nomorSurat" 
+                    id="nomorSurat"
+                    placeholder="Nomor akan dibuat saat submit"
+                    readonly
+                  >
+
+                  <div class="input_group">
+                    <label class="group_label" for="dariBagianSearch">
+                      Dari Bagian
+                    </label>
+
+                    <% if (dariBagianMode === 'auto') { %>
+                      <input 
+                        type="hidden" 
+                        name="dariBagian" 
+                        id="dariBagian"
+                        value="<%= user.bagian || '' %>"
+                      >
+
+                      <input 
+                        type="text" 
+                        id="dariBagianSearch"
+                        class="styled_input" 
+                        value="<%= user.bagian || '' %>"
+                        readonly
+                        required
+                      >
+
+                      <small class="helper_text">
+                        Otomatis dari bagian akun user.
+                      </small>
+                    <% } else { %>
+                      <input type="hidden" name="dariBagian" id="dariBagian">
+
+                      <div class="input_with_button">
+                        <div class="search_select">
+                          <input 
+                            type="text"
+                            id="dariBagianSearch"
+                            class="styled_input search_select_input"
+                            placeholder="Cari atau pilih bagian"
+                            autocomplete="off"
+                            required
+                          >
+
+                          <button 
+                            type="button"
+                            id="dariBagianToggle"
+                            class="search_select_toggle search_clear_btn"
+                            title="Hapus pilihan"
+                          >
+                            <span class="material-symbols-rounded">close</span>
+                          </button>
+
+                          <div 
+                            id="dariBagianDropdown"
+                            class="search_dropdown hidden"
+                          ></div>
+                        </div>
+
+                        <button 
+                          type="button" 
+                          id="autoBagianBtn" 
+                          class="small_icon_btn"
+                          title="Gunakan bagian dari akun ini"
+                        >
+                          <span class="material-symbols-rounded">check</span>
+                        </button>
+                      </div>
+
+                      <small class="helper_text">
+                        Cari bagian secara manual atau klik tanda centang untuk memakai bagian akun.
+                      </small>
+                    <% } %>
+                  </div>
+
+                  <div class="input_group">
+                    <label class="group_label" for="tujuanSurat">
+                      Tujuan Surat
+                    </label>
+
+                    <input 
+                      type="text" 
+                      name="tujuanSurat" 
+                      id="tujuanSurat"
+                      class="styled_input" 
+                      placeholder="Masukkan tujuan surat"
+                      required
+                    >
+                  </div>
+
+                  <div class="input_group full_width">
+                    <label class="group_label" for="halSurat">
+                      Hal Surat
+                    </label>
+
+                    <input 
+                      type="text" 
+                      name="halSurat" 
+                      id="halSurat"
+                      class="styled_input" 
+                      placeholder="Masukkan hal surat"
+                      required
+                    >
+                  </div>
+
+                </div>
+
+                <div class="form_actions">
+                  <button type="submit" class="primary_btn" id="submitBtn">
+                    <span class="material-symbols-rounded">send</span>
+                    Buat Sinosuke
+                    <span id="submitSpinner" class="mini_spinner hidden"></span>
+                  </button>
+                </div>
+
+              </form>
+
+              <div id="formMessage" class="result_message"></div>
+            </section>
+
+            <aside class="info_panel">
+
+              <div class="info_card" id="kodeTambahanInfoCard">
+                <span class="material-symbols-rounded">info</span>
+
+                <h3 id="kodeTambahanInfoTitle">
+                  Informasi Kode Tambahan
+                </h3>
+
+                <p id="kodeTambahanInfoText">
+                  Pilih kode tambahan terlebih dahulu untuk melihat keterangan klasifikasi surat.
+                </p>
+              </div>
+<!-- 
+              <div class="info_card">
+                <span class="material-symbols-rounded">rule</span>
+                <h3>Format Nomor Surat</h3>
+
+                <p>
+                  Surat Biasa:<br>
+                  <b>WP.3.PAS.4-KU.04.03-78</b><br><br>
+
+                  Surat Keputusan:<br>
+                  <b>WP.3.PAS.4-78.KU.04.03</b>
+                </p>
+              </div> -->
+
+              <div class="info_card">
+                <span class="material-symbols-rounded">manage_accounts</span>
+                <h3>Data Akun</h3>
+
+                <p>
+                  Nama: <b><%= user.nama %></b><br>
+                  Username: <b><%= user.username %></b><br>
+                  Jabatan: <b><%= user.bagian || 'Belum diatur' %></b><br>
+                  Total Surat Dibuat: 
+                  <b><%= typeof totalSuratUser !== 'undefined' ? totalSuratUser : 0 %></b>
+                </p>
+              </div>
+
+            </aside>
+
+          </section>
+
+          <!-- <section class="settings_section spreadsheet_section" id="spreadsheetSection">
+            <div class="section_header">
+              <div>
+                <h2>
+                  <span class="material-symbols-rounded">table</span>
+                  Data Spreadsheet
+                </h2>
+
+                <p>
+                  Data berikut ditampilkan langsung dari Google Spreadsheet.
+                </p>
+              </div>
+            </div>
+
+            <div class="sheet_wrapper">
+              <iframe 
+                src="<%= spreadsheetUrl %>"
+                width="100%"
+                height="650"
+                style="border:0;"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </section> -->
+
+        </div>
+
+      </section>
+
+    </main>
+      <%- include("partials/footer.ejs") %>
+
+  </div>
+
+  <script>
+    window.DASHBOARD_CONFIG = {
+      userBagian: "<%= user && user.bagian ? user.bagian : '' %>",
+      userNama: "<%= user && user.nama ? user.nama : '' %>",
+      username: "<%= user && user.username ? user.username : '' %>",
+      kodeSatker: "<%= process.env.KODE_SATKER || 'WP.3.PAS.4-' %>",
+      defaultJenisSurat: "SURAT_BIASA"
+    };
+  </script>
+
+  <script src="/secure-js/dashboard/config.js"></script>
+  <script src="/secure-js/dashboard/ui-utils.js"></script>
+  <script src="/secure-js/dashboard/surat-api.js"></script>
+  <script src="/secure-js/dashboard/search-dropdown.js"></script>
+  <script src="/secure-js/dashboard/form-submit.js"></script>
+  <script src="/secure-js/dashboard/main.js"></script>
+</body>
+
+</html>

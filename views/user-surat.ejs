@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+
+  <title>Riwayat Surat Saya</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" 
+    rel="stylesheet"
+  >
+
+  <script src="/secure-js/dashboard/theme.js"></script>
+
+  <link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    .sheet_row_link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      text-decoration: none;
+      background: rgba(59, 130, 246, 0.14);
+      border: 1px solid rgba(96, 165, 250, 0.28);
+      color: #bfdbfe;
+      padding: 8px 11px;
+      border-radius: 999px;
+      font-weight: 800;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .sheet_row_link:hover {
+      background: rgba(37, 99, 235, 0.22);
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .sheet_row_link .material-symbols-rounded {
+      font-size: 17px;
+    }
+
+    .sheet_row_empty {
+      color: var(--text-muted, #94a3b8);
+      font-weight: 700;
+    }
+
+    /* .jenis_surat_badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .jenis_surat_biasa {
+      background: rgba(34, 197, 94, 0.14);
+      border: 1px solid rgba(74, 222, 128, 0.28);
+      color: #bbf7d0;
+    }
+
+    .jenis_surat_keputusan {
+      background: rgba(168, 85, 247, 0.14);
+      border: 1px solid rgba(192, 132, 252, 0.28);
+      color: #e9d5ff;
+    } */
+
+    .format_nomor_text {
+      display: block;
+      margin-top: 7px;
+      color: var(--text-muted, #94a3b8);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .copy_nomor_btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      padding: 0;
+      text-align: left;
+    }
+
+    .copy_nomor_btn:hover {
+      text-decoration: underline;
+    }
+
+    .copy_nomor_btn .material-symbols-rounded {
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body class="sinosuke-body">
+
+  <%
+    const safeSuratList = typeof suratList !== "undefined" && Array.isArray(suratList) ? suratList : [];
+    const safeAppConfig = typeof appConfig !== "undefined" && appConfig ? appConfig : {};
+    const safeSuccess = typeof success !== "undefined" && Array.isArray(success) ? success : [];
+    const safeError = typeof error !== "undefined" && Array.isArray(error) ? error : [];
+    const safeUser = typeof user !== "undefined" && user ? user : {};
+    const safeTotalSuratUser = typeof totalSuratUser !== "undefined" ? totalSuratUser : 0;
+
+    function buildSheetRowUrl(surat) {
+      if (!surat) {
+        return "";
+      }
+
+      if (surat.sheetRowUrl) {
+        return surat.sheetRowUrl;
+      }
+
+      const spreadsheetUrl = surat.spreadsheetUrl || safeAppConfig.spreadsheetUrl || "";
+      const sheetGid = surat.sheetGid || "";
+      const sheetRow = surat.sheetRow || "";
+
+      if (!spreadsheetUrl || !sheetGid || !sheetRow) {
+        return "";
+      }
+
+      const cleanUrl = String(spreadsheetUrl).split("#")[0];
+
+      return cleanUrl + "#gid=" + sheetGid + "&range=A" + sheetRow;
+    }
+
+    function normalizeJenisSurat(value) {
+      const jenisSurat = String(value || "")
+        .trim()
+        .toUpperCase()
+        .replace(/\s+/g, "_");
+
+      if (jenisSurat === "SURAT_BIASA") {
+        return "SURAT_BIASA";
+      }
+
+      if (jenisSurat === "SURAT_KEPUTUSAN") {
+        return "SURAT_KEPUTUSAN";
+      }
+
+      return "SURAT_KEPUTUSAN";
+    }
+
+    function getJenisSuratLabel(value) {
+      const jenisSurat = normalizeJenisSurat(value);
+
+      if (jenisSurat === "SURAT_BIASA") {
+        return "Biasa";
+      }
+
+      return "Keputusan";
+    }
+
+    function getJenisSuratClass(value) {
+      const jenisSurat = normalizeJenisSurat(value);
+
+      if (jenisSurat === "SURAT_BIASA") {
+        return "jenis_surat_biasa";
+      }
+
+      return "jenis_surat_keputusan";
+    }
+
+    function getFormatNomorSurat(value) {
+      const jenisSurat = normalizeJenisSurat(value);
+
+      if (jenisSurat === "SURAT_BIASA") {
+      }
+
+    }
+
+    function formatTanggal(value) {
+      if (!value) {
+        return "-";
+      }
+
+      const date = new Date(value);
+
+      if (isNaN(date.getTime())) {
+        return "-";
+      }
+
+      return date.toLocaleDateString("id-ID");
+    }
+
+    function formatJam(value) {
+      if (!value) {
+        return "";
+      }
+
+      const date = new Date(value);
+
+      if (isNaN(date.getTime())) {
+        return "";
+      }
+
+      return date.toLocaleTimeString("id-ID", {
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    }
+  %>
+
+  <div id="toast_container" class="toast_container"></div>
+
+  <div class="app_window">
+
+    <aside class="sidebar">
+      <div class="branding">
+        <span class="material-symbols-rounded logo_icon">description</span>
+        <h1>SINOSUKE</h1>
+
+        <div class="app_slogan">
+          <%= process.env.APP_SLOGAN || 'Sistem Nomor Surat Keluar Lapas Pariaman.' %>
+        </div>
+      </div>
+
+      <div class="sidebar_divider"></div>
+
+      <nav class="nav_items">
+        <a href="/dashboard" class="nav_item">
+          <span class="material-symbols-rounded">dashboard</span>
+          <span class="project_label">Dashboard</span>
+        </a>
+
+        <a href="/profile" class="nav_item">
+          <span class="material-symbols-rounded">account_circle</span>
+          <span class="project_label">Profil</span>
+        </a>
+
+        <a href="/surat-saya" class="nav_item active">
+          <span class="material-symbols-rounded">folder_open</span>
+          <span class="project_label">Surat Saya</span>
+        </a>
+
+        <a href="/dashboard#spreadsheetSection" class="nav_item">
+          <span class="material-symbols-rounded">table_view</span>
+          <span class="project_label">Sheet</span>
+        </a>
+      </nav>
+
+      <div class="sidebar_bottom">
+        <button type="button" id="themeToggleBtn" class="nav_item nav_button">
+          <span class="material-symbols-rounded" id="themeIcon">dark_mode</span>
+          <span class="project_label">Tema</span>
+        </button>
+
+        <a href="/logout" class="nav_item danger_nav">
+          <span class="material-symbols-rounded">logout</span>
+          <span class="project_label">Logout</span>
+        </a>
+      </div>
+    </aside>
+
+    <main class="main_content">
+
+      <header class="top_header">
+        <div class="header_left"></div>
+
+        <div class="header_center">
+          <div class="project_rename_wrapper">
+            <input 
+              type="text" 
+              id="header_project_name" 
+              class="project_name_input" 
+              value="Riwayat Surat"
+              readonly
+            >
+          </div>
+        </div>
+
+        <div class="header_right"></div>
+      </header>
+
+      <section class="view_container">
+
+        <div class="dashboard_scroll">
+
+          <% if (safeSuccess.length > 0) { %>
+            <% safeSuccess.forEach(function(message) { %>
+              <div class="result_card" style="margin-bottom: 16px;">
+                <h3>
+                  <span class="material-symbols-rounded">check_circle</span>
+                  Berhasil
+                </h3>
+                <p><%= message %></p>
+              </div>
+            <% }) %>
+          <% } %>
+
+          <% if (safeError.length > 0) { %>
+            <% safeError.forEach(function(message) { %>
+              <div class="result_card" style="margin-bottom: 16px;">
+                <h3>
+                  <span class="material-symbols-rounded">error</span>
+                  Gagal
+                </h3>
+                <p><%= message %></p>
+              </div>
+            <% }) %>
+          <% } %>
+
+          <section class="settings_section">
+            <div class="section_header">
+              <div>
+                <h2>
+                  <span class="material-symbols-rounded">list_alt</span>
+                  Data Surat
+                </h2>
+
+                <p>
+                  Total surat yang dibuat: <b><%= safeSuratList.length %></b>
+                </p>
+              </div>
+
+              <a href="/dashboard" class="export_btn">
+                <span class="material-symbols-rounded">add</span>
+                Buat Surat Baru
+              </a>
+            </div>
+
+            <% if (safeSuratList.length > 0) { %>
+              <div style="overflow-x: auto;">
+                <table class="surat_table">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Nomor Surat Lengkap</th>
+                      <th>Jenis Surat</th>
+                      <th>Klasifikasi</th>
+                      <th>Kode Tambahan</th>
+                      <th>Dari Bagian</th>
+                      <th>Tujuan Surat</th>
+                      <th>Hal Surat</th>
+                      <th>Sheet</th>
+                      <th>Baris / Link</th>
+                      <th>Tanggal Input</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <% safeSuratList.forEach(function(surat, index) { %>
+                      <%
+                        const sheetRowUrl = buildSheetRowUrl(surat);
+                        const jenisSurat = normalizeJenisSurat(surat.jenisSurat);
+                        const jenisSuratLabel = getJenisSuratLabel(jenisSurat);
+                        const jenisSuratClass = getJenisSuratClass(jenisSurat);
+                        const formatNomorSurat = getFormatNomorSurat(jenisSurat);
+                      %>
+
+                      <tr>
+                        <td><%= index + 1 %></td>
+
+                        <td>
+                          <button
+                            type="button"
+                            class="copy_nomor_btn"
+                            data-nomor="<%= surat.nomorSuratLengkap || '' %>"
+                            title="Klik untuk salin nomor surat"
+                          >
+                            <span class="material-symbols-rounded">content_copy</span>
+                            <%= surat.nomorSuratLengkap || '-' %>
+                          </button>
+                        </td>
+
+                        <td>
+                          <span class="jenis_surat_badge <%= jenisSuratClass %>">
+                            <span class="material-symbols-rounded">
+                              <%= jenisSurat === "SURAT_BIASA" ? "mail" : "gavel" %>
+                            </span>
+                            <%= jenisSuratLabel %>
+                          </span>
+
+                          <span class="format_nomor_text">
+                            <%= formatNomorSurat %>
+                          </span>
+                        </td>
+
+                        <td>
+                          <span class="mini_badge">
+                            <%= surat.kodeKlasifikasi || '-' %>
+                          </span>
+                        </td>
+
+                        <td><%= surat.kodeTambahan || '-' %></td>
+
+                        <td><%= surat.dariBagian || '-' %></td>
+
+                        <td><%= surat.tujuanSurat || '-' %></td>
+
+                        <td><%= surat.halSurat || '-' %></td>
+
+                        <td><%= surat.sheetName || '-' %></td>
+
+                        <td>
+                          <% if (sheetRowUrl) { %>
+                            <a
+                              href="<%= sheetRowUrl %>"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="sheet_row_link"
+                              title="Buka baris surat di Google Sheet"
+                            >
+                              <span class="material-symbols-rounded">open_in_new</span>
+                              Row <%= surat.sheetRow || '-' %>
+                            </a>
+                          <% } else if (surat.sheetRow) { %>
+                            <span class="mini_badge">
+                              Row <%= surat.sheetRow %>
+                            </span>
+                          <% } else { %>
+                            <span class="sheet_row_empty">-</span>
+                          <% } %>
+                        </td>
+
+                        <td>
+                          <%= formatTanggal(surat.createdAt) %>
+
+                          <% if (formatJam(surat.createdAt)) { %>
+                            <br>
+                            <small>
+                              <%= formatJam(surat.createdAt) %>
+                            </small>
+                          <% } %>
+                        </td>
+                      </tr>
+                    <% }) %>
+                  </tbody>
+                </table>
+              </div>
+            <% } else { %>
+              <div class="info_card">
+                <span class="material-symbols-rounded">inbox</span>
+
+                <h3>Belum Ada Surat</h3>
+
+                <p>
+                  Anda belum membuat surat. Silakan kembali ke dashboard untuk membuat nomor surat baru.
+                </p>
+
+                <a href="/dashboard" class="export_btn" style="display: inline-flex; margin-top: 12px;">
+                  <span class="material-symbols-rounded">add</span>
+                  Buat Surat
+                </a>
+              </div>
+            <% } %>
+          </section>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <script>
+    (function () {
+      document.querySelectorAll(".copy_nomor_btn").forEach(function (button) {
+        button.addEventListener("click", async function () {
+          const nomor = button.dataset.nomor || "";
+
+          if (!nomor) {
+            return;
+          }
+
+          try {
+            if (navigator.clipboard && window.isSecureContext) {
+              await navigator.clipboard.writeText(nomor);
+            } else {
+              const textarea = document.createElement("textarea");
+              textarea.value = nomor;
+              textarea.style.position = "fixed";
+              textarea.style.left = "-9999px";
+
+              document.body.appendChild(textarea);
+              textarea.focus();
+              textarea.select();
+
+              document.execCommand("copy");
+              textarea.remove();
+            }
+
+            const originalHTML = button.innerHTML;
+
+            button.innerHTML = `
+              <span class="material-symbols-rounded">check_circle</span>
+              Tersalin
+            `;
+
+            setTimeout(function () {
+              button.innerHTML = originalHTML;
+            }, 1200);
+          } catch (error) {
+            console.error("Gagal menyalin nomor surat:", error);
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>

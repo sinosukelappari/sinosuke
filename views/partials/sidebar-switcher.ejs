@@ -1,0 +1,17 @@
+<%
+  const safeSidebarUser = typeof sidebarUser !== "undefined" && sidebarUser ? sidebarUser : {};
+  const safeActiveMenu = typeof activeMenu !== "undefined" ? activeMenu : "";
+  const safeRole = safeSidebarUser.role || "";
+%>
+
+<% if (safeRole === "sub_admin") { %>
+  <%- include("sub-admin-sidebar.ejs", {
+    sidebarUser: safeSidebarUser,
+    activeMenu: safeActiveMenu
+  }) %>
+<% } else { %>
+  <%- include("user-sidebar.ejs", {
+    sidebarUser: safeSidebarUser,
+    activeMenu: safeActiveMenu
+  }) %>
+<% } %>

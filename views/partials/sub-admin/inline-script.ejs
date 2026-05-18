@@ -1,0 +1,215 @@
+<script>
+  (function () {
+    const UI = window.DashboardUI;
+
+    if (!UI) {
+      console.error("DashboardUI belum tersedia. Pastikan ui-utils.js dipanggil sebelum inline-script.ejs.");
+      return;
+    }
+
+    const flashElement = document.getElementById("subAdminFlashMessagesJson");
+
+    if (flashElement) {
+      try {
+        const flash = JSON.parse(
+          flashElement.value || '{"success":[],"error":[]}'
+        );
+
+        if (Array.isArray(flash.success)) {
+          flash.success.forEach(function (message) {
+            UI.showToast(message, "success");
+          });
+        }
+
+        if (Array.isArray(flash.error)) {
+          flash.error.forEach(function (message) {
+            UI.showToast(message, "error");
+          });
+        }
+      } catch (error) {
+        console.error("Gagal membaca flash message:", error);
+      }
+    }
+
+    const confirmModalElement = document.getElementById("adminConfirmModal");
+    const confirmTitle = document.getElementById("adminConfirmModalLabel");
+    const confirmMessage = document.getElementById("adminConfirmMessage");
+    const confirmYesBtn = document.getElementById("adminConfirmYesBtn");
+    const confirmIcon = document.getElementById("adminConfirmIcon");
+
+    let pendingConfirmForm = null;
+    let confirmModal = null;
+
+    if (confirmModalElement && window.bootstrap) {
+      confirmModal = new bootstrap.Modal(confirmModalElement);
+    }
+
+    document.querySelectorAll(".confirm_form").forEach(function (form) {
+      form.addEventListener("submit", function (event) {
+        if (form.dataset.confirmed === "true") {
+          return;
+        }
+
+        event.preventDefault();
+
+        const title = form.dataset.confirmTitle || "Konfirmasi";
+        const message = form.dataset.confirmMessage || "Apakah Anda yakin ingin melanjutkan?";
+        const yesText = form.dataset.confirmYes || "Ya";
+        const type = form.dataset.confirmType || "default";
+
+        pendingConfirmForm = form;
+
+        if (!confirmModal) {
+          const confirmed = window.confirm(message);
+
+          if (confirmed) {
+            form.dataset.confirmed = "true";
+            form.submit();
+          }
+
+          return;
+        }
+
+        if (confirmTitle) {
+          confirmTitle.textContent = title;
+        }
+
+        if (confirmMessage) {
+          confirmMessage.textContent = message;
+        }
+
+        if (confirmYesBtn) {
+          confirmYesBtn.textContent = yesText;
+          confirmYesBtn.classList.remove("danger", "warning");
+
+          if (type === "danger") {
+            confirmYesBtn.classList.add("danger");
+          }
+
+          if (type === "warning") {
+            confirmYesBtn.classList.add("warning");
+          }
+        }
+
+        if (confirmIcon) {
+          confirmIcon.classList.remove("danger", "warning");
+
+          const iconSpan = confirmIcon.querySelector(".material-symbols-rounded");
+
+          if (type === "danger") {
+            confirmIcon.classList.add("danger");
+
+            if (iconSpan) {
+              iconSpan.textContent = "delete";
+            }
+          } else if (type === "warning") {
+            confirmIcon.classList.add("warning");
+
+            if (iconSpan) {
+              iconSpan.textContent = "lock_reset";
+            }
+          } else if (iconSpan) {
+            iconSpan.textContent = "help";
+          }
+        }
+
+        confirmModal.show();
+      });
+    });
+
+    if (confirmYesBtn) {
+      confirmYesBtn.addEventListener("click", function () {
+        if (!pendingConfirmForm) {
+          return;
+        }
+
+        pendingConfirmForm.dataset.confirmed = "true";
+        pendingConfirmForm.submit();
+      });
+    }
+
+    document.querySelectorAll(".copy_nomor_btn").forEach(function (button) {
+      button.addEventListener("click", async function () {
+        const nomor = button.dataset.nomor || "";
+
+        if (!nomor) {
+          UI.showToast("Nomor surat kosong.", "warning");
+          return;
+        }
+
+        try {
+          await UI.salinKeClipboard(nomor);
+          UI.showToast("Nomor surat berhasil disalin.", "success");
+        } catch (error) {
+          console.error("Gagal menyalin nomor surat:", error);
+          UI.showToast("Gagal menyalin nomor surat.", "error");
+        }
+      });
+    });
+
+    const searchAkunInput = document.getElementById("searchAkunInput");
+    const clearSearchAkunBtn = document.getElementById("clearSearchAkunBtn");
+    const akunRows = Array.from(document.querySelectorAll(".akun_row"));
+    const akunNoResultRow = document.getElementById("akunNoResultRow");
+
+    function updateVisibleRowNumbers() {
+      let number = 1;
+
+      akunRows.forEach(function (row) {
+        const nomorCell = row.querySelector(".akun_nomor");
+
+        if (!row.classList.contains("hidden") && nomorCell) {
+          nomorCell.textContent = number;
+          number += 1;
+        }
+      });
+    }
+
+    function filterAkunRows() {
+      const keyword = String(searchAkunInput ? searchAkunInput.value : "")
+        .trim()
+        .toLowerCase();
+
+      let visibleCount = 0;
+
+      akunRows.forEach(function (row) {
+        const nama = row.dataset.nama || "";
+        const username = row.dataset.username || "";
+        const bagian = row.dataset.bagian || "";
+
+        const isMatch =
+          !keyword ||
+          nama.includes(keyword) ||
+          username.includes(keyword) ||
+          bagian.includes(keyword);
+
+        row.classList.toggle("hidden", !isMatch);
+
+        if (isMatch) {
+          visibleCount += 1;
+        }
+      });
+
+      if (akunNoResultRow) {
+        akunNoResultRow.classList.toggle("hidden", visibleCount > 0);
+      }
+
+      updateVisibleRowNumbers();
+    }
+
+    if (searchAkunInput) {
+      searchAkunInput.addEventListener("input", filterAkunRows);
+    }
+
+    if (clearSearchAkunBtn) {
+      clearSearchAkunBtn.addEventListener("click", function () {
+        if (searchAkunInput) {
+          searchAkunInput.value = "";
+          searchAkunInput.focus();
+        }
+
+        filterAkunRows();
+      });
+    }
+  })();
+</script>

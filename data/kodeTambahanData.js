@@ -1,0 +1,527 @@
+const kodeTambahanData = {
+
+  PR: [
+    ["01", "Program dan Anggaran", "Kategori utama program dan anggaran kementerian"],
+    ["01.01", "Rencana Strategis", "Naskah yang berkaitan dengan Rencana Strategis (Renstra), dimulai dari pengumpulan data, pengolahan sampai dengan penetapan"],
+    ["01.02", "Trilateral Meeting", "Naskah yang berkaitan dengan kegiatan Trilateral Meeting"],
+    ["01.03", "Rencana Kerja", "Naskah yang berkaitan dengan rencana kerja"],
+    ["01.04", "Rencana Kerja dan Anggaran", "Naskah yang berkaitan dengan kegiatan penyusunan Rencana Kerja dan Anggaran Kementerian/Lembaga (RKA K/L), yang di dalamnya berisi pagu indikatif dan pagu definitif"],
+    
+    ["02", "Evaluasi", "Kategori evaluasi program dan kinerja kementerian"],
+    ["02.01", "Unit Utama", "Naskah yang berkaitan dengan evaluasi program dan kinerja pada kementerian dan unit utama"],
+    ["02.02", "Kantor Wilayah", "Naskah yang berkaitan dengan evaluasi program dan kinerja pada kantor wilayah"],
+    
+    ["03", "Laporan Akuntabilitas Kinerja Instansi Pemerintah (LAKIP)", "Kategori LAKIP kementerian"],
+    
+    ["04", "Pelaporan", "Kategori pelaporan rutin dan insidentil"],
+    ["04.01", "Laporan Tetap", "Naskah yang berkaitan dengan laporan Bulanan, Triwulan, Semester, dan Tahunan"],
+    ["04.02", "Laporan Insidentil", "Naskah yang berkaitan dengan laporan insidentil"],
+    
+    ["05", "Rapat Kerja", "Kategori rapat kerja kementerian"],
+    ["05.01", "Dengan Dewan Perwakilan Rakyat (DPR)", "Naskah yang berkaitan dengan penyusunan bahan rapat kerja dengan DPR"],
+    ["05.02", "Tingkat Kementerian", "Naskah yang berkaitan dengan penyusunan bahan rapat kerja tingkat kementerian"],
+    ["05.03", "Tingkat Unit Utama (Rapat Kerja Teknis)", "Naskah yang berkaitan dengan penyusunan bahan rapat kerja tingkat unit utama"],
+    ["05.04", "Tingkat Kantor Wilayah", "Naskah yang berkaitan dengan penyusunan bahan rapat kerja tingkat kantor wilayah"],
+    ["05.05", "Rapat Pimpinan dan Rapat Staf", "Naskah yang berkaitan dengan penyusunan bahan rapat pimpinan dan rapat staf"],
+    
+    ["06", "Sidang Kabinet", "Kategori sidang kabinet"],
+    ["06.01", "Sidang Kabinet Terbatas", "Naskah yang berkaitan dengan penyusunan bahan sidang kabinet terbatas"],
+    ["06.02", "Sidang Kabinet Paripurna", "Naskah yang berkaitan dengan penyusunan bahan sidang kabinet paripurna"]
+  ],
+KU : [
+  ["01", "Pelaksanaan Anggaran", "Kategori pelaksanaan anggaran kementerian/lembaga"],
+  ["01.01", "Pedoman, Petunjuk, dan Administrasi Pelaksanaan Anggaran", "Naskah yang berkaitan dengan Pedoman, Petunjuk, dan Administrasi Pelaksanaan Anggaran seperti langkah-langkah awal tahun, akhir tahun, capaian, dan evaluasi pelaksanaan anggaran per triwulan, semester, dan tahunan"],
+  ["01.02", "Daftar Isian Pelaksanaan Anggaran (DIPA)", "Naskah yang berkaitan dengan Daftar Isian Pelaksanaan Anggaran (DIPA) seperti Surat Pengesahan, Surat Usulan Revisi, Surat Persetujuan dan Pernyataan, Surat Pengantar usulan revisi"],
+  ["01.03", "Penerimaan Negara Bukan Pajak (PNBP)", "Naskah yang berkaitan dengan kegiatan pengelolaan perbendaharaan dalam rangka PNBP, baik berupa penerimaan Non Pajak seperti Surat Usulan Target PNBP, Surat Perubahan Target, Surat Usulan Perubahan Jenis dan Tarif PNBP, Surat Laporan Realisasi PNBP, Surat Pengantar Ijin Penggunaan PNBP"],
+
+  ["02", "Tata Usaha Keuangan", "Kategori tata usaha keuangan kementerian"],
+  ["02.01", "Pedoman dan Petunjuk Administrasi Keuangan", "Naskah yang berkaitan dengan kegiatan Pedoman dan Petunjuk Pengelolaan Keuangan seperti Tata Cara Pengelolaan Hibah, Tata Cara Pengelolaan Rekening Pemerintah, Tata Cara Penetapan Pejabat Perbendaharaan, Fungsi dan Tugas Kuasa Pengguna Anggaran, Standar Operasional Prosedur (SOP) Penyelesaian Kerugian Negara, SOP Pengangkatan Kuasa Pengguna Anggaran, SOP Revisi Kuasa Pengguna Anggaran, SOP Laporan Hibah, SOP Daftar Piutang Negara, SOP Surat Keputusan Pembebanan Ganti Rugi Negara, SOP Pengajuan Surat Perintah Membayar GUP/TUP Nihil, SOP Laporan Realisasi PNBP, SOP Pelaksanaan Rekonsiliasi Data Laporan Keuangan, SOP Penyusunan dan Penyampaian Laporan Keuangan Tingkat Kementerian"],
+  ["02.02", "Penatausahaan Hibah", "Naskah yang berkaitan dengan kegiatan pengelolaan hibah seperti hibah luar negeri dan dalam negeri, rekonsiliasi hibah, tindak lanjut hasil rekonsiliasi hibah, pembinaan dan monitoring hibah"],
+  ["02.03", "Pejabat Perbendaharaan Negara", "Naskah yang berkaitan dengan kegiatan pengelolaan perbendaharaan, seperti SK Pengangkatan KPA, PPK, Pejabat Penandatangan SPM, Bendahara Penerimaan, Bendahara Pengeluaran, dan Bendahara Pengeluaran Pembantu, pembinaan dan monitoring pejabat perbendaharaan negara"],
+  ["02.04", "Penyelesaian Kerugian Negara", "Naskah yang berkaitan dengan kegiatan penyelesaian kerugian negara berupa Tuntutan Ganti Rugi seperti Piutang Negara, Tuntutan Perbendaharaan, rekonsiliasi Tuntutan Ganti Rugi, rekonsiliasi Tuntutan Perbendaharaan, tindak lanjut laporan hasil pemeriksaan BPK/Inspektorat Jenderal, pembinaan dan monitoring penyelesaian kerugian negara"],
+  ["02.05", "Penatausahaan Rekening Pemerintah", "Naskah yang berkaitan dengan kegiatan pengelolaan rekening pemerintah seperti pembukaan dan penutupan rekening, restrukturisasi rekening, rekonsiliasi rekening, tindak lanjut hasil rekonsiliasi rekening"],
+
+  ["03", "Perbendaharaan", "Kategori perbendaharaan kementerian"],
+  ["03.01", "Dokumen Pertanggungjawaban Belanja", "Naskah yang berkaitan dengan kegiatan pertanggungjawaban belanja di lingkungan Sekretariat Jenderal seperti Surat Permintaan Pembayaran, Surat Perintah Membayar, Kuitansi, Pengeluaran Real, Surat Penyediaan Dana (SPD)"],
+  ["03.02", "Buku Kas Umum dan Buku Pembantu", "Naskah yang berkaitan dengan kegiatan pencatatan penerimaan dan pengeluaran permintaan belanja dari Bendahara Pembantu Pengeluaran di lingkungan Sekretariat Jenderal"],
+  ["03.03", "Laporan Pertanggungjawaban (LPJ) Bendahara Pengeluaran", "Naskah yang berkaitan dengan kegiatan pertanggungjawaban belanja bendahara pengeluaran dan BPP di lingkungan Sekretariat Jenderal"],
+  ["03.04", "LPJ Bendahara Penerimaan", "Naskah yang berkaitan dengan kegiatan pertanggungjawaban pendapatan bendahara penerimaan"],
+  ["03.05", "Penerimaan Negara Pajak", "Naskah yang berkaitan dengan penerimaan pajak kementerian"],
+
+  ["04", "Akuntansi dan Pelaporan", "Kategori akuntansi dan pelaporan kementerian"],
+  ["04.01", "Laporan Keuangan", "Naskah yang berkaitan dengan pelaporan komponen Laporan Keuangan berupa Laporan Realisasi Anggaran, Laporan Operasional, Laporan Perubahan Ekuitas, Neraca, Catatan atas Laporan Keuangan (CALK), dan Representasi Manajemen"],
+  ["04.02", "Rekonsiliasi dan Data Laporan Keuangan", "Naskah yang berkaitan dengan kegiatan rekonsiliasi komponen Laporan Keuangan secara intra (dengan pihak internal) maupun ekstra (dengan pihak eksternal) berupa Berita Acara Rekonsiliasi, laporan kegiatan; serta naskah yang berkaitan dengan analisa data; pembinaan, pendampingan, monitoring dan evaluasi penyusunan laporan keuangan"],
+  ["04.03", "Penyelesaian Tindak Lanjut Temuan Hasil Pemeriksaan BPK dan Inspektorat Jenderal", "Naskah yang berkaitan dengan kegiatan penyelesaian tindak lanjut temuan hasil pemeriksaan BPK dan Inspektorat Jenderal, berupa Action Plan, surat, nota dinas, laporan kegiatan, dan dokumen pelaksanaan rekomendasi temuan hasil pemeriksaan"]
+],
+OT : [
+  ["01", "Organisasi dan Tata Kerja", "Kategori organisasi dan tata kerja kementerian"],
+  ["01.01", "Organisasi dan Tata Kerja Kementerian", "Naskah yang berkaitan dengan organisasi dan tata kerja kementerian"],
+  ["01.02", "Organisasi dan Tata Kerja Kantor Wilayah", "Naskah yang berkaitan dengan organisasi dan tata kerja kantor wilayah"],
+  ["01.03", "Organisasi dan Tata Kerja Unit Pelaksana Teknis (UPT)", "Naskah yang berkaitan dengan organisasi dan tata kerja Unit Pelaksana Teknis (UPT)"],
+  ["01.04", "Evaluasi Kelembagaan", "Naskah yang berkaitan dengan evaluasi kelembagaan"],
+
+  ["02", "Ketatalaksanaan", "Kategori ketatalaksanaan unit kerja"],
+  ["02.01", "Standarisasi Sarana Kerja", "Naskah yang berkaitan dengan standarisasi sarana kerja"],
+  ["02.02", "Sistem, Prosedur dan Metode Kerja", "Naskah yang berkaitan dengan SOP dan rancangan Peraturan Menteri"],
+  ["02.03", "Analisa dan Uraian Jabatan", "Naskah yang berkaitan dengan analisa dan uraian jabatan"],
+
+  ["03", "Reformasi Birokrasi", "Kategori reformasi birokrasi kementerian"],
+  ["03.01", "Penilaian Mandiri Pelaksanaan Reformasi Birokrasi (PMPRB)", "Naskah yang berkaitan dengan Penilaian Mandiri Pelaksanaan Reformasi Birokrasi (PMPRB)"],
+  ["03.02", "Zona Integritas (ZI)", "Naskah yang berkaitan dengan Zona Integritas (ZI)"],
+  ["03.03", "Evaluasi Reformasi Birokrasi", "Naskah yang berkaitan dengan evaluasi Reformasi Birokrasi"],
+
+  ["04", "Instruksi Menteri", "Kategori instruksi Menteri terkait organisasi dan birokrasi"]
+],
+SA : [
+  ["01", "Formasi SDM Aparatur", "Kategori formasi SDM aparatur"],
+  ["01.01", "Inventarisasi Jabatan/Peta Jabatan", "Naskah yang berkaitan dengan inventarisasi jabatan/peta jabatan"],
+  ["01.02", "Evaluasi Jabatan", "Naskah yang berkaitan dengan evaluasi jabatan"],
+  ["01.03", "Usulan Formasi", "Naskah yang berkaitan dengan usulan formasi"],
+  ["01.04", "Alokasi Formasi", "Naskah yang berkaitan dengan alokasi formasi"],
+
+  ["02", "Penerimaan/Pengadaan SDM Aparatur", "Kategori penerimaan dan pengadaan SDM aparatur"],
+  ["02.01", "Proses Penerimaan SDM Aparatur", "Meliputi seleksi SDM Aparatur, penetapan kelulusan, dan pengumuman kelulusan"],
+  ["02.02", "Berkas Lamaran Yang Tidak Diterima", "Naskah yang berkaitan dengan berkas lamaran yang tidak diterima"],
+  ["02.03", "Surat Keputusan CPNS/PNS Kolektif", "Naskah yang berkaitan dengan SK CPNS/PNS secara kolektif"],
+  ["02.04", "Penerimaan SDM Aparatur dari Politeknik", "Naskah yang berkaitan dengan penerimaan SDM dari Politeknik Ilmu Pemasyarakatan dan Politeknik Imigrasi"],
+  ["02.05", "Ujian Dinas dan Ujian Penyesuaian Ijazah", "Naskah yang berkaitan dengan pelaksanaan ujian dinas dan penyesuaian ijazah"],
+
+  ["03", "Pengangkatan SDM Aparatur", "Kategori pengangkatan SDM aparatur"],
+  ["03.01", "Pengangkatan CPNS", "Naskah yang berkaitan dengan pengangkatan CPNS"],
+  ["03.02", "Pengangkatan PNS", "Naskah yang berkaitan dengan pengangkatan PNS"],
+  ["03.03", "Pengangkatan Jabatan Struktural", "Naskah yang berkaitan dengan pengangkatan jabatan struktural"],
+  ["03.04", "Pengangkatan Jabatan Fungsional", "Naskah yang berkaitan dengan pengangkatan jabatan fungsional"],
+
+  ["04", "Mutasi SDM Aparatur", "Kategori mutasi SDM aparatur"],
+  ["04.01", "Alih Tugas/Diperbantukan/Dipekerjakan/Pelaksana", "Naskah terkait alih tugas dan penugasan pegawai"],
+  ["04.02", "Pelaksana Harian/Pelaksana Tugas", "Naskah terkait pelaksana harian/tugas sementara"],
+  ["04.03", "Pencantuman Gelar Akademik", "Naskah terkait pencantuman gelar akademik"],
+  ["04.04", "Kenaikan Gaji Berkala (KGB)", "Naskah terkait kenaikan gaji berkala pegawai"],
+  ["04.05", "Kenaikan Pangkat (KP)/Golongan", "Naskah terkait kenaikan pangkat atau golongan"],
+  ["04.06", "Peninjauan Masa Kerja", "Naskah terkait peninjauan masa kerja pegawai"],
+  ["04.07", "Berkas Baperjakat", "Naskah terkait berkas Badan Pertimbangan Jabatan dan Kepangkatan (Baperjakat)"],
+  ["04.08", "Pengaktifan Kembali dari Cuti Luar Tanggungan Negara (CTLN) dan Hukuman Disiplin", "Naskah terkait pengaktifan kembali pegawai dari CTLN dan tindak disiplin"],
+
+  ["05", "Pembinaan SDM Aparatur", "Kategori pembinaan SDM aparatur"],
+  ["05.01", "Penilaian Prestasi Kerja Pegawai (PPKP)", "Meliputi sasaran kerja pegawai dan prestasi kerja pegawai"],
+  ["05.02", "Pembinaan Disiplin dan Kode Etik", "Naskah terkait pembinaan disiplin dan kode etik pegawai"],
+  ["05.03", "Penghargaan dan Tanda Jasa", "Naskah terkait pemberian penghargaan dan tanda jasa"],
+
+  ["06", "Pengembangan SDM Aparatur", "Kategori pengembangan SDM aparatur"],
+  ["06.01", "Pengembangan Kompetensi Jabatan Pimpinan Tinggi dan Administrasi", "Naskah terkait pengembangan kompetensi jabatan pimpinan tinggi dan administrasi"],
+  ["06.02", "Pengembangan Kompetensi Fungsional", "Naskah terkait pengembangan kompetensi jabatan fungsional"],
+  ["06.03", "Pengiriman Peserta Diklat", "Naskah terkait pengiriman peserta diklat"],
+  ["06.04", "Bea Siswa", "Naskah terkait pemberian beasiswa"],
+
+  ["07", "Hukuman Disiplin", "Kategori hukuman disiplin pegawai"],
+  ["07.01", "Tingkat Ringan", "Meliputi pernyataan tidak puas, teguran lisan, teguran tertulis"],
+  ["07.02", "Tingkat Sedang", "Meliputi penundaan KGB, KP, dan penurunan gaji"],
+  ["07.03", "Tingkat Berat", "Meliputi penurunan pangkat, pembebasan jabatan, pemberhentian dengan hormat/tidak dengan hormat"],
+
+  ["08", "Tata Usaha SDM Aparatur", "Kategori tata usaha SDM aparatur"],
+  ["08.01", "Data SDM Aparatur", "Naskah terkait pengelolaan data SDM aparatur"],
+  ["08.02", "Identitas Pegawai", "Naskah terkait Kartu Pegawai, Kartu Suami/Istri"],
+  ["08.03", "Izin Kepegawaian", "Naskah terkait izin belajar, tugas belajar dalam dan luar negeri"],
+  ["08.04", "Keanggotaan SDM Aparatur dalam Organisasi Sosial", "Naskah terkait keanggotaan pegawai dalam organisasi sosial"],
+  ["08.05", "Daftar Hadir/Absensi SDM Aparatur", "Naskah terkait daftar hadir/absensi pegawai"],
+
+  ["09", "Kesejahteraan SDM Aparatur", "Kategori kesejahteraan SDM aparatur"],
+  ["09.01", "Kesehatan", "Naskah terkait pelayanan kesehatan pegawai"],
+  ["09.02", "Perumahan", "Tabungan Perumahan (TAPERUM), Biaya Uang Muka"],
+  ["09.03", "Tabungan dan Asuransi Pegawai Negeri (TASPEN)", "Naskah terkait tabungan dan asuransi pegawai negeri"],
+  ["09.04", "Cuti", "Naskah terkait hak cuti pegawai"],
+  ["09.05", "Uang Duka Tewas", "Naskah terkait santunan kematian pegawai"],
+  ["09.06", "Pembekalan Purnabakti", "Naskah terkait pembekalan purnabakti pegawai"],
+  ["09.07", "Mutasi Keluarga", "Meliputi nikah, anak, cerai, kematian, kartu suami, kartu istri"],
+  ["09.08", "Laporan Kekayaan", "Meliputi Laporan Pajak-Pajak Pribadi (LP2P) dan Laporan Harta Kekayaan Penyelenggara Negara (LHKPN)"],
+
+  ["10", "Pembinaan Jabatan Fungsional", "Kategori pembinaan jabatan fungsional"],
+  ["10.01", "Jabatan Fungsional Umum (JFU)", "Naskah terkait jabatan fungsional umum"],
+  ["10.02", "Jabatan Fungsional Tertentu (JFT)", "Naskah terkait jabatan fungsional tertentu"],
+
+  ["11", "Pemberhentian SDM Aparatur", "Kategori pemberhentian SDM aparatur"],
+  ["11.01", "Pemberhentian Atas Permintaan Sendiri", "Naskah terkait pemberhentian atas permintaan pegawai"],
+  ["11.02", "Pemberhentian Karena Batas Usia Pensiun", "Naskah terkait pemberhentian karena batas usia"],
+  ["11.03", "Pemberhentian Karena Keuzuran/Kondisi Jasmani dan Rohani", "Naskah terkait pemberhentian karena kondisi jasmani/rohani"],
+  ["11.04", "Pemberhentian Karena Hilang", "Naskah terkait pemberhentian karena pegawai hilang"],
+  ["11.05", "Pemberhentian Sementara", "Naskah terkait pemberhentian sementara"],
+  ["11.06", "Pensiun Janda/Duda dan Anak", "Naskah terkait pensiun janda/duda dan anak"],
+
+  ["12", "Berkas PNS", "Kategori berkas PNS"],
+  ["12.01", "Berkas PNS", "Nota Penetapan NIP, SK CPNS/PNS, SK Kenaikan Pangkat, SK Perpindahan, SK CLTN, SK Hukuman Disiplin, SK Perbantuan, Surat Pernyataan Pelantikan, Ijazah/Sertifikat, Berita Acara Pengambilan Sumpah, dan dokumen lain terkait PNS"],
+
+  ["13", "Berkas Perseorangan Menteri, Wakil Menteri dan Pejabat Negara lainnya", "Naskah terkait berkas perseorangan pejabat negara"],
+
+  ["14", "Organisasi Non Kedinasan", "Kategori organisasi non kedinasan"],
+  ["14.01", "KORPRI", "Naskah terkait kegiatan KORPRI"],
+  ["14.02", "Dharma Wanita", "Naskah terkait kegiatan Dharma Wanita"],
+  ["14.03", "Koperasi", "Naskah terkait kegiatan koperasi"]
+],
+PB : [
+  ["01", "Perencanaan BMN", "Kategori perencanaan Barang Milik Negara (BMN)"],
+  ["01.01", "Usulan Rencana Kebutuhan BMN", "Naskah terkait usulan rencana kebutuhan BMN oleh unit kerja"],
+  ["01.02", "Rencana Kebutuhan BMN Kementerian", "Naskah terkait rencana kebutuhan BMN di tingkat kementerian"],
+  ["01.03", "Hasil Analisis Kebutuhan BMN", "Naskah terkait hasil analisis kebutuhan BMN"],
+  ["01.04", "Rencana Kebutuhan Aset Berwujud", "Naskah terkait rencana kebutuhan BMN berupa aset berwujud"],
+  ["01.05", "Rencana Kebutuhan Aset Tak Berwujud", "Naskah terkait rencana kebutuhan BMN berupa aset tak berwujud"],
+
+  ["02", "Pengadaan BMN (Layanan Pengadaan)", "Kategori pengadaan Barang Milik Negara"],
+  ["02.01", "Pengelolaan Pengadaan Barang/Jasa", "Meliputi: a. Pengadaan Barang Persediaan (habis pakai), b. Pengadaan Barang Bukan Persediaan, c. Pengadaan Jasa Lainnya, d. Pengadaan Jasa Konsultasi, e. Pengadaan Teknis Aset Tetap (Tanah), f. Pengadaan Aset Tidak Berwujud (Software), g. Pengadaan Sewa, h. Pengadaan Modal Peralatan dan Mesin, i. Pekerjaan Konstruksi (Bangunan)"],
+  ["02.02", "Pengelolaan layanan pengadaan secara elektronik dan data", "Naskah terkait pengelolaan layanan pengadaan elektronik dan data informasi pengadaan barang/jasa"],
+  ["02.03", "Pembinaan, Bimbingan, Pendampingan, dan Konsultasi Teknis Pengadaan Barang/Jasa", "Naskah terkait pembinaan, bimbingan, pendampingan, dan konsultasi teknis pengadaan barang/jasa"],
+  ["02.04", "Tindaklanjut Hasil Pemeriksaan", "Naskah terkait tindak lanjut hasil pemeriksaan pengadaan BMN"],
+  ["02.05", "Laporan Pengadaan Barang/Jasa", "Naskah terkait laporan kegiatan pengadaan BMN"],
+  ["02.06", "Telaahan Permasalahan Pengadaan Barang/Jasa", "Naskah terkait telaahan masalah pengadaan BMN"],
+  ["02.07", "Unit Kerja Pengadaan Barang dan Jasa (UKPBJ)", "Meliputi Sekretariat Pusat UKPBJ, Sekretariat Perwakilan UKPBJ Unit Eselon I, Sekretariat Perwakilan UKPBJ Kantor Wilayah"],
+  ["02.08", "Pendistribusian Barang Milik Negara", "Naskah terkait distribusi BMN ke unit kerja"],
+
+  ["03", "Penetapan Status dan Pengamanan BMN", "Kategori pengamanan dan pemanfaatan BMN"],
+  ["03.01", "Penggunaan BMN", "Berkas permohonan, SK dan tindak lanjut terkait penggunaan BMN, termasuk permohonan status penggunaan, penggunaan sementara, pengalihan status, pengalihan penggunaan, dan alih fungsi BMN"],
+  ["03.02", "Pemanfaatan BMN", "Berkas permohonan, SK, dan tindak lanjut terkait pemanfaatan BMN seperti Sewa, Pinjam Pakai, Kerja Sama Pemanfaatan (KSP), Bangunan Guna Serah (BGS), Bangunan Serah Guna (BSG), dan Kerja Sama Pemanfaatan Infrastruktur (KSPI)"],
+  ["03.03", "Pengamanan dan Pemeliharaan", "Dokumen permasalahan BMN, berkas pengamanan dan pemeliharaan (SK Tim dan tindak lanjut penyelesaian masalah), dan laporan data tanah"],
+  ["03.04", "Rumah Negara", "a. Berkas permohonan penetapan status penggolongan rumah negara, b. SK penetapan status, c. Surat pembatalan ijin penghuni, d. Surat ijin penghuni rumah negara"],
+
+  ["04", "Penatausahaan BMN", "Kategori penatausahaan BMN"],
+  ["04.01", "Pencatatan BMN", "Naskah terkait pencatatan BMN"],
+  ["04.02", "Inventarisasi", "Naskah terkait inventarisasi BMN"],
+  ["04.03", "Opname Fisik", "Naskah terkait opname fisik BMN"],
+  ["04.04", "Rekonsiliasi Data BMN", "Naskah terkait rekonsiliasi data BMN"],
+  ["04.05", "Pengawasan dan Pengendalian BMN", "Naskah terkait pengawasan dan pengendalian BMN"],
+  ["04.06", "Laporan BMN", "Naskah terkait laporan pengelolaan BMN"],
+
+  ["05", "Pemindahtanganan dan Penghapusan", "Kategori pemindahtanganan dan penghapusan BMN"],
+  ["05.01", "Penjualan", "Naskah terkait penjualan BMN"],
+  ["05.02", "Tukar Menukar", "Naskah terkait tukar menukar BMN"],
+  ["05.03", "Hibah", "Naskah terkait hibah BMN"],
+  ["05.04", "Pemusnahan", "Naskah terkait pemusnahan BMN"],
+  ["05.05", "Penghapusan", "Naskah terkait penghapusan BMN"]
+],
+HK : [
+  ["01", "Kerja Sama/Hubungan Lembaga dan Organisasi Kemasyarakatan", "Kategori kerja sama dan hubungan dengan lembaga dan organisasi kemasyarakatan"],
+  ["01.01", "Lembaga Tinggi Negara (dalam negeri dan luar negeri)", "Naskah/dokumen yang substansinya berkaitan dengan Lembaga Tinggi Negara, baik dalam negeri maupun luar negeri, seperti DPR, MPR, Mahkamah Agung (MA), BPK"],
+  ["01.02", "Lembaga Pemerintah (dalam negeri dan luar negeri)", "Naskah/dokumen yang substansinya berkaitan dengan Lembaga Pemerintah, baik dalam negeri (Kementerian/Lembaga) maupun perwakilan pemerintah negara sahabat (bilateral, regional, dan multilateral), dan Organisasi Internasional"],
+  ["01.03", "Organisasi Kemasyarakatan/Lembaga Swasta (dalam negeri dan luar negeri)", "Naskah/dokumen yang substansinya berkaitan dengan organisasi kemasyarakatan/lembaga swasta, baik dalam negeri maupun Organisasi Internasional Non Pemerintah"],
+  ["01.04", "Perguruan Tinggi/Sekolah (dalam negeri dan luar negeri)", "Naskah/dokumen yang substansinya berkaitan kerja sama/berhubungan dengan Perguruan Tinggi/Sekolah"],
+  ["01.05", "Penyusunan Dokumen Kerja Sama (dalam negeri dan luar negeri)", "Naskah/dokumen yang substansinya berkaitan proses penyusunan suatu perjanjian kerja sama, mulai dari penjajakan, perundingan, perumusan, hingga penandatanganan. Meliputi pembahasan naskah kerja sama dan produk kerja sama yang dihasilkan melalui proses penyusunan"],
+  ["01.06", "Permintaan dan Pengelolaan Data Kerja Sama (dalam negeri dan luar negeri)", "Naskah/dokumen yang substansinya berkaitan dengan permintaan dan pengelolaan data kerja sama, baik dalam negeri maupun luar negeri"],
+  ["01.07", "Audiensi/Kunjungan", "Naskah/dokumen yang substansinya berkaitan dengan fasilitasi audiensi/kunjungan dari dan/kepada Kementerian/Lembaga, Organisasi Kemasyarakatan/Lembaga Swasta, Organisasi Internasional/Organisasi Internasional Non Pemerintah"],
+  ["01.08", "Pemantauan dan Evaluasi", "Naskah/dokumen yang substansinya berkaitan kegiatan pemantauan dan evaluasi atas pelaksanaan kerja sama, baik dalam negeri maupun luar negeri"],
+  ["01.09", "Administrasi Kerja Sama", "Naskah/dokumen yang memuat tentang permohonan izin tenaga asing, fasilitasi perpajakan dalam kerangka kerja sama teknik, serta pengelolaan data hibah sebagai pertanggungjawaban dari suatu perjanjian kerja sama"],
+
+  ["02", "Layanan Advokasi Hukum", "Kategori advokasi hukum kementerian"],
+  ["02.01", "Advokasi Hukum Litigasi", "Naskah terkait administrasi persidangan (Surat Dinas, Nota Dinas) serta dokumen/naskah yang dibuat dalam rangka proses beracara seperti Relaas Panggilan, Gugatan, Eksepsi dan Jawaban, Replik, Duplik, Daftar Bukti, Kesimpulan"],
+  ["02.02", "Advokasi Hukum Non Litigasi", "Naskah/dokumen yang memuat administrasi perkara Non Litigasi (Surat Dinas, Nota Dinas)"],
+  ["02.03", "Pengaduan Hukum", "Naskah/dokumen yang memuat tanggapan/respon terhadap pengaduan hukum (Nota Dinas, Surat Dinas)"],
+  ["02.04", "Bantuan Hukum", "Naskah/dokumen yang memuat surat jawaban terhadap permohonan bantuan hukum yang diajukan (Nota Dinas, Surat Dinas)"],
+  ["02.05", "Layanan Aspirasi dan Pengaduan Online Rakyat (LAPOR)", "Naskah/dokumen yang memuat Layanan Aspirasi dan Pengaduan Online Rakyat (LAPOR) (Nota Dinas, Surat Dinas)"],
+  ["02.06", "Sistem Informasi Pelayanan Publik (SIPP)", "Naskah/dokumen yang memuat Sistem Informasi Pelayanan Publik (Nota Dinas, Surat Dinas)"],
+
+  ["03", "Penyusunan Peraturan Perundang-undangan", "Kategori penyusunan peraturan perundang-undangan"],
+  ["03.01", "Penyusunan Rencana Pembentukan Perundang-undangan", "Naskah yang berkaitan dengan perencanaan penyusunan perundang-undangan"],
+  ["03.02", "Penyusunan, Penetapan dan Pengundangan", "Naskah yang berkaitan dengan penyusunan, penetapan, dan pengundangan peraturan perundang-undangan"]
+],
+UM : [
+  ["01", "Ketatausahaan", "Kategori ketatausahaan kementerian"],
+  ["01.01", "Persuratan", "Naskah yang berkaitan dengan kegiatan pengurusan/pengelolaan surat masuk dan surat keluar, seperti penomoran surat, pengarahan, pencatatan, pendistribusian surat, penggunaan cap/stempel, dan pengiriman surat/barang cetakan"],
+  ["01.02", "Ucapan Terima Kasih/Ucapan Selamat", "Naskah yang berkaitan dengan kegiatan pemberian ucapan terima kasih/ucapan selamat di lingkungan internal dan eksternal kementerian"],
+
+  ["02", "Kearsipan", "Kategori kearsipan kementerian"],
+  ["02.01", "Pemindahan Arsip", "Meliputi Berita Acara Pemindahan dan Daftar Arsip Yang Dipindahkan"],
+  ["02.02", "Pemusnahan Arsip", "Meliputi SK Tim Pemusnahan, Berita Acara Pemusnahan, Daftar Arsip Yang Dimusnahkan, Rekomendasi/Pertimbangan, dan Surat Keputusan Pemusnahan"],
+  ["02.03", "Penyerahan", "Meliputi SK Tim Penyerahan, Berita Acara Penyerahan, dan Daftar Arsip Yang Diserahkan"],
+  ["02.04", "Pembinaan Kearsipan", "Naskah terkait pembinaan kearsipan di lingkungan kementerian"],
+  ["02.05", "Pengawasan Kearsipan", "Naskah terkait pengawasan kegiatan kearsipan"],
+  ["02.06", "Monitoring dan Evaluasi", "Naskah terkait monitoring dan evaluasi kegiatan kearsipan"],
+
+  ["03", "Kerumahtanggaan", "Kategori kerumahtanggaan kementerian"],
+  ["03.01", "Penggunaan Ruang dan Peralatan Kantor", "Naskah yang berkaitan dengan peminjaman dan penggunaan ruang dan peralatan kantor"],
+  ["03.02", "Penggunaan dan Penghunian Rumah Negara", "Naskah yang berkaitan dengan peminjaman, penggunaan dan penghunian rumah negara"],
+  ["03.03", "Penggunaan dan Pemeliharaan Kendaraan Dinas", "Naskah yang berkaitan dengan peminjaman, penggunaan dan pemeliharaan kendaraan dinas"],
+  ["03.04", "Penggunaan dan Pemeliharaan Barang Elektronik serta Mesin", "Naskah yang berkaitan dengan peminjaman, penggunaan dan pemeliharaan barang elektronik serta mesin"],
+  ["03.05", "Pemeliharaan Gedung dan Bangunan serta Area Kantor", "Naskah yang berkaitan dengan penggunaan gedung dan bangunan serta area kantor"],
+  ["03.06", "Pemeliharaan Alat Kesehatan", "Naskah yang berkaitan dengan pemeliharaan alat kesehatan"],
+  ["03.07", "Perjalanan Dinas (Dalam Negeri/Luar Negeri)", "Naskah yang berkaitan dengan usulan perjalanan dinas"],
+  ["03.08", "Penghematan Energi dan Air", "Naskah yang berkaitan dengan penghematan energi dan air"],
+
+  ["04", "Keprotokolan", "Kategori keprotokolan kementerian"],
+  ["04.01", "Penyelenggaraan Upacara", "Naskah yang berkaitan dengan kegiatan penyelenggaraan upacara nasional"],
+  ["04.02", "Pelayanan Tamu, Acara Kedinasan, Jamuan dan Ramah Tamah", "Naskah yang berkaitan dengan pelayanan tamu, acara kedinasan, jamuan, dan ramah tamah"],
+  ["04.03", "Daftar Nama Pejabat dan Alamat", "Naskah yang berkaitan dengan penyampaian informasi daftar nama pejabat dan alamat"],
+
+  ["05", "Pengamanan", "Kategori pengamanan kementerian"],
+  ["05.01", "Pengamanan Personil (VVIP/VIP)", "Naskah yang berkaitan dengan pengamanan personil VVIP/VIP"],
+  ["05.02", "Pengamanan Lingkungan, Fisik dan Instalasi", "Naskah yang berkaitan dengan pengamanan lingkungan, fisik, dan instalasi"],
+  ["05.03", "Pengamanan Dokumen dan Informasi Rahasia", "Naskah yang berkaitan dengan pengamanan dokumen dan informasi rahasia"],
+  ["05.04", "Laporan Keamanan", "Naskah yang berkaitan dengan laporan pengamanan di lingkungan unit kerja"],
+  ["05.05", "Laporan Kejadian", "Naskah yang berkaitan dengan laporan kejadian di lingkungan unit kerja"],
+  ["05.06", "Bantuan Pengamanan", "Naskah yang berkaitan dengan permintaan dan bantuan pengamanan"],
+
+  ["06", "Pembinaan Sikap Mental dan Layanan Kesehatan", "Kategori pembinaan mental dan layanan kesehatan pegawai"],
+  ["06.01", "Layanan Keagamaan dan Sosial", "Naskah yang berkaitan dengan kegiatan permintaan rohaniawan, undangan ceramah, himbauan zakat/qurban, dan kegiatan keagamaan lainnya"],
+  ["06.02", "Layanan Kesehatan Jasmani", "Naskah yang berkaitan dengan kegiatan kesehatan jasmani seperti pelaksanaan senam pagi, permintaan instruktur, dan SK instruktur senam"],
+  ["06.03", "Pelayanan Kesehatan", "Naskah yang berkaitan dengan layanan medis poli gigi, poli umum, dan poli mata"],
+
+  ["07", "Kepustakaan", "Kategori kepustakaan kementerian"],
+  ["07.01", "Akusisi", "Meliputi pembelian, hadiah, hibah, tukar menukar, pendistribusian bahan pustaka surplus, dan inventarisasi bahan pustaka (buku induk)"],
+  ["07.02", "Pengolahan Bahan Pustaka", "Naskah yang berkaitan dengan katalogisasi, klasifikasi, verifikasi, penyusunan dan pengendalian tajuk nama pengarang/badan korporasi/subjek, serta penyiapan akses layanan informasi"],
+  ["07.03", "Pangkalan Data Koleksi", "Naskah yang berkaitan dengan data koleksi perpustakaan"],
+  ["07.04", "Layanan Perpustakaan", "Meliputi keanggotaan, sirkulasi, referensi, alih bahasa, kerja sama perpustakaan, pengembangan TI perpustakaan, dan penanyangan bahan pustaka"],
+  ["07.05", "Preservasi Bahan Pustaka", "Meliputi perawatan bahan pustaka, perbaikan, penjilidan, dan reproduksi foto digital"],
+  ["07.06", "Pengembangan Perpustakaan", "Meliputi penyusunan standar nasional, pedoman, akreditasi, pengkajian, dan promosi perpustakaan"],
+  ["07.07", "Pendidikan dan Pelatihan Perpustakaan", "Naskah yang berkaitan dengan analisa/perencanaan kebutuhan diklat dan kerja sama dengan instansi lain"],
+  ["07.08", "Tenaga Perpustakaan", "Meliputi sertifikasi tenaga perpustakaan, pembinaan teknis pustakawan, dan penilaian jabatan fungsional pustakawan"]
+],
+PW : [
+  ["01", "Perencanaan Pengawasan", "Kategori perencanaan pengawasan kementerian"],
+  ["01.01", "Kebijakan Pengawasan", "Naskah yang berkaitan dengan penyusunan dan pelaksanaan kebijakan pengawasan kementerian"],
+  ["01.02", "Perjanjian Kinerja", "Naskah terkait penyusunan dan pemantauan perjanjian kinerja unit kerja"],
+  ["01.03", "Program Kerja Pengawasan Tahunan (PKPT)", "Naskah terkait program kerja pengawasan tahunan"],
+  ["01.04", "Program Kerja Administrasi Umum (PKAU)", "Naskah terkait program kerja administrasi umum"],
+  ["01.05", "Rapat Koordinasi Pengawasan (RAKORWAS)", "Naskah terkait rapat koordinasi pengawasan"],
+  ["01.06", "Ikhtisar Hasil Pengawasan", "Naskah terkait ringkasan hasil kegiatan pengawasan"],
+
+  ["02", "Pelaksanaan Pengawasan", "Kategori pelaksanaan pengawasan kementerian"],
+  ["02.01", "Audit Kinerja & Informasi, Reviu dan Evaluasi", "Naskah terkait audit kinerja, reviu, dan evaluasi unit kerja"],
+  ["02.02", "Audit Tujuan Tertentu / Khusus", "Naskah terkait audit tujuan tertentu atau khusus"],
+  ["02.03", "Pemantauan / Monitoring", "Naskah terkait pemantauan/monitoring oleh BPK RI, BPKP RI, ORI, dan Inspektorat Jenderal"],
+  ["02.04", "Pengawasan Lainnya, Pendampingan, Sosialisasi, Perjanjian Kerja Sama", "Naskah terkait kegiatan pengawasan lainnya, pendampingan, sosialisasi, dan perjanjian kerja sama"],
+
+  ["03", "Pelaporan Pengawasan", "Kategori pelaporan hasil pengawasan kementerian"],
+  ["03.01", "Laporan Hasil Audit Kinerja (LHA/LHP), Informasi Data Pendukung Pemeriksaan", "Naskah terkait laporan hasil audit kinerja, beserta informasi pendukung pemeriksaan dalam negeri dan luar negeri"],
+  ["03.02", "Laporan Hasil Audit Tujuan Tertentu (Audit Khusus)", "Naskah terkait laporan audit tujuan tertentu atau khusus"],
+  ["03.03", "Pemantauan/Monitoring BPK RI, BPKP RI, ORI, Inspektorat Jenderal", "Naskah terkait laporan pemantauan/monitoring lembaga pengawasan eksternal dan internal"],
+  ["03.04", "Pengawasan Lainnya, Pendampingan, Sosialisasi, Perjanjian Kerja Sama", "Naskah terkait laporan pengawasan tambahan, pendampingan, sosialisasi, dan kerja sama"],
+  ["03.05", "Inspektorat Jenderal", "Naskah terkait laporan kegiatan Inspektorat Jenderal"],
+
+  ["04", "Tindak Lanjut", "Kategori tindak lanjut hasil pengawasan"],
+  ["04.01", "Laporan Tindak Lanjut Hasil Audit Kinerja", "Naskah terkait tindak lanjut hasil audit kinerja"],
+  ["04.02", "Laporan Tindak Lanjut Hasil Audit Khusus", "Naskah terkait tindak lanjut hasil audit khusus"],
+  ["04.03", "Tindak Lanjut BPKP RI, BPK RI, ITJEN", "Naskah terkait tindak lanjut rekomendasi BPKP RI, BPK RI, dan Inspektorat Jenderal"],
+
+  ["05", "Reviu dan Tindak Lanjut Reviu", "Kategori reviu dan tindak lanjutnya"],
+  ["05.01", "Reviu", "Naskah terkait kegiatan reviu unit kerja"],
+  ["05.02", "Tindak Lanjut Reviu", "Naskah terkait tindak lanjut hasil reviu"],
+
+  ["06", "Tindak Lanjut Pengaduan", "Kategori tindak lanjut pengaduan"],
+  ["06.01", "Whistle Blowing System (WBS)", "Naskah terkait pengaduan melalui WBS"],
+  ["06.02", "Gratifikasi", "Naskah terkait pengaduan gratifikasi"],
+  ["06.03", "Pengaduan Tertulis", "Naskah terkait pengaduan tertulis melalui SMS Gateway, PO BOX 3489, dan Email ITJEN"],
+  ["06.05", "Pengaduan melalui aplikasi LAPOR", "Naskah terkait pengaduan melalui aplikasi Layanan Aspirasi dan Pengaduan Online Rakyat"],
+  ["06.06", "Pengaduan Ombudsman", "Naskah terkait pengaduan yang diteruskan ke Ombudsman"],
+
+  ["07", "Tindak Lanjut Atensi dan Telaahan", "Kategori tindak lanjut atensi dan telaahan"],
+  ["07.01", "Tanggapan/Telaahan Hukuman Disiplin Yang Tidak Ditindaklanjuti", "Naskah terkait tanggapan/telaahan hukuman disiplin yang tidak ditindaklanjuti"],
+  ["07.02", "Tanggapan/Telaahan Hukuman Disiplin Yang Ditindaklanjuti", "Naskah terkait tanggapan/telaahan hukuman disiplin yang ditindaklanjuti"],
+  ["07.03", "Daftar Nama Pegawai yang Dikenakan Sanksi", "Naskah terkait daftar nama pegawai Kementerian Imigrasi dan Pemasyarakatan yang dikenakan sanksi hukuman disiplin/kartu cela"]
+],TI : [
+  ["01", "Pengamanan Data", "Kuesioner, data pendukung, dan analisis terkait pengamanan data kementerian"],
+  ["02", "Pengamanan Jaringan", "Pemeliharaan jaringan, audit jaringan, dan laporan hasil audit"],
+  
+  ["03", "Standarisasi", "Kategori standarisasi TI"],
+  ["03.01", "Standarisasi Teknologi dan Informasi", "Penyusunan regulasi standarisasi teknologi dan informasi yang berkaitan dengan peraturan menteri, keputusan menteri, dan SOP"],
+  ["03.02", "Implementasi Aplikasi", "Naskah yang berkaitan dengan surat perencanaan Komite TIK, Aplikasi Satu Data, Digital Signature, Sertifikat Elektronik"],
+  ["03.03", "Implementasi Situs Internet, Portal Internet dan Surat Elektronik", "Naskah yang berkaitan dengan pelaksanaan implementasi situs internet, portal internet dan surat elektronik"],
+  ["03.04", "Uji Coba Infrastruktur", "Naskah terkait kegiatan uji coba infrastruktur TI"],
+
+  ["04", "Kerja Sama", "Kategori kerja sama TI"],
+  ["04.01", "Kerja Sama Internal", "a. Kerja sama pengelolaan data pusat data dan TI dengan unit eselon satu; b. Pengelolaan Data Center Kementerian Imigrasi dan Pemasyarakatan"],
+  ["04.02", "Kerja Sama Eksternal", "a. Memorandum of Understanding dengan Kementerian/Lembaga; b. Naskah kerja sama dengan Kementerian/Lembaga"],
+
+  ["05", "Perencanaan Pengembangan TI", "Kategori perencanaan pengembangan TI kementerian"],
+  ["05.01", "Penyusunan Program Perencanaan TI", "Perencanaan server dan jaringan"],
+  ["05.02", "Pengembangan Infrastruktur TI", "Pengembangan Data Center dan server Kementerian Imigrasi dan Pemasyarakatan"],
+  ["05.03", "Pengembangan Aplikasi", "Pengembangan sistem SDM dan website"],
+  ["05.04", "Pengembangan Database, Situs Internet dan Surat Elektronik", "Pelaksanaan pengembangan database, situs internet, dan surat elektronik"],
+
+  ["06", "Pengelolaan Sistem TI", "Kategori pengelolaan sistem TI kementerian"],
+  ["06.01", "Pengelolaan Jaringan", "Naskah terkait pengelolaan jaringan"],
+  ["06.02", "Pengelolaan Jaringan Sistem Informasi", "Naskah terkait pengelolaan jaringan sistem informasi"],
+  ["06.03", "Pengelolaan Database", "Naskah terkait pengelolaan database"],
+  ["06.04", "Pengelolaan Situs Internet, Portal Internet dan Surat Elektronik", "Naskah terkait pengelolaan situs internet, portal, dan surat elektronik"],
+  ["06.05", "Pengelolaan Aplikasi", "Naskah terkait pengelolaan aplikasi TI"],
+  ["06.06", "Pengelolaan Alat Pendukung", "Naskah terkait pengelolaan alat pendukung TI"],
+
+  ["07", "Layanan Sistem TI", "Kategori layanan sistem TI kementerian"],
+  ["07.01", "Naskah Layanan Keluhan LPSE", "Layanan pengadaan secara elektronik"],
+  ["07.02", "Tindak Lanjut Keluhan", "Naskah terkait tindak lanjut keluhan TI"],
+  ["07.03", "Monitoring/Pemantauan Layanan Keluhan", "Pemantauan keluhan tentang software/hardware"],
+  ["07.04", "Evaluasi (Hasil Evaluasi TI)", "Naskah terkait hasil evaluasi TI"],
+
+  ["08", "Informasi dan Komunikasi Publik", "Kategori informasi dan komunikasi publik"],
+  ["08.01", "Media Massa", "Cetak, elektronik, media sosial"],
+  ["08.02", "Sosialisasi dan Diseminasi", "Naskah terkait sosialisasi dan diseminasi informasi"],
+  ["08.03", "Pejabat Pengelola Informasi dan Dokumentasi (PPID)", "Naskah terkait PPID"],
+  ["08.04", "Badan Koordinasi Hubungan Masyarakat (Bakohumas)", "Naskah terkait Bakohumas"],
+  ["08.05", "Peliputan", "Naskah terkait kegiatan peliputan"],
+  ["08.06", "Konferensi Pers", "Naskah terkait konferensi pers"],
+  ["08.07", "Siaran Pers", "Naskah terkait siaran pers"],
+
+  ["09", "Dokumentasi", "Kategori dokumentasi kementerian"],
+  ["09.01", "Produk Informasi", "Media cetak, elektronik, media sosial; film, foto, video grafis, narasi tunggal media massa elektronik, infografis, surat penyerahan, konten video revolusi media digital, dan konten media sosial"],
+  ["09.02", "Rekapitulasi Pemberitaan", "Naskah terkait rekapitulasi pemberitaan kementerian"]
+],
+PK : [
+  ["01", "Pelayanan Pemasyarakatan", "Kategori pelayanan pemasyarakatan kementerian"],
+  ["01.01", "Registrasi Tahanan dan Anak", "Naskah yang berkaitan dengan kegiatan pemeriksaan dokumen, pencatatan penerimaan, pemeriksaan kesehatan, pembuatan pas foto, sidik jari, dan berita acara serah terima tahanan dan anak"],
+  ["01.02", "Registrasi Narapidana dan Anak Binaan", "Naskah yang berkaitan dengan pemeriksaan dokumen, pencatatan penerimaan, pemeriksaan kesehatan, pembuatan pas foto, sidik jari, dan berita acara serah terima narapidana dan anak binaan"],
+  ["01.03", "Registrasi Klien Pemasyarakatan", "Naskah yang berkaitan dengan pemeriksaan dokumen, pencatatan penerimaan, pemeriksaan kesehatan, pembuatan pas foto, sidik jari, dan berita acara serah terima klien pemasyarakatan"],
+  ["01.04", "Registrasi Titipan", "Naskah yang berkaitan dengan pemeriksaan dokumen, pencatatan penerimaan, pemeriksaan kesehatan, pembuatan pas foto, sidik jari, dan berita acara serah terima orang titipan"],
+  ["01.05", "Administrasi Pelayanan Tahanan di luar Rutan", "Naskah yang berkaitan dengan pelaksanaan administrasi pelayanan tahanan di luar rutan"],
+  ["01.06", "Peminjaman/Bon Narapidana dan Anak Binaan", "Naskah yang berkaitan dengan peminjaman narapidana dan anak binaan untuk kepentingan penyidikan, sidang PK, dan kegiatan sementara"],
+
+  ["02", "Asesmen dan Klasifikasi", "Kategori asesmen dan klasifikasi pemasyarakatan"],
+  ["02.01", "Admisi Orientasi", "Naskah yang berkaitan dengan admisi orientasi bagi tahanan, anak, narapidana, dan anak binaan"],
+  ["02.02", "Asesmen dan Klasifikasi", "Naskah yang berkaitan dengan pelaksanaan asesmen dan klasifikasi tahanan, anak, dan warga binaan"],
+
+  ["03", "Mutasi", "Kategori mutasi pemasyarakatan"],
+  ["03.01", "Mutasi Tahanan dan Anak", "Naskah yang berkaitan dengan pemindahan tahanan dan anak untuk keamanan, proses peradilan, dan administrasi pembantaran/penangguhan penahanan"],
+  ["03.02", "Mutasi Narapidana dan Anak Binaan", "Naskah yang berkaitan dengan mutasi/pemindahan narapidana dan anak binaan untuk keamanan, pembinaan, dan keperluan proses peradilan"],
+  ["03.03", "Mutasi Klien Pemasyarakatan", "Naskah yang berkaitan dengan mutasi/pemindahan klien pemasyarakatan untuk kepentingan pembimbingan, keamanan, pembinaan, dan proses peradilan"],
+
+  ["04", "Bimbingan Kemasyarakatan dan Pengentasan Anak", "Kategori bimbingan dan pengentasan anak"],
+  ["04.01", "Layanan Kepribadian", "Naskah terkait bimbingan mental, spiritual, kesadaran berbangsa dan bernegara, pendidikan, dan layanan kemandirian"],
+  ["04.02", "Layanan Kemandirian", "Naskah terkait layanan kemandirian seperti bimbingan keterampilan kerja"],
+  ["04.03", "Layanan Pelindungan Hukum Tahanan dan Anak", "Naskah terkait fasilitasi bantuan hukum litigasi/nonlitigasi, rehabilitasi, klarifikasi status hukum, pencegahan penahanan berlebih, pemantauan penahanan di luar rutan"],
+  ["04.04", "Pengeluaran Tahanan dan Anak", "Naskah terkait pelaksanaan pengeluaran tahanan dalam proses peradilan, meninggal dunia, habis masa penahanan, atau perpanjangan penahanan"],
+  ["04.05", "Tim Pertimbangan Pemasyarakatan Pelayanan Tahanan dan Anak", "Naskah terkait pelaksanaan sidang Tim Pertimbangan Pemasyarakatan"],
+
+  ["05", "Pembinaan Narapidana dan Anak Binaan", "Kategori pembinaan narapidana dan anak binaan"],
+  ["05.01", "Pembinaan Kepribadian", "Naskah terkait kegiatan keagamaan, kesadaran berbangsa dan bernegara, pendidikan, dan kepribadian"],
+  ["05.02", "Pembinaan Kemandirian", "Naskah terkait pengembangan kewirausahaan dan kegiatan kemandirian"],
+  ["05.03", "Asimilasi dan Integrasi Narapidana dan Anak Binaan", "Naskah terkait proses usulan hingga SK pemberian PB, CMB, CB, cuti kunjungan keluarga, dan asimilasi"],
+  ["05.04", "Pengeluaran Narapidana dan Anak Binaan", "Naskah terkait pelaksanaan pengeluaran narapidana dan anak binaan bersifat tetap"],
+  ["05.05", "Tim Pertimbangan Pemasyarakatan Pembinaan Narapidana dan Anak Binaan", "Naskah terkait pelaksanaan sidang Tim Pertimbangan Pemasyarakatan"],
+
+  ["06", "Pembimbingan Kemasyarakatan", "Kategori pembimbingan kemasyarakatan"],
+  ["06.01", "Penelitian Kemasyarakatan", "Naskah terkait pembuatan penelitian kemasyarakatan bagi warga binaan untuk PB, CMB, CB, cuti kunjungan, asimilasi, pembinaan, dan pendampingan anak"],
+  ["06.02", "Pendampingan Klien Pemasyarakatan dan Upaya Keadilan Restoratif", "Naskah terkait pendampingan pra ajudikasi, ajudikasi, pasca ajudikasi, dan upaya keadilan restoratif pemasyarakatan"],
+  ["06.03", "Pembimbingan Klien Pemasyarakatan", "Naskah terkait bimbingan kepribadian klien, bimbingan kemandirian, home visit, penyuluhan/konseling, keluarga asuh/anak asuh, dan bimbingan lanjutan"],
+  ["06.04", "Pengawasan Klien Pemasyarakatan", "Naskah terkait pengawasan program pendampingan dan pembimbingan, investigasi pelanggaran, penghentian program, pelibatan masyarakat dalam reintegrasi sosial"],
+  ["06.05", "Tim Pertimbangan Pemasyarakatan Pembimbingan Klien", "Naskah terkait pelaksanaan sidang Tim Pertimbangan Pemasyarakatan"],
+
+  ["07", "Perawatan Kesehatan dan Rehabilitasi", "Kategori perawatan kesehatan dan rehabilitasi pemasyarakatan"],
+  ["07.01", "Perawatan Kesehatan Dasar", "Naskah terkait penyuluhan kesehatan, pengelolaan fasilitasi layanan kesehatan, dan perawatan kelompok kebutuhan khusus"],
+  ["07.02", "Perawatan Kesehatan Lanjutan", "Naskah terkait kesehatan mental, perawatan rujukan, perawatan paliatif dan pemulasaraan"],
+  ["07.03", "Perawatan Kesehatan Khusus", "Naskah terkait rehabilitasi ketergantungan narkotika dan pencegahan penyakit menular"],
+  ["07.04", "Kebutuhan Dasar dan Kesehatan Lingkungan", "Naskah terkait pemenuhan kebutuhan dasar, gizi, penyelenggaraan makanan, dan kesehatan lingkungan"],
+
+  ["08", "Pengamanan dan Intelijen", "Kategori pengamanan dan intelijen pemasyarakatan"],
+  ["08.01", "Intelijen Pemasyarakatan", "Naskah terkait manajemen operasional intelijen, laporan atensi intelijen, profiling tahanan/anak/warga binaan, diseminasi gangguan, laporan triwulan"],
+  ["08.02", "Pencegahan Gangguan Keamanan dan Pemeliharaan Keamanan", "Naskah terkait pengelolaan kerawanan, strategi pengamanan, rencana kontijensi, penanggulangan bencana, pemeliharaan keamanan lembaga, pengamatan dan penegakan disiplin"],
+  ["08.03", "Penindakan dan Pemulihan", "Naskah terkait penindakan, tanggap darurat, pemulihan, dan pengelolaan crisis center"],
+
+  ["09", "Kepatuhan Internal", "Kategori kepatuhan internal pemasyarakatan"],
+  ["09.01", "Pencegahan dan Pengendalian", "Naskah terkait pembinaan mental pegawai, edukasi pencegahan korupsi, pelanggaran kode etik, disiplin pegawai, pengendalian gratifikasi, pemantauan perilaku dan kepatuhan, serta pelaporan data pegawai"],
+  ["09.02", "Fasilitasi Advokasi dan Investigasi Internal", "Naskah terkait pengawasan kepatuhan pelaksanaan tugas pelayanan dan administrasi Direktorat Jenderal Pemasyarakatan"],
+
+  ["10", "Pengelolaan Data dan Informasi Pemasyarakatan", "Kategori pengelolaan data dan informasi pemasyarakatan"],
+  ["10.01", "Pengelolaan Data dan Informasi", "Naskah terkait pelaksanaan pengelolaan data dan informasi, analisis, dan pertukaran data dan informasi"],
+  ["10.02", "Statistik Tahanan dan Anak", "Naskah terkait preskripsi dan data statistik tahanan dan anak"],
+  ["10.03", "Statistik Narapidana dan Anak Binaan", "Naskah terkait preskripsi dan data statistik narapidana dan anak binaan"],
+  ["10.04", "Statistik Klien Pemasyarakatan", "Naskah terkait preskripsi dan data statistik klien pemasyarakatan"],
+  ["10.05", "Statistik Titipan", "Naskah terkait preskripsi dan data statistik orang titipan"]
+],
+GR : [
+  ["01", "Pelayanan Pemasyarakatan", "Kategori pelayanan pemasyarakatan kementerian"],
+  ["01.01", "Registrasi Tahanan dan Anak", "Naskah yang berkaitan dengan kegiatan pemeriksaan dokumen, pencatatan penerimaan, pemeriksaan kesehatan, pembuatan pas foto, sidik jari, dan berita acara serah terima tahanan dan anak"],
+  ["01.02", "Registrasi Narapidana dan Anak Binaan", "Naskah yang berkaitan dengan pemeriksaan dokumen, pencatatan penerimaan, pemeriksaan kesehatan, pembuatan pas foto, sidik jari, dan berita acara serah terima narapidana dan anak binaan"],
+  ["01.03", "Registrasi Klien Pemasyarakatan", "Naskah yang berkaitan dengan pemeriksaan dokumen, pencatatan penerimaan, pemeriksaan kesehatan, pembuatan pas foto, sidik jari, dan berita acara serah terima klien pemasyarakatan"],
+  ["01.04", "Registrasi Titipan", "Naskah yang berkaitan dengan pemeriksaan dokumen, pencatatan penerimaan, pemeriksaan kesehatan, pembuatan pas foto, sidik jari, dan berita acara serah terima orang titipan"],
+  ["01.05", "Administrasi Pelayanan Tahanan di luar Rutan", "Naskah yang berkaitan dengan pelaksanaan administrasi pelayanan tahanan di luar rutan"],
+  ["01.06", "Peminjaman/Bon Narapidana dan Anak Binaan", "Naskah yang berkaitan dengan peminjaman narapidana dan anak binaan untuk kepentingan penyidikan, sidang PK, dan kegiatan sementara"],
+
+  ["02", "Asesmen dan Klasifikasi", "Kategori asesmen dan klasifikasi pemasyarakatan"],
+  ["02.01", "Admisi Orientasi", "Naskah yang berkaitan dengan admisi orientasi bagi tahanan, anak, narapidana, dan anak binaan"],
+  ["02.02", "Asesmen dan Klasifikasi", "Naskah yang berkaitan dengan pelaksanaan asesmen dan klasifikasi tahanan, anak, dan warga binaan"],
+
+  ["03", "Mutasi", "Kategori mutasi pemasyarakatan"],
+  ["03.01", "Mutasi Tahanan dan Anak", "Naskah yang berkaitan dengan pemindahan tahanan dan anak untuk keamanan, proses peradilan, dan administrasi pembantaran/penangguhan penahanan"],
+  ["03.02", "Mutasi Narapidana dan Anak Binaan", "Naskah yang berkaitan dengan mutasi/pemindahan narapidana dan anak binaan untuk keamanan, pembinaan, dan keperluan proses peradilan"],
+  ["03.03", "Mutasi Klien Pemasyarakatan", "Naskah yang berkaitan dengan mutasi/pemindahan klien pemasyarakatan untuk kepentingan pembimbingan, keamanan, pembinaan, dan proses peradilan"],
+
+  ["04", "Bimbingan Kemasyarakatan dan Pengentasan Anak", "Kategori bimbingan dan pengentasan anak"],
+  ["04.01", "Layanan Kepribadian", "Naskah terkait bimbingan mental, spiritual, kesadaran berbangsa dan bernegara, pendidikan, dan layanan kemandirian"],
+  ["04.02", "Layanan Kemandirian", "Naskah terkait layanan kemandirian seperti bimbingan keterampilan kerja"],
+  ["04.03", "Layanan Pelindungan Hukum Tahanan dan Anak", "Naskah terkait fasilitasi bantuan hukum litigasi/nonlitigasi, rehabilitasi, klarifikasi status hukum, pencegahan penahanan berlebih, pemantauan penahanan di luar rutan"],
+  ["04.04", "Pengeluaran Tahanan dan Anak", "Naskah terkait pelaksanaan pengeluaran tahanan dalam proses peradilan, meninggal dunia, habis masa penahanan, atau perpanjangan penahanan"],
+  ["04.05", "Tim Pertimbangan Pemasyarakatan Pelayanan Tahanan dan Anak", "Naskah terkait pelaksanaan sidang Tim Pertimbangan Pemasyarakatan"],
+
+  ["05", "Pembinaan Narapidana dan Anak Binaan", "Kategori pembinaan narapidana dan anak binaan"],
+  ["05.01", "Pembinaan Kepribadian", "Naskah terkait kegiatan keagamaan, kesadaran berbangsa dan bernegara, pendidikan, dan kepribadian"],
+  ["05.02", "Pembinaan Kemandirian", "Naskah terkait pengembangan kewirausahaan dan kegiatan kemandirian"],
+  ["05.03", "Asimilasi dan Integrasi Narapidana dan Anak Binaan", "Naskah terkait proses usulan hingga SK pemberian PB, CMB, CB, cuti kunjungan keluarga, dan asimilasi"],
+  ["05.04", "Pengeluaran Narapidana dan Anak Binaan", "Naskah terkait pelaksanaan pengeluaran narapidana dan anak binaan bersifat tetap"],
+  ["05.05", "Tim Pertimbangan Pemasyarakatan Pembinaan Narapidana dan Anak Binaan", "Naskah terkait pelaksanaan sidang Tim Pertimbangan Pemasyarakatan"],
+
+  ["06", "Pembimbingan Kemasyarakatan", "Kategori pembimbingan kemasyarakatan"],
+  ["06.01", "Penelitian Kemasyarakatan", "Naskah terkait pembuatan penelitian kemasyarakatan bagi warga binaan untuk PB, CMB, CB, cuti kunjungan, asimilasi, pembinaan, dan pendampingan anak"],
+  ["06.02", "Pendampingan Klien Pemasyarakatan dan Upaya Keadilan Restoratif", "Naskah terkait pendampingan pra ajudikasi, ajudikasi, pasca ajudikasi, dan upaya keadilan restoratif pemasyarakatan"],
+  ["06.03", "Pembimbingan Klien Pemasyarakatan", "Naskah terkait bimbingan kepribadian klien, bimbingan kemandirian, home visit, penyuluhan/konseling, keluarga asuh/anak asuh, dan bimbingan lanjutan"],
+  ["06.04", "Pengawasan Klien Pemasyarakatan", "Naskah terkait pengawasan program pendampingan dan pembimbingan, investigasi pelanggaran, penghentian program, pelibatan masyarakat dalam reintegrasi sosial"],
+  ["06.05", "Tim Pertimbangan Pemasyarakatan Pembimbingan Klien", "Naskah terkait pelaksanaan sidang Tim Pertimbangan Pemasyarakatan"],
+
+  ["07", "Perawatan Kesehatan dan Rehabilitasi", "Kategori perawatan kesehatan dan rehabilitasi pemasyarakatan"],
+  ["07.01", "Perawatan Kesehatan Dasar", "Naskah terkait penyuluhan kesehatan, pengelolaan fasilitasi layanan kesehatan, dan perawatan kelompok kebutuhan khusus"],
+  ["07.02", "Perawatan Kesehatan Lanjutan", "Naskah terkait kesehatan mental, perawatan rujukan, perawatan paliatif dan pemulasaraan"],
+  ["07.03", "Perawatan Kesehatan Khusus", "Naskah terkait rehabilitasi ketergantungan narkotika dan pencegahan penyakit menular"],
+  ["07.04", "Kebutuhan Dasar dan Kesehatan Lingkungan", "Naskah terkait pemenuhan kebutuhan dasar, gizi, penyelenggaraan makanan, dan kesehatan lingkungan"],
+
+  ["08", "Pengamanan dan Intelijen", "Kategori pengamanan dan intelijen pemasyarakatan"],
+  ["08.01", "Intelijen Pemasyarakatan", "Naskah terkait manajemen operasional intelijen, laporan atensi intelijen, profiling tahanan/anak/warga binaan, diseminasi gangguan, laporan triwulan"],
+  ["08.02", "Pencegahan Gangguan Keamanan dan Pemeliharaan Keamanan", "Naskah terkait pengelolaan kerawanan, strategi pengamanan, rencana kontijensi, penanggulangan bencana, pemeliharaan keamanan lembaga, pengamatan dan penegakan disiplin"],
+  ["08.03", "Penindakan dan Pemulihan", "Naskah terkait penindakan, tanggap darurat, pemulihan, dan pengelolaan crisis center"],
+
+  ["09", "Kepatuhan Internal", "Kategori kepatuhan internal pemasyarakatan"],
+  ["09.01", "Pencegahan dan Pengendalian", "Naskah terkait pembinaan mental pegawai, edukasi pencegahan korupsi, pelanggaran kode etik, disiplin pegawai, pengendalian gratifikasi, pemantauan perilaku dan kepatuhan, serta pelaporan data pegawai"],
+  ["09.02", "Fasilitasi Advokasi dan Investigasi Internal", "Naskah terkait pengawasan kepatuhan pelaksanaan tugas pelayanan dan administrasi Direktorat Jenderal Pemasyarakatan"],
+
+  ["10", "Pengelolaan Data dan Informasi Pemasyarakatan", "Kategori pengelolaan data dan informasi pemasyarakatan"],
+  ["10.01", "Pengelolaan Data dan Informasi", "Naskah terkait pelaksanaan pengelolaan data dan informasi, analisis, dan pertukaran data dan informasi"],
+  ["10.02", "Statistik Tahanan dan Anak", "Naskah terkait preskripsi dan data statistik tahanan dan anak"],
+  ["10.03", "Statistik Narapidana dan Anak Binaan", "Naskah terkait preskripsi dan data statistik narapidana dan anak binaan"],
+  ["10.04", "Statistik Klien Pemasyarakatan", "Naskah terkait preskripsi dan data statistik klien pemasyarakatan"],
+  ["10.05", "Statistik Titipan", "Naskah terkait preskripsi dan data statistik orang titipan"]
+],
+SM : [
+  ["01", "Pendidikan dan Pelatihan Kepemimpinan", "Kategori pendidikan dan pelatihan kepemimpinan kementerian"],
+  ["01.01", "Perencanaan Program Pendidikan dan Pelatihan", "Naskah terkait agenda rapat perencanaan program pelatihan kepemimpinan, undangan rapat koordinasi, permohonan izin fasilitator/penceramah, penyampaian notula rapat koordinasi pelatihan kepemimpinan"],
+  ["01.02", "Kurikulum, Metode Standar/Mutu dan Pedoman Diklat", "Naskah terkait penyusunan modul, bahan ajar, bahan tayang pelatihan teknis, undangan rapat koordinasi, penyusunan modul dan telaahan pelatihan teknis"],
+  ["01.03", "Penyelenggaraan", "Naskah terkait pemberitahuan penyelenggaraan, pemanggilan peserta, permohonan tenaga pengajar, izin kunjungan lapangan, undangan pembukaan, permintaan nomor STTP, permohonan penutupan, dan permintaan piagam penghargaan"],
+  ["01.04", "Evaluasi", "Naskah terkait pedoman coach dan mentor, permohonan sebagai mentor/penguji, undangan penyamaan persepsi, rapat evaluasi, dan laporan pelaksanaan pelatihan kepemimpinan"],
+
+  ["02", "Pendidikan dan Pelatihan Teknis", "Kategori pendidikan dan pelatihan teknis kementerian"],
+  ["02.01", "Perencanaan Program Diklat", "Naskah terkait agenda rapat perencanaan program, undangan rapat koordinasi, permohonan izin dan fasilitator, penyampaian notula rapat koordinasi pelatihan teknis"],
+  ["02.02", "Kurikulum, Metode Standar/Mutu dan Pedoman Diklat", "Naskah terkait undangan rapat penyusunan modul, bahan ajar, bahan tayang pelatihan teknis, rapat koordinasi penyusunan modul, penyusunan modul dan telaahan pelatihan teknis"],
+  ["02.03", "Penyelenggaraan", "Naskah terkait pemberitahuan penyelenggaraan, pemanggilan peserta, permohonan tenaga pengajar, izin kunjungan lapangan, undangan pembukaan, permintaan nomor STTP, permohonan penutupan, dan permintaan piagam penghargaan"],
+  ["02.04", "Evaluasi", "Naskah terkait pedoman coach dan mentor, permohonan sebagai mentor/penguji, undangan penyamaan persepsi, rapat evaluasi, dan laporan pelaksanaan pelatihan teknis"],
+
+  ["03", "Bimbingan Teknis/Fokus Grup Diskusi (FGD)", "Kategori bimbingan teknis dan FGD"],
+  ["03.01", "Fasilitatif", "Naskah terkait bimbingan teknis, FGD, workshop materi teknis fasilitatif dan teknis substantif"],
+  ["03.02", "Substantif", "Naskah terkait penyusunan kurikulum dan modul pengembangan pelatihan fungsional, pelatihan teknis dan kepemimpinan; pedoman/instrumen evaluasi; standar sistematika laporan pelatihan; pedoman sistematika laporan produk individu/kelompok; standar penilaian kompetensi"],
+
+  ["04", "Pertemuan Ilmiah", "Kategori pertemuan ilmiah kementerian"],
+  ["04.01", "Seminar, Lokakarya, Diskusi, Simposium, Temu Karya, Bedah Buku", "Naskah terkait penyelenggaraan pertemuan ilmiah"],
+
+  ["05", "Penilaian Kompetensi", "Kategori penilaian kompetensi SDM"],
+  ["05.01", "Penyusunan Program", "Naskah terkait permohonan persetujuan SOP penilaian kompetensi, indikator dan target kinerja, undangan rapat pelaksanaan, permohonan kegiatan tahun depan, peningkatan kapasitas assessor, penulisan laporan individu assessment center"],
+  ["05.02", "Standarisasi Kompetensi", "Naskah terkait rapat koordinasi, pembahasan soal, instrumen situational judgement test, matrik metode dan alat ukur, penyusunan instrumen test potensi"],
+  ["05.03", "Pelaksanaan Penilaian Kompetensi", "Naskah terkait surat pemanggilan peserta, undangan pembukaan, jadwal pelaksanaan, permohonan penguji teknis, permohonan tenaga assessor, permohonan bantuan teknis, penunjukan kegiatan, permohonan nomor sertifikat, undangan rapat uji kompetensi, penyampaian hasil uji kompetensi kenaikan jenjang jabatan"],
+  ["05.04", "Evaluasi", "Naskah terkait rencana rapat evaluasi hasil, undangan rapat evaluasi, survei evaluasi peserta, penginputan data hasil penilaian kompetensi, penyampaian hasil kegiatan uji kompetensi"],
+
+  ["06", "Kerja Sama Pengembangan SDM", "Kategori kerja sama pengembangan SDM"],
+  ["06.01", "International", "Naskah terkait perjanjian kerja sama pengembangan SDM dengan institusi/lembaga internasional"],
+  ["06.02", "Institusi/Lembaga", "Naskah terkait perjanjian kerja sama pengembangan SDM dengan institusi/lembaga nasional"],
+  ["06.03", "Universitas/Perguruan Tinggi", "Naskah terkait perjanjian kerja sama pengembangan SDM dengan universitas/perguruan tinggi"]
+],LT : [
+  ["01", "Pusat Penelitian dan Pengembangan Kebijakan", "Kategori pusat penelitian dan pengembangan kebijakan kementerian"],
+  ["01.01", "Kelompok Substansi Penelitian dan Pengembangan Pembentukan Regulasi", "Naskah dinas berkaitan dengan penyusunan perumusan kebijakan teknis, program, dan anggaran penelitian dan pengembangan, pelaksanaan penelitian dan pengembangan, pemantauan, evaluasi, pelaporan, serta koordinasi dan kerja sama penelitian dan pengembangan di bidang pembentukan regulasi"],
+  ["01.02", "Kelompok Substansi Penelitian dan Pengembangan Penegakan Hukum", "Naskah dinas berkaitan dengan penyusunan perumusan kebijakan teknis, program, dan anggaran penelitian dan pengembangan, pelaksanaan penelitian dan pengembangan, pemantauan, evaluasi, pelaporan, serta koordinasi dan kerja sama penelitian dan pengembangan di bidang penegakan hukum"],
+  ["01.03", "Kelompok Substansi Penelitian dan Pengembangan Administrasi Fasilitatif", "Naskah dinas berkaitan dengan penyusunan perumusan kebijakan teknis, program, dan anggaran penelitian dan pengembangan kebijakan, pelaksanaan penelitian dan pengembangan kebijakan, koordinasi dan kerja sama penelitian dan pengembangan kebijakan, serta pemantauan, evaluasi, dan pelaporan di bidang administrasi fasilitatif"],
+  ["01.04", "Kelompok Substansi Penelitian dan Pengembangan Sumber Daya Manusia", "Naskah dinas berkaitan dengan penyusunan perumusan kebijakan teknis, program, dan anggaran penelitian dan pengembangan kebijakan, pelaksanaan penelitian dan pengembangan kebijakan, koordinasi dan kerja sama penelitian dan pengembangan kebijakan, serta pemantauan, evaluasi, dan pelaporan di bidang sumber daya manusia"],
+  ["01.05", "Kelompok Substansi Penelitian dan Pengembangan Pengawasan", "Naskah dinas berkaitan dengan penyusunan perumusan kebijakan teknis, program, dan anggaran penelitian dan pengembangan kebijakan, pelaksanaan penelitian dan pengembangan kebijakan, koordinasi dan kerja sama penelitian dan pengembangan kebijakan, serta pemantauan, evaluasi, dan pelaporan di bidang pengawasan"],
+  ["01.06", "Kelompok Substansi Analisis Data dan Informasi di bidang Keimigrasian dan Pemasyarakatan", "Naskah dinas berkaitan dengan penyusunan perumusan kebijakan teknis, program dan anggaran, pelaksanaan analisis data dan informasi, pemantauan, evaluasi, pelaporan, serta koordinasi dan kerja sama di bidang analisis data dan informasi"],
+  ["01.07", "Kelompok Substansi Penelitian dan Pengembangan Teknologi dan Sistem Informasi Keimigrasian dan Pemasyarakatan", "Naskah dinas berkaitan dengan penyusunan perumusan kebijakan teknis, program dan anggaran, pelaksanaan analisis data dan informasi, pemantauan, evaluasi, pelaporan, serta koordinasi dan kerja sama di bidang teknologi dan sistem informasi"]
+]
+}
+
+module.exports = kodeTambahanData;
